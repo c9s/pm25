@@ -9,7 +9,70 @@ use PM25\Model\SiteBase;
 class Site  extends SiteBase {
     const GOOGLE_GEOCODING_KEY = 'AIzaSyBq56dBXLlJOOfQP5UE2LVim1pXIYBEH5o';
 
+    /*
+        The returning structure:
 
+        {
+            "results" : [
+                {
+                    "address_components" : [
+                        {
+                        "long_name" : "Banqiao District",
+                        "short_name" : "Banqiao District",
+                        "types" : [ "administrative_area_level_3", "political" ]
+                        },
+                        {
+                        "long_name" : "New Taipei City",
+                        "short_name" : "New Taipei City",
+                        "types" : [ "administrative_area_level_1", "political" ]
+                        },
+                        {
+                        "long_name" : "Taiwan",
+                        "short_name" : "TW",
+                        "types" : [ "country", "political" ]
+                        },
+                        {
+                        "long_name" : "220",
+                        "short_name" : "220",
+                        "types" : [ "postal_code" ]
+                        }
+                    ],
+                    "formatted_address" : "Banqiao District, New Taipei City, Taiwan 220",
+                    "geometry" : {
+                        "bounds" : {
+                        "northeast" : {
+                            "lat" : 25.039807,
+                            "lng" : 121.4887543
+                        },
+                        "southwest" : {
+                            "lat" : 24.972071,
+                            "lng" : 121.4244149
+                        }
+                        },
+                        "location" : {
+                        "lat" : 25.0114095,
+                        "lng" : 121.4618415
+                        },
+                        "location_type" : "APPROXIMATE",
+                        "viewport" : {
+                        "northeast" : {
+                            "lat" : 25.039807,
+                            "lng" : 121.4887543
+                        },
+                        "southwest" : {
+                            "lat" : 24.972071,
+                            "lng" : 121.4244149
+                        }
+                        }
+                    },
+                    "place_id" : "ChIJG9DLhKgCaDQRWxhjDEDyk2w",
+                    "types" : [ "administrative_area_level_3", "political" ]
+                }
+            ],
+            "status" : "OK"
+        }
+
+     */
     public function updateLocation() {
         $url = 'https://maps.googleapis.com/maps/api/geocode/json';
 
