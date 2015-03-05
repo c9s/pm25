@@ -17,14 +17,18 @@ class SiteBase  extends BaseModel {
 
 public static $column_names = array (
   0 => 'country',
-  1 => 'name',
-  2 => 'city',
-  3 => 'id',
+  1 => 'city',
+  2 => 'name',
+  3 => 'longitude',
+  4 => 'latitude',
+  5 => 'id',
 );
 public static $column_hash = array (
   'country' => 1,
-  'name' => 1,
   'city' => 1,
+  'name' => 1,
+  'longitude' => 1,
+  'latitude' => 1,
   'id' => 1,
 );
 public static $mixin_classes = array (
