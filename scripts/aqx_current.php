@@ -35,10 +35,3 @@ foreach($measures as $measure) {
     // echo $site->SiteName, "\n";
 }
 
-// China
-$url = 'http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php';
-$agent = new CurlKit\CurlAgent;
-$response = $agent->post('http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php', [ 'city' => '上海' ]);
-
-
-
