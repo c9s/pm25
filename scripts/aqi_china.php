@@ -50,6 +50,7 @@ foreach($cities as $cityName) {
         $ret = $measure->loadOrCreate([
             'site_id'      => $site->id,
             'pm25'         => $row->pm2_5,
+            'aqi'          => $row->aqi,
             'pm10'         => $row->pm10,
             'no2'          => $row->no2,
             'c0'           => $row->co,
