@@ -10,7 +10,7 @@ class CurrentController extends Controller
     public function indexAction() {
         $conns = ConnectionManager::getInstance();
         $conn = $conns->get('default');
-        $stmt = $conn->prepareAndExecute('SELECT s.city, s.name, s.longitude, s.latitude, m.pm25, m.pm10, m.wind_speed, m.wind_direction, m.published_at FROM measures m INNER JOIN (SELECT site_id, MAX(published_at) AS latest_published_at FROM measures GROUP BY site_id) AS lm ON (m.site_id = lm.site_id AND m.published_at = lm.latest_published_at) LEFT JOIN sites s ON (s.id = m.site_id) ORDER BY m.published_at DESC');
+        $stmt = $conn->prepareAndExecute('SELECT s.country, s.city, s.name, s.longitude, s.latitude, m.pm25, m.pm10, m.wind_speed, m.wind_direction, m.published_at FROM measures m INNER JOIN (SELECT site_id, MAX(published_at) AS latest_published_at FROM measures GROUP BY site_id) AS lm ON (m.site_id = lm.site_id AND m.published_at = lm.latest_published_at) LEFT JOIN sites s ON (s.id = m.site_id) ORDER BY m.published_at DESC');
         $rows = $stmt->fetchAll();
         foreach($rows as &$row){
             $row['pm25'] = floatval($row['pm25']);
