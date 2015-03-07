@@ -14,6 +14,7 @@ class SiteSchema extends SchemaDeclare
         $this->column('name')->varchar(30);
 
         $this->column('longitude')->double();
+
         $this->column('latitude')->double();
     }
 }
