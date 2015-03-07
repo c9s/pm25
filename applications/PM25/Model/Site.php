@@ -75,9 +75,8 @@ class Site  extends SiteBase {
      */
     public function updateLocation() {
         $url = 'https://maps.googleapis.com/maps/api/geocode/json';
-
         $url .= '?' . http_build_query([ 
-            'address' => $this->city . $this->name,
+            'address' => $this->getAddress(),
             'key' => self::GOOGLE_GEOCODING_KEY,
         ]);
         $obj = json_decode(file_get_contents($url));
@@ -88,5 +87,10 @@ class Site  extends SiteBase {
             ]);
         }
     }
+
+    public function getAddress() {
+        return join(', ', [$this->country, $this->city, $this->name]);
+    }
+
 }
 
