@@ -74,15 +74,7 @@ class Site  extends SiteBase {
 
      */
     public function updateLocation() {
-        /*
-         * https://maps.googleapis.com/maps/api/geocode/json?address=%E5%8F%B0%E7%81%A3%E5%AE%9C%E8%98%AD
-         */
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json';
-        $url .= '?' . http_build_query([ 
-            'address' => $this->getAddress(),
-            'key' => self::GOOGLE_GEOCODING_KEY,
-        ]);
-        $obj = json_decode(file_get_contents($url));
+        $obj = $this->requestGeocode($this->getAddress());
         if ($obj->status === "OK") {
             return $this->update([
                 'longitude' => $obj->results[0]->geometry->location->lng,
@@ -91,7 +83,19 @@ class Site  extends SiteBase {
         }
     }
 
+    public function requestGeocode($address) {
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $url .= '?' . http_build_query([ 
+            'address' => $address,
+            'key' => self::GOOGLE_GEOCODING_KEY,
+        ]);
+        return json_decode(file_get_contents($url));
+    }
+
     public function getAddress() {
+        if ($this->address) {
+            return $this->address;
+        }
         return join(', ', [$this->country, $this->city, $this->name]);
     }
 
