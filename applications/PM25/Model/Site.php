@@ -74,6 +74,9 @@ class Site  extends SiteBase {
 
      */
     public function updateLocation() {
+        /*
+         * https://maps.googleapis.com/maps/api/geocode/json?address=%E5%8F%B0%E7%81%A3%E5%AE%9C%E8%98%AD
+         */
         $url = 'https://maps.googleapis.com/maps/api/geocode/json';
         $url .= '?' . http_build_query([ 
             'address' => $this->getAddress(),
