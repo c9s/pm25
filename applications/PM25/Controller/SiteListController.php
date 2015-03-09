@@ -2,6 +2,7 @@
 namespace PM25\Controller;
 use Phifty\Controller;
 use PM25\Model\SiteCollection;
+use LazyRecord\ConnectionManager;
 
 class SiteListController extends Controller
 {
