@@ -13,6 +13,8 @@ class SiteListController extends Controller
         $rows = $stmt->fetchAll();
         foreach($rows as &$row) {
             $row['id'] = intval($row['id']);
+            $row['longitude'] = doubleval($row['longitude']);
+            $row['latitude'] = doubleval($row['latitude']);
         }
         return $this->toJson($rows);
     }
