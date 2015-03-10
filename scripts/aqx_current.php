@@ -9,11 +9,11 @@ foreach($measures as $measure) {
     $time = new DateTime($measure['PublishTime']);
 
     $site = new Station;
-    $site->load([ 'name' => $measure['StationName'] ]);
+    $site->load(['name' => $measure['SiteName']]);
     $ret = $record->loadOrCreate([
         // MajorPollutant: "懸浮微粒",
         // status: "普通",
-        'site_id'        => $site->id,
+        'station_id'        => $site->id,
         'psi'            => floatval($measure['PSI']),
         'so2'            => floatval($measure['SO2']),
         'co'             => floatval($measure['CO']),
@@ -25,7 +25,7 @@ foreach($measures as $measure) {
         'wind_speed'     => floatval($measure['WindSpeed']),
         'wind_direction' => floatval($measure['WindDirec']),
         'published_at'   => $time->format(DateTime::ATOM),
-    ], ['site_id', 'published_at']);
+    ], ['station_id', 'published_at']);
 
     if (!$ret->success) {
         die("import error\n");
