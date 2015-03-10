@@ -1,30 +1,30 @@
 <?php
 require 'main.php';
 
-use PM25\Model\Site;
+use PM25\Model\Station;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
 
 $logger = Logger::getInstance();
 
 $logger->info("Fetching opendata from opendata.epa.gov.tw ...");
-$siteDetails = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQXSite/?$orderby=SiteName&$skip=0&$top=1000&format=json'), false);
+$siteDetails = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQXStation/?$orderby=StationName&$skip=0&$top=1000&format=json'), false);
 
 foreach($siteDetails as $siteDetail) {
-    $site = new Site;
-    $site->load([ 'name' => $siteDetail->SiteName ]);
+    $site = new Station;
+    $site->load([ 'name' => $siteDetail->StationName ]);
     if ($site->id) {
-        $logger->info("Site {$siteDetail->SiteName} loaded");
+        $logger->info("Station {$siteDetail->StationName} loaded");
         $site->update([ 
             'longitude' => doubleval($siteDetail->TWD97Lon),
             'latitude' => doubleval($siteDetail->TWD97Lat),
-            'name_en' => $siteDetail->SiteEngName,
-            'address' => $siteDetail->SiteAddress,
+            'name_en' => $siteDetail->StationEngName,
+            'address' => $siteDetail->StationAddress,
         ]);
     }
 
     if (! $site->address_en) {
-        $result = $site->requestGeocode($siteDetail->SiteAddress);
+        $result = $site->requestGeocode($siteDetail->StationAddress);
         // $result[0]->address_components;
         $englishAddress = $result->results[0]->formatted_address;
         echo "Updating english address => ", $englishAddress , "\n";

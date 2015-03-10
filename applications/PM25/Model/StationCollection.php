@@ -5,9 +5,9 @@ Please DO NOT modify this file directly.
 */
 namespace PM25\Model;
 
-use PM25\Model\SiteCollectionBase;
+use PM25\Model\StationCollectionBase;
 
-class SiteCollection  extends SiteCollectionBase {
+class StationCollection  extends StationCollectionBase {
 
 
 

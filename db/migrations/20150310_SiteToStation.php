@@ -20,7 +20,7 @@
  *    $this->dropTable('authors');
  */
 
-class SiteToStation_1425963243  extends LazyRecord\Migration\Migration {
+class StationToStation_1425963243  extends LazyRecord\Migration\Migration {
 
     public function upgrade() {
         $this->executeSql('ALTER TABLE sites RENAME stations');

@@ -2,7 +2,7 @@
 namespace PM25\Model;
 use LazyRecord\Schema\SchemaDeclare;
 
-class SiteSchema extends SchemaDeclare
+class StationSchema extends SchemaDeclare
 {
     public function schema() {
         $this->table('stations');

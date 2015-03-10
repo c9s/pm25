@@ -12,7 +12,7 @@ use LazyRecord;
 use LazyRecord\Schema\RuntimeSchema;
 use LazyRecord\Schema\Relationship;
 
-class SiteSchemaProxy extends RuntimeSchema
+class StationSchemaProxy extends RuntimeSchema
 {
 
     public static $column_names = array (
@@ -57,14 +57,14 @@ class SiteSchemaProxy extends RuntimeSchema
   10 => 'id',
 );
 
-        const schema_class = 'PM25\\Model\\SiteSchema';
-        const collection_class = 'PM25\\Model\\SiteCollection';
-        const model_class = 'PM25\\Model\\Site';
-        const model_name = 'Site';
+        const schema_class = 'PM25\\Model\\StationSchema';
+        const collection_class = 'PM25\\Model\\StationCollection';
+        const model_class = 'PM25\\Model\\Station';
+        const model_name = 'Station';
         const model_namespace = 'PM25\\Model';
         const primary_key = 'id';
         const table = 'stations';
-        const label = 'Site';
+        const label = 'Station';
 
     public function __construct()
     {
@@ -173,9 +173,9 @@ class SiteSchemaProxy extends RuntimeSchema
 );
         $this->primaryKey      = 'id';
         $this->table           = 'stations';
-        $this->modelClass      = 'PM25\\Model\\Site';
-        $this->collectionClass = 'PM25\\Model\\SiteCollection';
-        $this->label           = 'Site';
+        $this->modelClass      = 'PM25\\Model\\Station';
+        $this->collectionClass = 'PM25\\Model\\StationCollection';
+        $this->label           = 'Station';
         $this->relations       = array( 
 );
         $this->readSourceId    = 'default';
@@ -188,7 +188,7 @@ class SiteSchemaProxy extends RuntimeSchema
      * Code block for message id parser.
      */
     private function __() {
-        _('Site');
+        _('Station');
     }
 
 }

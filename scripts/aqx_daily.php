@@ -1,6 +1,6 @@
 <?php
 require 'main.php';
-use PM25\Model\Site;
+use PM25\Model\Station;
 use PM25\Model\Measure;
 
 $measures = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQX/?top=1000&format=json'), true);
@@ -8,8 +8,8 @@ $record = new Measure;
 foreach($measures as $measure) {
     $time = new DateTime($measure['PublishTime']);
 
-    $site = new Site;
-    $site->load([ 'name' => $measure['SiteName'] ]);
+    $site = new Station;
+    $site->load([ 'name' => $measure['StationName'] ]);
     $ret = $record->loadOrCreate([
         // MajorPollutant: "懸浮微粒",
         // status: "普通",
@@ -32,5 +32,5 @@ foreach($measures as $measure) {
     }
     print_r($record->toArray());
     echo $measure['PublishTime'] , " => ", $time->format(DateTime::ATOM), " => " , $time->getTimestamp(), "\n";
-    // echo $site->SiteName, "\n";
+    // echo $site->StationName, "\n";
 }

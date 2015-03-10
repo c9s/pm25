@@ -6,7 +6,7 @@ class Application extends Bundle
 {
     public function init() {
         $this->route('/current', 'CurrentController');
-        $this->route('/sites', 'SiteListController');
+        $this->route('/stations', 'StationListController');
     }
 }
 

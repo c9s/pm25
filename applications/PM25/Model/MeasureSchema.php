@@ -33,6 +33,6 @@ class MeasureSchema extends SchemaDeclare
         // PublishTime: "2015-03-04 22:00"
         $this->column('published_at')->timestamp();
 
-        $this->belongsTo('site', 'PM25\Model\SiteSchema', 'id', 'site_id');
+        $this->belongsTo('site', 'PM25\Model\StationSchema', 'id', 'site_id');
     }
 }

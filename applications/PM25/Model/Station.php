@@ -4,9 +4,9 @@ This is an auto-generated file,
 Please DO NOT modify this file directly.
 */
 namespace PM25\Model;
-use PM25\Model\SiteBase;
+use PM25\Model\StationBase;
 
-class Site  extends SiteBase {
+class Station  extends StationBase {
     const GOOGLE_GEOCODING_KEY = 'AIzaSyBq56dBXLlJOOfQP5UE2LVim1pXIYBEH5o';
 
     /*

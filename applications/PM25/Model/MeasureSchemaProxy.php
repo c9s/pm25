@@ -216,7 +216,7 @@ class MeasureSchemaProxy extends RuntimeSchema
       'type' => 4,
       'self_schema' => 'PM25\\Model\\MeasureSchema',
       'self_column' => 'site_id',
-      'foreign_schema' => 'PM25\\Model\\SiteSchema',
+      'foreign_schema' => 'PM25\\Model\\StationSchema',
       'foreign_column' => 'id',
     ),
 )),

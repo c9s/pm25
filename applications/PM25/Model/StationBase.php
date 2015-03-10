@@ -7,11 +7,11 @@ namespace PM25\Model;
 
 use LazyRecord\BaseModel;
 
-class SiteBase  extends BaseModel {
+class StationBase  extends BaseModel {
 
-    const schema_proxy_class = 'PM25\\Model\\SiteSchemaProxy';
-    const collection_class = 'PM25\\Model\\SiteCollection';
-    const model_class = 'PM25\\Model\\Site';
+    const schema_proxy_class = 'PM25\\Model\\StationSchemaProxy';
+    const collection_class = 'PM25\\Model\\StationCollection';
+    const model_class = 'PM25\\Model\\Station';
     const table = 'stations';
 
 

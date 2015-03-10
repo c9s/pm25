@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 require 'main.php';
-use PM25\Model\Site;
+use PM25\Model\Station;
 use PM25\Model\Measure;
 use CLIFramework\Logger;
 
@@ -34,7 +34,7 @@ foreach($cities as $cityName) {
                 [time_point] => 2015-03-07 20:00:00
             )
         */
-        $site = new Site;
+        $site = new Station;
         $site->loadOrCreate([
             'country' => '中國',
             'city' => $cityName,
