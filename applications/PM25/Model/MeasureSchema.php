@@ -18,7 +18,7 @@ class MeasureSchema extends SchemaDeclare
         $this->column('so2')->double()->default(0);
 
         // XXX: should be C0
-        $this->column('c0')->double()->default(0);
+        $this->column('co')->double()->default(0);
 
         $this->column('psi')->double()->default(0);
 

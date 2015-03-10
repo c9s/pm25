@@ -20,7 +20,7 @@ class Measure  extends MeasureBase {
         $data['so2'] = floatval($data['so2']);
         $data['no2'] = floatval($data['no2']);
 
-        $data['c0'] = floatval($data['c0']);
+        $data['co'] = floatval($data['co']);
         // $data['fpmi'] = floatval($data['fpmi']);
 
         $data['wind_speed'] = floatval($data['wind_speed']);

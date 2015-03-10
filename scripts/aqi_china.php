@@ -53,7 +53,7 @@ foreach($cities as $cityName) {
             'aqi'          => $row->aqi,
             'pm10'         => $row->pm10,
             'no2'          => $row->no2,
-            'c0'           => $row->co,
+            'co'           => $row->co,
             'so2'          => $row->so2,
             'published_at' => $time->format(DateTime::ATOM),
             // 'o3' => $row->o3,
