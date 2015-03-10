@@ -5,6 +5,8 @@ use LazyRecord\Schema\SchemaDeclare;
 class SiteSchema extends SchemaDeclare
 {
     public function schema() {
+        $this->table('stations');
+
         $this->column('country')->varchar(30);
 
         $this->column('country_en')->varchar(30);

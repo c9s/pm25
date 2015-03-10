@@ -11,7 +11,7 @@ class SiteCollectionBase  extends BaseCollection {
 
     const schema_proxy_class = 'PM25\\Model\\SiteSchemaProxy';
     const model_class = 'PM25\\Model\\Site';
-    const table = 'sites';
+    const table = 'stations';
 
 
 

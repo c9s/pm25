@@ -12,7 +12,7 @@ class SiteBase  extends BaseModel {
     const schema_proxy_class = 'PM25\\Model\\SiteSchemaProxy';
     const collection_class = 'PM25\\Model\\SiteCollection';
     const model_class = 'PM25\\Model\\Site';
-    const table = 'sites';
+    const table = 'stations';
 
 
 public static $column_names = array (
