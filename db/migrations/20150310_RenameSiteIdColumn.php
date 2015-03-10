@@ -22,10 +22,10 @@
 
 class RenameSiteIdColumn_1425963691  extends LazyRecord\Migration\Migration {
     public function upgrade() {
-        $this->renameColumn('measures', 'site_id', 'station_id');
+        $this->executeSql('ALTER TABLE measures CHANGE column site_id station_id INTEGER');
     }
 
     public function downgrade() {
-        $this->renameColumn('measures', 'station_id', 'site_id');
+        $this->executeSql('ALTER TABLE measures CHANGE column station_id site_id INTEGER');
     }
 }
