@@ -23,8 +23,8 @@ class StationSchema extends SchemaDeclare
 
         $this->column('address_en')->varchar(60);
 
-        $this->column('longitude')->double();
+        $this->column('longitude')->double()->isa('double');
 
-        $this->column('latitude')->double();
+        $this->column('latitude')->double()->isa('double');
     }
 }
