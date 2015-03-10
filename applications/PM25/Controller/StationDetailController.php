@@ -3,6 +3,7 @@ namespace PM25\Controller;
 use Phifty\Controller;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
+use PM25\Model\MeasureCollection;
 
 class StationDetailController extends Controller
 {
@@ -20,9 +21,20 @@ class StationDetailController extends Controller
         }
         if ($station) {
             $data = $station->toArray();
-            $data['longitude'] = doubleval($data['longitude']);
-            $data['latitude'] = doubleval($data['latitude']);
-            $data['id'] = doubleval($data['id']);
+
+            $measurements = array();
+
+            $measures = new MeasureCollection;
+            $measures->where()
+                ->equal('station_id', $station->id);
+            $measures->order('published_at', 'DESC');
+            $measures->limit(20);
+            foreach($measures as $measure) {
+                $array = $measure->toArray();
+                unset($array['station_id']);
+                $measurements[] = $array;
+            }
+            $data['measurements']  = $measurements;
             return $this->toJson($data);
         } else {
             return $this->toJson([ 'error' => 'Station not found' ]);

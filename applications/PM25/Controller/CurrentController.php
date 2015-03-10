@@ -17,6 +17,9 @@ class CurrentController extends Controller
 
             $row['pm25'] = floatval($row['pm25']);
             $row['pm10'] = floatval($row['pm10']);
+            $row['so2'] = floatval($row['so2']);
+            $row['no2'] = floatval($row['no2']);
+            $row['fpmi'] = floatval($row['fpmi']);
 
             $row['longitude'] = floatval($row['longitude']);
             $row['latitude'] = floatval($row['latitude']);

@@ -99,5 +99,15 @@ class Station  extends StationBase {
         return join(', ', [$this->country, $this->city, $this->name]);
     }
 
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+        $data['longitude'] = doubleval($data['longitude']);
+        $data['latitude'] = doubleval($data['latitude']);
+        $data['id'] = doubleval($data['id']);
+        return $data;
+    }
+
 }
 

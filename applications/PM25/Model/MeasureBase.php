@@ -16,7 +16,7 @@ class MeasureBase  extends BaseModel {
 
 
 public static $column_names = array (
-  0 => 'site_id',
+  0 => 'station_id',
   1 => 'pm10',
   2 => 'pm25',
   3 => 'no2',
@@ -32,7 +32,7 @@ public static $column_names = array (
   13 => 'id',
 );
 public static $column_hash = array (
-  'site_id' => 1,
+  'station_id' => 1,
   'pm10' => 1,
   'pm25' => 1,
   'no2' => 1,
