@@ -35,7 +35,7 @@ class Index_1426072879  extends LazyRecord\Migration\Migration {
         $this->executeSql('drop index station_text_all_search_idx ON stations');
         $this->executeSql('drop index station_text_en_search_idx ON stations');
         $this->executeSql('drop index station_text_search_idx ON stations');
-        $this->executeSql('drop index recent_measures_idx ON stations');
+        $this->executeSql('drop index recent_measures_idx ON measures');
     
     }
 
