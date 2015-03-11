@@ -22,6 +22,7 @@ class Measure  extends MeasureBase {
 
         $data['co'] = floatval($data['co']);
         $data['fpmi'] = floatval($data['fpmi']);
+        $data['psi'] = floatval($data['psi']);
 
         $data['wind_speed'] = floatval($data['wind_speed']);
         $data['wind_direction'] = floatval($data['wind_direction']);
