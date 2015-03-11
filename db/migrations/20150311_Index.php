@@ -28,12 +28,14 @@ class Index_1426072879  extends LazyRecord\Migration\Migration {
         $this->executeSql('create index station_text_all_search_idx ON stations (country,country_en,city,city_en,name,name_en,address,address_en);');
         $this->executeSql('create index station_text_en_search_idx ON stations (country_en,city_en,name_en,address_en);');
         $this->executeSql('create index station_text_search_idx ON stations (country,city,name,address);');
+        $this->executeSql('create index recent_measures_idx ON measures (station_id, pm25, pm10, id DESC);');
     }
 
     public function downgrade() {
         $this->executeSql('drop index station_text_all_search_idx ON stations');
         $this->executeSql('drop index station_text_en_search_idx ON stations');
         $this->executeSql('drop index station_text_search_idx ON stations');
+        $this->executeSql('drop index recent_measures_idx ON stations');
     
     }
 
