@@ -9,7 +9,7 @@ class StationListController extends Controller
     public function indexAction() {
         $conns = ConnectionManager::getInstance();
         $conn = $conns->get('default');
-        $stmt = $conn->prepareAndExecute('SELECT * FROM stations s ORDER BY country ASC, city ASC, name ASC, id DESC');
+        $stmt = $conn->prepareAndExecute('SELECT id, country, country_en, city, city_en, name, name_en, address, address_en, latitude, longitude FROM stations s ORDER BY country ASC, city ASC, name ASC, id DESC');
         $rows = $stmt->fetchAll();
         foreach($rows as &$row) {
             $row['id'] = intval($row['id']);

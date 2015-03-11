@@ -35,6 +35,7 @@ class StationDetailController extends Controller
                 $measurements[] = $array;
             }
             $data['measurements']  = $measurements;
+            unset($data['location']);
             return $this->toJson($data);
         } else {
             return $this->toJson([ 'error' => 'Station not found' ]);

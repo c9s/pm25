@@ -10,7 +10,7 @@ class CurrentController extends Controller
     public function indexAction() {
         $conns = ConnectionManager::getInstance();
         $conn = $conns->get('default');
-        $stmt = $conn->prepareAndExecute('SELECT s.id, s.country, s.city, s.city_en, s.name, s.name_en, s.address, s.address_en, s.longitude, s.latitude, m.pm25, m.pm10, m.wind_speed, m.wind_direction, m.published_at FROM measures m INNER JOIN (SELECT station_id, MAX(published_at) AS latest_published_at FROM measures GROUP BY station_id) AS lm ON (m.station_id = lm.station_id AND m.published_at = lm.latest_published_at) LEFT JOIN stations s ON (s.id = m.station_id) ORDER BY m.published_at DESC');
+        $stmt = $conn->prepareAndExecute('SELECT s.id, s.country, s.country_en, s.city, s.city_en, s.name, s.name_en, s.address, s.address_en, s.longitude, s.latitude, m.pm25, m.pm10, m.wind_speed, m.wind_direction, m.published_at FROM measures m INNER JOIN (SELECT station_id, MAX(published_at) AS latest_published_at FROM measures GROUP BY station_id) AS lm ON (m.station_id = lm.station_id AND m.published_at = lm.latest_published_at) LEFT JOIN stations s ON (s.id = m.station_id) ORDER BY m.published_at DESC');
         $rows = $stmt->fetchAll();
         foreach($rows as &$row){
             $row['id'] = intval($row['id']);
