@@ -12,7 +12,7 @@ $url = 'http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php';
 
 
 $agent = new CurlKit\CurlAgent;
-$cities = array('上海', '北京', '重庆', '深圳', '广州', '青岛', '成都', '苏州', '西安');
+$cities = array('上海', '北京', '重庆', '深圳', '广州', '青岛', '成都', '苏州', '西安', '山東');
 
 foreach($cities as $cityName) {
     $response = $agent->post('http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php', [ 'city' => $cityName ]);
