@@ -21,6 +21,7 @@ class NearbyStationController extends Controller
                  + SIN(RADIANS(:lat)) * SIN(RADIANS(latitude)))) AS distance_km 
                  FROM stations s
                  LEFT JOIN (SELECT pm25, pm10, aqi, psi, station_id FROM measures s ORDER BY published_at DESC LIMIT 1) m ON (m.station_id = s.id)
+                 WHERE longitude != 0 AND latitude != 0
                  ORDER BY distance_km ASC LIMIT $limit
                  ", 
                  [ 
