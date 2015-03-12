@@ -28,7 +28,7 @@ class StationDetailController extends Controller
             $measures->where()
                 ->equal('station_id', $station->id);
             $measures->order('published_at', 'DESC');
-            $measures->limit(20);
+            $measures->limit(36);
             foreach($measures as $measure) {
                 $array = $measure->toArray();
                 unset($array['station_id']);
