@@ -33,6 +33,8 @@ class StationSchema extends SchemaDeclare
 
         $this->column('rawdata')->text();
 
+        $this->column('location')->type('point');
+
         $this->column('remark')->json();
     }
 }

@@ -17,7 +17,6 @@ class MeasureSchema extends SchemaDeclare
 
         $this->column('so2')->double()->default(0);
 
-        // XXX: should be C0
         $this->column('co')->double()->default(0);
 
         $this->column('psi')->double()->default(0);
@@ -29,6 +28,8 @@ class MeasureSchema extends SchemaDeclare
         $this->column('wind_speed')->double();
 
         $this->column('wind_direction')->double();
+
+        $this->column('major_pollutant')->varchar(32);
 
         // PublishTime: "2015-03-04 22:00"
         $this->column('published_at')->timestamp();
