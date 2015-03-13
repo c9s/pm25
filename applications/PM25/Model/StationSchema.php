@@ -9,11 +9,11 @@ class StationSchema extends SchemaDeclare
 
         $this->column('country')->varchar(30);
 
-        $this->column('country_en')->varchar(30);
+        $this->column('country_en')->varchar(60);
 
         $this->column('city')->varchar(30);
 
-        $this->column('city_en')->varchar(30);
+        $this->column('city_en')->varchar(60);
 
         $this->column('name')->varchar(30);
 
@@ -21,7 +21,11 @@ class StationSchema extends SchemaDeclare
 
         $this->column('address')->varchar(60);
 
-        $this->column('address_en')->varchar(60);
+        $this->column('address_en')->varchar(120);
+
+        $this->column('area')->varchar(30);
+
+        $this->column('area_en')->varchar(60);
 
         $this->column('longitude')->double()->isa('double');
 
