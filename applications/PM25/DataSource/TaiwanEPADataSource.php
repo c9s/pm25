@@ -5,6 +5,12 @@ use PM25\DataSource\TaiwanEPADataSource;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
 
+interface DataSourceInterface {
+
+    public function updateStationDetails();
+
+}
+
 class TaiwanEPADataSource
 {
 
