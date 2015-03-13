@@ -28,8 +28,12 @@ class CurrentController extends Controller
             $row['longitude'] = floatval($row['longitude']);
             $row['latitude'] = floatval($row['latitude']);
 
-            $row['wind_speed'] = floatval($row['wind_speed']);
-            $row['wind_direction'] = floatval($row['wind_direction']);
+            if ($row['wind_speed']) {
+                $row['wind_speed'] = floatval($row['wind_speed']);
+            }
+            if ($row['wind_direction']) {
+                $row['wind_direction'] = floatval($row['wind_direction']);
+            }
         }
         return $this->toJson($rows);
     }
