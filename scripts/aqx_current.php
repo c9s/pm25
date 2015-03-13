@@ -11,7 +11,6 @@ foreach($measures as $measure) {
     $site = new Station;
     $site->load(['name' => $measure['SiteName']]);
     $ret = $record->loadOrCreate([
-        // MajorPollutant: "懸浮微粒",
         // status: "普通",
         'station_id'        => $site->id,
         'psi'            => floatval($measure['PSI']),
@@ -20,11 +19,12 @@ foreach($measures as $measure) {
         'o3'             => floatval($measure['O3']),
         'pm10'           => floatval($measure['PM10']),
         'pm25'           => floatval($measure['PM2.5']),
-        'no2'            => floatval($measure['NO2']),
-        'fpmi'           => floatval($measure['FPMI']),
-        'wind_speed'     => floatval($measure['WindSpeed']),
-        'wind_direction' => floatval($measure['WindDirec']),
-        'published_at'   => $time->format(DateTime::ATOM),
+        'no2'             => floatval($measure['NO2']),
+        'fpmi'            => floatval($measure['FPMI']),
+        'wind_speed'      => floatval($measure['WindSpeed']),
+        'wind_direction'  => floatval($measure['WindDirec']),
+        'published_at'    => $time->format(DateTime::ATOM),
+        'major_pollutant' => $measure['MajorPollutant'],
     ], ['station_id', 'published_at']);
 
     if (!$ret->success) {
