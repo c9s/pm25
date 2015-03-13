@@ -33,11 +33,11 @@ class NearbyStationController extends Controller
             $row['id'] = intval($row['id']);
             $row['latitude'] = doubleval($row['latitude']);
             $row['longitude'] = doubleval($row['longitude']);
-            $row['pm25'] = floatval($row['pm25']);
-            $row['pm10'] = floatval($row['pm10']);
-            $row['aqi'] = floatval($row['aqi']);
-            $row['psi'] = floatval($row['psi']);
-            $row['distance_km'] = floatval($row['distance_km']);
+            $row['pm25'] = doubleval($row['pm25']);
+            $row['pm10'] = doubleval($row['pm10']);
+            $row['aqi'] = doubleval($row['aqi']);
+            $row['psi'] = doubleval($row['psi']);
+            $row['distance_km'] = doubleval($row['distance_km']);
         }
         return $this->toJson($rows);
     }
