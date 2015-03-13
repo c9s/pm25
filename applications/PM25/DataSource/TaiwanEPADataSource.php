@@ -11,7 +11,7 @@ interface DataSourceInterface {
 
 }
 
-class TaiwanEPADataSource
+class TaiwanEPADataSource implements DataSourceInterface
 {
 
     const STATION_DETAILS_URL = 'http://opendata.epa.gov.tw/ws/Data/AQXSite/?$orderby=SiteName&$skip=0&$top=1000&format=json';
