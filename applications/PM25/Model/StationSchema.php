@@ -30,5 +30,9 @@ class StationSchema extends SchemaDeclare
         $this->column('longitude')->double()->isa('double');
 
         $this->column('latitude')->double()->isa('double');
+
+        $this->column('rawdata')->text();
+
+        $this->column('remark')->json();
     }
 }

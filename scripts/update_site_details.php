@@ -8,7 +8,7 @@ use LazyRecord\ConnectionManager;
 $logger = Logger::getInstance();
 
 $logger->info("Fetching opendata from opendata.epa.gov.tw ...");
-$siteDetails = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQXStation/?$orderby=StationName&$skip=0&$top=1000&format=json'), false);
+$siteDetails = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQXSite/?$orderby=StationName&$skip=0&$top=1000&format=json'), false);
 
 foreach($siteDetails as $siteDetail) {
     $site = new Station;
@@ -20,6 +20,9 @@ foreach($siteDetails as $siteDetail) {
             'latitude' => doubleval($siteDetail->TWD97Lat),
             'name_en' => $siteDetail->StationEngName,
             'address' => $siteDetail->StationAddress,
+            'area'    => $siteDetail->Township,
+            'rawdata' => yaml_emit($siteDetail),
+            // 'remark'  => [ 'type' => $siteDetail->SiteType ],
         ]);
     }
 
