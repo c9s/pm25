@@ -1,5 +1,5 @@
 <?php
-namespace PM25\DataSource;
+namespace PM25\DataSource\Asia;
 use PM25\Model\Station;
 use PM25\DataSource\TaiwanEPADataSource;
 use CLIFramework\Logger;
