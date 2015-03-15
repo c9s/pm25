@@ -35,6 +35,10 @@ class StationSchema extends SchemaDeclare
 
         $this->column('location')->type('point');
 
+        $this->column('support_uv')->boolean();
+
+        $this->column('support_air')->boolean();
+
         $this->column('remark')->json();
     }
 }
