@@ -4,6 +4,7 @@ use PM25\Model\Station;
 use PM25\DataSource\TaiwanEPADataSource;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
+use PM25\DataSource\BaseDataSource;
 
 interface DataSourceInterface {
 
@@ -11,7 +12,7 @@ interface DataSourceInterface {
 
 }
 
-class TaiwanEPADataSource implements DataSourceInterface
+class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
 {
 
     const STATION_DETAILS_URL = 'http://opendata.epa.gov.tw/ws/Data/AQXSite/?$orderby=SiteName&$skip=0&$top=1000&format=json';

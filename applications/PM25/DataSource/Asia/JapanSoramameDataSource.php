@@ -4,36 +4,66 @@ namespace PM25\DataSource\Asia;
 use Symfony\Component\DomCrawler\Crawler;
 use DOMElement;
 use DOMText;
+use CLIFramework\Logger;
+use PM25\DataSource\BaseDataSource;
 
-class JapanSoramameDataSource
+class JapanSoramameDataSource extends BaseDataSource
 {
-    public function parseForCities($attributeNames, $cityDataHtml) {
-        // print_r($attributeNames);
-        $dataCrawler = new Crawler($cityDataHtml);
-        $cityStationRows = $dataCrawler->filter('table.hyoMenu tr');
+    const BASE_URL = 'http://soramame.taiki.go.jp';
+
+    const PROVINCE_LIST_PAGE = '/MstItiran.php';
+
+    const STATION_LIST_PAGE = '/MstItiranHyou.php?Pref={city}&Time={time}';
+
+    const STATION_TITLE_PAGE = '/MstItiranTitle.php?Time={time}';
+
+    public function getProvinceListPageUrl() {
+        return self::BASE_URL . self::PROVINCE_LIST_PAGE;
+    }
+
+    public function getStationTitlePageUrl() {
+        return self::BASE_URL . 
+            str_replace(['{time}' ], [date('YmdH') ], 
+                self::STATION_TITLE_PAGE);
+    }
+
+    public function getStationListPageUrl($cityId) {
+        return self::BASE_URL . 
+            str_replace([ '{city}', '{time}' ], [ $cityId, date('YmdH') ], 
+                self::STATION_LIST_PAGE);
+    }
+
+
+    public function parseCountyStations($attributeNames, $pageHtml) {
+        $dataCrawler = new Crawler($pageHtml);
+        $countyStationRows = $dataCrawler->filter('table.hyoMenu tr');
         $stations = array();
-        foreach ($cityStationRows as $cityStationRow) {
-            // print_r($cityStationRow);
-            $stationInfo = $this->parseCityStationRow($cityStationRow);
+        foreach ($countyStationRows as $countyStationRow) {
+            $stationInfo = $this->parseCountyStationRow($countyStationRow);
+
+            if (empty($stationInfo)) {
+                $this->logger->warn('Empty station info, row: ' . $countyStationRow->C14N());
+                continue;
+            }
+
             if (count($attributeNames) == count($stationInfo['attributes'])) {
                 $stationInfo['attributes'] = array_combine($attributeNames, $stationInfo['attributes']);
             } else {
                 echo "Inequal attribute numbers at ", var_export($stationInfo, true), "\n";
-                echo $cityStationRow->C14N();
+                echo $countyStationRow->C14N();
                 exit(0);
             }
             if (!$stationInfo['code'] && !$stationInfo['name'] && !$stationInfo['address']) {
-                echo "Station info not found in ", $cityStationRow->C14N() , "\n";
+                echo "Station info not found in ", $countyStationRow->C14N() , "\n";
                 echo "Skipping to next row\n";
                 continue;
             }
-            print_r($stationInfo);
             $stations[] = $stationInfo;
         }
         return $stations;
     }
 
-    public function parseCityStationRow(DOMElement $row) {
+    public function parseCountyStationRow(DOMElement $row) {
         $rowCrawler = new Crawler($row);
         $columnElements = $row->getElementsByTagName('td');
         $mstCode = $columnElements->item(0)->textContent;
@@ -52,9 +82,9 @@ class JapanSoramameDataSource
             }
         }
         return [
-            'code' => $mstCode,
-            'name' => $mstName,
-            'address' => $mstAddress,
+            'code' => trim($mstCode),
+            'name' => trim($mstName),
+            'address' => trim($mstAddress),
             'attributes' => $attributes,
         ];
     }
@@ -79,25 +109,34 @@ class JapanSoramameDataSource
     }
 
     public function updateStationDetails() {
-        $crawler = new Crawler(file_get_contents('japan/MstItiran.php'));
+        $this->logger->info('Fetching province list ' . $this->getProvinceListPageUrl());
+        
+        $crawler = new Crawler(file_get_contents($this->getProvinceListPageUrl()));
         $crawler = $crawler->filter('.DataKoumoku select[name="ListPref"] option');
-        foreach($crawler as $i => $cityOption) {
-            $cityId = $cityOption->getAttribute('value');
-            if ($cityId == 0) {
+        $counties = array();
+        foreach($crawler as $i => $countyOption) {
+            $countyId = $countyOption->getAttribute('value');
+            if ($countyId == 0) {
                 continue;
             }
 
             // print_r($cityOption);
-            $cityName = $cityOption->textContent;
-            
-            echo "Parsing stations for ", $cityName, "\n";
+            $countyName = trim($countyOption->textContent);
+            $counties[ $countyId ] = $countyName;
+        }
 
-            // XXX:
-            $cityId = '08';
+        $this->logger->info('Parsing station attributes ' . $this->getStationTitlePageUrl());
+        $attributeNames = $this->buildAttributeTable(file_get_contents($this->getStationTitlePageUrl()));
+        foreach($counties as $countyId => $county) {
+            $this->logger->info("Parsing stations for county " . $county);
 
-            $attributeNames = $this->buildAttributeTable(file_get_contents('japan/MstItiranTitle.php?Time=2015031516'));
-            $stations = $this->parseForCities($attributeNames, file_get_contents("japan/MstItiranHyou.php?Pref={$cityId}&Time=2015031516"));
-            return $stations;
+            $stations = $this->parseCountyStations($attributeNames, 
+                file_get_contents($this->getStationListPageUrl($countyId))
+            );
+
+            foreach($stations as $station) {
+                $this->logger->info(join(', ', [$station['name'], $station['code'], $station['address']]));
+            }
         }
     }
 }
