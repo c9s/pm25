@@ -5,11 +5,12 @@ use PM25\DataSource\Asia\TaiwanEPADataSource;
 use PM25\DataSource\Asia\JapanSoramameDataSource;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
+use CurlKit\CurlAgent;
 $logger = Logger::getInstance();
-
+$agent = new CurlAgent;
 $dataSources = [
-    new TaiwanEPADataSource($logger),
-    new JapanSoramameDataSource($logger),
+    new TaiwanEPADataSource($agent, $logger),
+    new JapanSoramameDataSource($agent, $logger),
 ];
 foreach($dataSources as $dataSource) {
     $dataSource->updateStationDetails();

@@ -6,6 +6,8 @@ use DOMElement;
 use DOMText;
 use CLIFramework\Logger;
 use PM25\DataSource\BaseDataSource;
+use CurlKit\CurlAgent;
+use PM25\Exception\IncorrectDataException;
 
 class JapanSoramameDataSource extends BaseDataSource
 {
@@ -34,7 +36,10 @@ class JapanSoramameDataSource extends BaseDataSource
     }
 
 
-    public function parseCountyStations($attributeNames, $pageHtml) {
+    public function parseCountyStations($attributeNames, $pageUrl) {
+        $response = $this->agent->get($pageUrl);
+        $pageHtml = $response->decodeBody();
+
         $dataCrawler = new Crawler($pageHtml);
         $countyStationRows = $dataCrawler->filter('table.hyoMenu tr');
         $stations = array();
@@ -49,9 +54,7 @@ class JapanSoramameDataSource extends BaseDataSource
             if (count($attributeNames) == count($stationInfo['attributes'])) {
                 $stationInfo['attributes'] = array_combine($attributeNames, $stationInfo['attributes']);
             } else {
-                echo "Inequal attribute numbers at ", var_export($stationInfo, true), "\n";
-                echo $countyStationRow->C14N();
-                exit(0);
+                throw new IncorrectDataException('Inequal attribute numbers', $pageUrl, $stationInfo, $countyStationRow->C14N());
             }
             if (!$stationInfo['code'] && !$stationInfo['name'] && !$stationInfo['address']) {
                 echo "Station info not found in ", $countyStationRow->C14N() , "\n";
@@ -126,16 +129,13 @@ class JapanSoramameDataSource extends BaseDataSource
         }
 
         $this->logger->info('Parsing station attributes ' . $this->getStationTitlePageUrl());
-        $attributeNames = $this->buildAttributeTable(file_get_contents($this->getStationTitlePageUrl()));
+        $response = $this->agent->get($this->getStationTitlePageUrl());
+        $attributeNames = $this->buildAttributeTable($response->decodeBody());
         foreach($counties as $countyId => $county) {
             $this->logger->info("Parsing stations for county " . $county);
-
-            $stations = $this->parseCountyStations($attributeNames, 
-                file_get_contents($this->getStationListPageUrl($countyId))
-            );
-
+            $stations = $this->parseCountyStations($attributeNames, $this->getStationListPageUrl($countyId));
             foreach($stations as $station) {
-                $this->logger->info(join(', ', [$station['name'], $station['code'], $station['address']]));
+                $this->logger->info(' - ' . join(', ', [$station['name'], $station['code'], $station['address']]));
             }
         }
     }
