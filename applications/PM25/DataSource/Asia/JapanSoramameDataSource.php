@@ -1,13 +1,14 @@
 <?php
 namespace PM25\DataSource\Asia;
-// use DOMElement;
+use PM25\DataSource\BaseDataSource;
+use PM25\Exception\IncorrectDataException;
 use Symfony\Component\DomCrawler\Crawler;
+use CLIFramework\Logger;
+use CurlKit\CurlAgent;
 use DOMElement;
 use DOMText;
-use CLIFramework\Logger;
-use PM25\DataSource\BaseDataSource;
-use CurlKit\CurlAgent;
-use PM25\Exception\IncorrectDataException;
+use PM25\Model\Station;
+use PM25\Model\StationCollection;
 
 class JapanSoramameDataSource extends BaseDataSource
 {
@@ -57,8 +58,8 @@ class JapanSoramameDataSource extends BaseDataSource
                 throw new IncorrectDataException('Inequal attribute numbers', $pageUrl, $stationInfo, $countyStationRow->C14N());
             }
             if (!$stationInfo['code'] && !$stationInfo['name'] && !$stationInfo['address']) {
-                echo "Station info not found in ", $countyStationRow->C14N() , "\n";
-                echo "Skipping to next row\n";
+                $this->logger->warn('Station info not found in ' . $countyStationRow->C14N());
+                $this->logger->info('Skipping to next row');
                 continue;
             }
             $stations[] = $stationInfo;
@@ -104,8 +105,6 @@ class JapanSoramameDataSource extends BaseDataSource
                 continue;
             }
             $span = $item->childNodes->item(0);
-            // echo get_class($item) , "=>", trim($span->textContent), "\n";
-            // echo get_class($item), " => ", $item->C14N() , "\n";
             $attributeNames[] = trim($span->textContent);
         }
         return $attributeNames;
