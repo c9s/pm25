@@ -134,7 +134,19 @@ class JapanSoramameDataSource extends BaseDataSource
             $this->logger->info("Parsing stations for county " . $county);
             $stations = $this->parseCountyStations($attributeNames, $this->getStationListPageUrl($countyId));
             foreach($stations as $station) {
-                $this->logger->info(' - ' . join(', ', [$station['name'], $station['code'], $station['address']]));
+                $this->logger->info(' - Station ' . join(', ', [$station['name'], $station['code'], $station['address']]));
+
+                $station = new Station;
+                $ret = $station->createOrUpdate([  
+                    'name' => $station['name'],
+                    'address' => $station['address'],
+                    'code' => $station['code'],
+                    'city' => $county,
+                    'rawdata' => yaml_emit($station, YAML_UTF8_ENCODING),
+                ], ['name', 'code']);
+                if ($ret->error) {
+                    $this->logger->error('Station record create failed: ' .$ret->message);
+                }
             }
         }
     }

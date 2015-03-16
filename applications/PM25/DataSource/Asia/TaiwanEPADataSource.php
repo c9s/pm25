@@ -34,7 +34,7 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
                 'name_en' => $siteDetail->SiteEngName,
                 'address' => $siteDetail->SiteAddress,
                 'area'    => $siteDetail->Township,
-                'rawdata' => yaml_emit($siteDetail),
+                'rawdata' => yaml_emit($siteDetail, YAML_UTF8_ENCODING),
                 // 'remark'  => [ 'type' => $siteDetail->SiteType ],
             ], [ 'name' => $siteDetail->SiteName ]);
             if ($ret->error) {

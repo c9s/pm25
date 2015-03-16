@@ -18,7 +18,7 @@ foreach($data as $item) {
         'address' => $item->SiteAddress,
         'longitude' => $item->TWD97Lon,
         'latitude'  => $item->TWD97Lat,
-        'rawdata'   => yaml_emit($item),
+        'rawdata'   => yaml_emit($item, YAML_UTF8_ENCODING),
         'support_uv' => true,
     ], ['name','city']);
 }
