@@ -78,7 +78,8 @@ class Station  extends StationBase {
         if ($obj->status === "OK" 
             && $obj->results[0] 
             && $obj->results[0]->geometry 
-            && $obj->results[0]->geometry->location) 
+            && $obj->results[0]->geometry->location
+            && $this->id)
         {
             return $this->update([
                 'longitude' => $obj->results[0]->geometry->location->lng,
