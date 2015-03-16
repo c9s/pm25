@@ -12,8 +12,10 @@ class StationSchema extends SchemaDeclare
         $this->column('country_en')->varchar(60);
 
         $this->column('city')->varchar(30);
-
         $this->column('city_en')->varchar(60);
+
+        $this->column('county')->varchar(30);
+        $this->column('county_en')->varchar(60);
 
         $this->column('name')->varchar(30);
 

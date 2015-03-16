@@ -142,11 +142,18 @@ class JapanSoramameDataSource extends BaseDataSource
                     'address' => $station['address'],
                     'code' => $station['code'],
                     'city' => $county,
+                    'county' => $county,
                     'rawdata' => yaml_emit($station, YAML_UTF8_ENCODING),
                 ], ['name', 'code']);
                 if ($ret->error) {
                     $this->logger->error('Station record create failed: ' .$ret->message);
                 }
+
+                if (!$station->latitude && !$station->longitude) {
+                    // Translate the address to latitude and longitude
+                }
+
+
             }
             $this->logger->info('Sleeping 30 seconds...');
             // sleep a while for later parsing
