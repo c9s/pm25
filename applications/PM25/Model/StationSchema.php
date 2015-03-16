@@ -41,7 +41,7 @@ class StationSchema extends SchemaDeclare
 
         $this->column('support_air')->boolean();
 
-        $this->column('remark')->json();
+        $this->column('remark')->text();
 
         $this->column('data_source')->varchar(64);
     }
