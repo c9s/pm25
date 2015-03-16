@@ -23,6 +23,8 @@
 class CountyFieldUpdate_1426505836  extends LazyRecord\Migration\Migration {
 
     public function upgrade() {
+        $this->executeSql('ALTER TABLE stations ADD COLUMN county varchar(30);');
+        $this->executeSql('ALTER TABLE stations ADD COLUMN county_en varchar(60);');
         $this->executeSql('UPDATE stations SET county = city WHERE city IS NOT NULL');
         $this->executeSql('UPDATE stations SET county_en = city_en WHERE city_en IS NOT NULL');
     }
