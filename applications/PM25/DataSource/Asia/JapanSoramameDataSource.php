@@ -148,6 +148,9 @@ class JapanSoramameDataSource extends BaseDataSource
                     $this->logger->error('Station record create failed: ' .$ret->message);
                 }
             }
+            $this->logger->info('Sleeping 30 seconds...');
+            // sleep a while for later parsing
+            sleep(30);
         }
     }
 }
