@@ -75,7 +75,11 @@ class Station  extends StationBase {
      */
     public function updateLocation() {
         $obj = $this->requestGeocode($this->getAddress());
-        if ($obj->status === "OK") {
+        if ($obj->status === "OK" 
+            && $obj->results[0] 
+            && $obj->results[0]->geometry 
+            && $obj->results[0]->geometry->location) 
+        {
             return $this->update([
                 'longitude' => $obj->results[0]->geometry->location->lng,
                 'latitude' => $obj->results[0]->geometry->location->lat,
