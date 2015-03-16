@@ -157,11 +157,17 @@ class JapanSoramameDataSource extends BaseDataSource
                     $this->logger->error('Station record create or update failed: ' .$ret->message);
                 }
 
-                if (!$station->latitude && !$station->longitude) {
-                    $this->logger->info('Updating geolocation from address');
-                    // Translate the address to latitude and longitude
-                    $station->updateLocation();
+                // just make sure we have the record.
+                if ($station->id) {
+                    if (!$station->latitude && !$station->longitude) {
+                        $this->logger->info('Updating geolocation from address');
+                        // Translate the address to latitude and longitude
+                        $station->updateLocation();
+                    }
+                    $station->importAttributes($stationInfo['attributes']);
                 }
+
+            
             }
             $this->logger->info('Sleeping 30 seconds...');
             // sleep a while for later parsing

@@ -5,6 +5,8 @@ Please DO NOT modify this file directly.
 */
 namespace PM25\Model;
 use PM25\Model\StationBase;
+use PM25\Model\MeasureAttribute;
+use PM25\Model\StationMeasureAttribute;
 use Exception;
 
 class RequestFailException extends Exception { 
@@ -133,6 +135,37 @@ class Station  extends StationBase {
         $data['id'] = doubleval($data['id']);
         return $data;
     }
+
+    public function importAttributes(array $attributes)
+    {
+        if (empty($attributes)) {
+            throw new RuntimeException('Empty attributes');
+        }
+
+        foreach($attributes as $key => $val) {
+            $identifier = trim(strtolower($key));
+            if ($val) {
+                $attribute = new MeasureAttribute;
+                $attribute->createOrUpdate([ 'identifier' => $identifier, 'label' => $key ], ['identifier']);
+                if (!$attribute->id) {
+                    throw new Exception('Attribute id is undefined');
+                }
+                $junction = new StationMeasureAttribute;
+                $junction->loadOrCreate([ 'attribute_id' => $attribute->id, 'station_id' => $this->id ]);
+            } else {
+                $attribute = new MeasureAttribute;
+                $attribute->load([ 'identifier' => $identifier ]);
+                if ($attribute->id) {
+                    $junction = new StationMeasureAttribute;
+                    $junction->load([ 'attribute_id' => $attribute->id, 'station_id' => $this->id ]);
+                    if ($junction->id) {
+                        $junction->delete();
+                    }
+                }
+            }
+        }
+    }
+
 
 }
 
