@@ -5,6 +5,21 @@ Please DO NOT modify this file directly.
 */
 namespace PM25\Model;
 use PM25\Model\StationBase;
+use Exception;
+
+class RequestFailException extends Exception { 
+
+    public $url;
+    public $params = array();
+    public $response;
+
+    public function __construct($message, $url, $params, $response) {
+        $this->url = $url;
+        $this->params = $params;
+        $this->response = $response;
+        parent::__construct($message);
+    }
+}
 
 class Station  extends StationBase {
     const GOOGLE_GEOCODING_KEY = 'AIzaSyBq56dBXLlJOOfQP5UE2LVim1pXIYBEH5o';
@@ -89,12 +104,17 @@ class Station  extends StationBase {
     }
 
     public function requestGeocode($address) {
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json';
-        $url .= '?' . http_build_query([ 
+        $args = array(
             'address' => $address,
             'key' => self::GOOGLE_GEOCODING_KEY,
-        ]);
-        return json_decode(file_get_contents($url));
+        );
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json';
+        $url .= '?' . http_build_query($args);
+        $response = file_get_contents($url);
+        if ($response === false) {
+            throw new RequestFailException('Google Map API request failed.', $url, $args, $response);
+        }
+        return json_decode($response);
     }
 
     public function getAddress() {

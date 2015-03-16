@@ -110,7 +110,7 @@ class JapanSoramameDataSource extends BaseDataSource
         return $attributeNames;
     }
 
-    public function updateStationDetails() {
+    public function updateStationDetails(array $options = array()) {
         $this->logger->info('Fetching county list ' . $this->getCountyListPageUrl());
         
         $crawler = new Crawler(file_get_contents($this->getCountyListPageUrl()));
@@ -131,7 +131,11 @@ class JapanSoramameDataSource extends BaseDataSource
         $response = $this->agent->get($this->getStationTitlePageUrl());
         $attributeNames = $this->buildAttributeTable($response->decodeBody());
         foreach($counties as $countyId => $county) {
-            $this->logger->info("Parsing stations for county " . $county);
+            if (isset($options['start_from']) && $options['start_from'] != $county && $options['start_from'] != $countyId) {
+                continue;
+            }
+
+            $this->logger->info("Parsing stations for county " . $county . ' (' . $countyId . ')');
             $stations = $this->parseCountyStations($attributeNames, $this->getStationListPageUrl($countyId));
             foreach($stations as $stationInfo) {
                 $this->logger->info(' - Station ' . join(', ', [$stationInfo['name'], $stationInfo['code'], $stationInfo['address']]));
