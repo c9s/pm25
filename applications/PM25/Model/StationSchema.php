@@ -43,6 +43,6 @@ class StationSchema extends SchemaDeclare
 
         $this->column('remark')->json();
 
-        $this->column('data_source')->varchar(32);
+        $this->column('data_source')->varchar(64);
     }
 }

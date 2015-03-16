@@ -20,7 +20,7 @@ class JapanSoramameDataSource extends BaseDataSource
 
     const STATION_TITLE_PAGE = '/MstItiranTitle.php?Time={time}';
 
-    public function getProvinceListPageUrl() {
+    public function getCountyListPageUrl() {
         return self::BASE_URL . self::PROVINCE_LIST_PAGE;
     }
 
@@ -111,9 +111,9 @@ class JapanSoramameDataSource extends BaseDataSource
     }
 
     public function updateStationDetails() {
-        $this->logger->info('Fetching province list ' . $this->getProvinceListPageUrl());
+        $this->logger->info('Fetching county list ' . $this->getCountyListPageUrl());
         
-        $crawler = new Crawler(file_get_contents($this->getProvinceListPageUrl()));
+        $crawler = new Crawler(file_get_contents($this->getCountyListPageUrl()));
         $crawler = $crawler->filter('.DataKoumoku select[name="ListPref"] option');
         $counties = array();
         foreach($crawler as $i => $countyOption) {
@@ -133,27 +133,31 @@ class JapanSoramameDataSource extends BaseDataSource
         foreach($counties as $countyId => $county) {
             $this->logger->info("Parsing stations for county " . $county);
             $stations = $this->parseCountyStations($attributeNames, $this->getStationListPageUrl($countyId));
-            foreach($stations as $station) {
-                $this->logger->info(' - Station ' . join(', ', [$station['name'], $station['code'], $station['address']]));
+            foreach($stations as $stationInfo) {
+                $this->logger->info(' - Station ' . join(', ', [$stationInfo['name'], $stationInfo['code'], $stationInfo['address']]));
 
                 $station = new Station;
                 $ret = $station->createOrUpdate([  
-                    'name' => $station['name'],
-                    'address' => $station['address'],
-                    'code' => $station['code'],
+                    'name' => $stationInfo['name'],
+                    'address' => $stationInfo['address'],
+                    'code' => $stationInfo['code'],
                     'city' => $county,
                     'county' => $county,
-                    'rawdata' => yaml_emit($station, YAML_UTF8_ENCODING),
-                ], ['name', 'code']);
-                if ($ret->error) {
-                    $this->logger->error('Station record create failed: ' .$ret->message);
+                    'data_source' => 'JapanSoramameDataSource',
+                    'country' => '日本國',
+                    'country_en' => 'Japan',
+                    'rawdata' => yaml_emit($stationInfo, YAML_UTF8_ENCODING),
+                ], ['name', 'county', 'country']);
+
+                if (!$ret->success) {
+                    $this->logger->error('Station record create or update failed: ' .$ret->message);
                 }
 
                 if (!$station->latitude && !$station->longitude) {
+                    $this->logger->info('Updating geolocation from address');
                     // Translate the address to latitude and longitude
+                    $station->updateLocation();
                 }
-
-
             }
             $this->logger->info('Sleeping 30 seconds...');
             // sleep a while for later parsing

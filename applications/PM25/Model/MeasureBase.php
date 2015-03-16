@@ -28,8 +28,9 @@ public static $column_names = array (
   9 => 'status_text',
   10 => 'wind_speed',
   11 => 'wind_direction',
-  12 => 'published_at',
-  13 => 'id',
+  12 => 'major_pollutant',
+  13 => 'published_at',
+  14 => 'id',
 );
 public static $column_hash = array (
   'station_id' => 1,
@@ -44,6 +45,7 @@ public static $column_hash = array (
   'status_text' => 1,
   'wind_speed' => 1,
   'wind_direction' => 1,
+  'major_pollutant' => 1,
   'published_at' => 1,
   'id' => 1,
 );
