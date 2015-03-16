@@ -1,0 +1,992 @@
+<html>
+<head>
+<title>大気汚染物質広域監視システム（そらまめ君）ホームページ</title>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<link rel="stylesheet" media="all" href="Styles.css" type="text/css">
+<script language="javascript" src="JScript1.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+<!--
+-->
+</script>
+
+</head>
+
+<body MS_POSITIONING="GridLayout" class="bodyInfo">
+<form name="Form1" action="">
+	<table border="0" style="position:absolute; top:0px;">
+	  <tr>
+	<td>
+		<table class="hyoMenu" style="font-size:13px;">
+            <tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08201030</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08201030" target="_blank">水戸石川</a></td>
+				<td width="90" class="hyoMenu_List_Co">水戸市石川一丁目４０４３−８</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08201040</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08201040" target="_blank">水戸東部</a></td>
+				<td width="90" class="hyoMenu_List">水戸市元石川町２２９７−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08201510</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08201510" target="_blank">水戸大工町</a></td>
+				<td width="90" class="hyoMenu_List_Co">水戸市大工町１−６</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">自排局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08202020</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08202020" target="_blank">日立市役所</a></td>
+				<td width="90" class="hyoMenu_List">日立市宮田町１−４４−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08202030</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08202030" target="_blank">日立会瀬</a></td>
+				<td width="90" class="hyoMenu_List_Co">日立市会瀬町３−６７２</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08202050</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08202050" target="_blank">日立多賀</a></td>
+				<td width="90" class="hyoMenu_List">日立市末広町１−２</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08202200</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08202200" target="_blank">日立南部</a></td>
+				<td width="90" class="hyoMenu_List_Co">日立市下土木内町６１７</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08202510</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08202510" target="_blank">日立小木津</a></td>
+				<td width="90" class="hyoMenu_List">日立市小木津町３８８２−２</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">自排局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08203010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08203010" target="_blank">土浦保健所</a></td>
+				<td width="90" class="hyoMenu_List_Co">土浦市下高津２−７−４６</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08203520</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08203520" target="_blank">土浦中村南</a></td>
+				<td width="90" class="hyoMenu_List">土浦市中村南１丁目１４１３番地−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">自排局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08204010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08204010" target="_blank">古河保健所</a></td>
+				<td width="90" class="hyoMenu_List_Co">古河市北町６−２２</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08205020</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08205020" target="_blank">石岡杉並</a></td>
+				<td width="90" class="hyoMenu_List">石岡市杉並２−１−２</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08206010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08206010" target="_blank">筑西保健所</a></td>
+				<td width="90" class="hyoMenu_List_Co">筑西市甲１１４</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08208010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08208010" target="_blank">竜ヶ崎保健所</a></td>
+				<td width="90" class="hyoMenu_List">龍ケ崎市光順田２９８３−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08210010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08210010" target="_blank">下妻</a></td>
+				<td width="90" class="hyoMenu_List_Co">下妻市下妻乙２０９</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08211010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08211010" target="_blank">常総保健所</a></td>
+				<td width="90" class="hyoMenu_List">常総市水海道森下町４４７４</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08212010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08212010" target="_blank">常陸太田</a></td>
+				<td width="90" class="hyoMenu_List_Co">常陸太田市稲木町６６０</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08213010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08213010" target="_blank">常陸那珂勝田</a></td>
+				<td width="90" class="hyoMenu_List">ひたちなか市東石川２−１０−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08214010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08214010" target="_blank">高萩本町</a></td>
+				<td width="90" class="hyoMenu_List_Co">高萩市本町２丁目３７番地</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08215010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08215010" target="_blank">北茨城中郷</a></td>
+				<td width="90" class="hyoMenu_List">北茨城市中郷町上桜井５３−５</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08216010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08216010" target="_blank">笠間市役所</a></td>
+				<td width="90" class="hyoMenu_List_Co">笠間市石井７１７</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08217010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08217010" target="_blank">取手市役所</a></td>
+				<td width="90" class="hyoMenu_List">取手市大字寺田５１３９</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08220010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08220010" target="_blank">つくば高野</a></td>
+				<td width="90" class="hyoMenu_List_Co">つくば市高野１１９７−２０</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08221010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08221010" target="_blank">ひたちなか</a></td>
+				<td width="90" class="hyoMenu_List">ひたちなか市市毛８２３−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08302010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08302010" target="_blank">東茨城大戸</a></td>
+				<td width="90" class="hyoMenu_List_Co">東茨城郡茨城町大戸１７３７</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08341010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08341010" target="_blank">常陸那珂東海</a></td>
+				<td width="90" class="hyoMenu_List">那珂郡東海村照沼１１４５</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08342010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08342010" target="_blank">那珂</a></td>
+				<td width="90" class="hyoMenu_List_Co">那珂市菅谷８９１−２</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08344010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08344010" target="_blank">大宮野中</a></td>
+				<td width="90" class="hyoMenu_List">常陸大宮市野中町３０８３</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08402010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08402010" target="_blank">鉾田保健所</a></td>
+				<td width="90" class="hyoMenu_List_Co">鉾田市大字鉾田１３６７−３</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08405010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08405010" target="_blank">鹿島宮中</a></td>
+				<td width="90" class="hyoMenu_List">鹿嶋市城山２−２−１９</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08405020</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08405020" target="_blank">鹿島高天原</a></td>
+				<td width="90" class="hyoMenu_List_Co">鹿嶋市大字港ヶ丘２丁目１１５０−４１</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08406010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08406010" target="_blank">神栖下幡木</a></td>
+				<td width="90" class="hyoMenu_List">神栖市大字下幡木４１３０</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08406030</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08406030" target="_blank">鹿島事務所</a></td>
+				<td width="90" class="hyoMenu_List_Co">神栖市大野原４−７</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08406050</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08406050" target="_blank">神栖消防</a></td>
+				<td width="90" class="hyoMenu_List">神栖市大字溝口字甲の池４９９１−５</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08406060</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08406060" target="_blank">神栖一貫野</a></td>
+				<td width="90" class="hyoMenu_List_Co">神栖市大字知手１００−３</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08406080</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08406080" target="_blank">神栖横瀬</a></td>
+				<td width="90" class="hyoMenu_List">神栖市大字横瀬８６６−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08407010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08407010" target="_blank">波崎太田</a></td>
+				<td width="90" class="hyoMenu_List_Co">神栖市大字須田２３４０−１</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08423040</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08423040" target="_blank">潮来保健所</a></td>
+				<td width="90" class="hyoMenu_List">潮来市大字大洲１４４６−１</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08441010</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08441010" target="_blank">江戸崎公民館</a></td>
+				<td width="90" class="hyoMenu_List_Co">稲敷市江戸崎字大宿甲３２１３</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">一般局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List">08541010</td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=08541010" target="_blank">古河市役所</a></td>
+				<td width="90" class="hyoMenu_List">古河市下大野谷地川２４５６</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="45" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="32" class="MstHyo">○</td>
+				<td width="37" class="MstHyo">×</td>
+				<td width="32" class="MstHyo">×</td>
+				<td width="70" class="hyoMenu_List">茨城県</td>
+				<td width="50" class="hyoMenu_List">一般局</td>
+			</tr>
+								<tr bgcolor="#FFFFCC">
+				<td width="60" class="hyoMenu_List_Co">08561510</td>
+				<td width="67" class="hyoMenu_List_Co"><a href="DataList.php?MstCode=08561510" target="_blank">守谷</a></td>
+				<td width="90" class="hyoMenu_List_Co">守谷市大柏９３７−２</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="45" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="32" class="MstHyo_Co">○</td>
+				<td width="37" class="MstHyo_Co">×</td>
+				<td width="32" class="MstHyo_Co">×</td>
+				<td width="70" class="hyoMenu_List_Co">茨城県</td>
+				<td width="50" class="hyoMenu_List_Co">自排局</td>
+			</tr>
+								<tr>
+				<td width="60" class="hyoMenu_List"></td>
+				<td width="67" class="hyoMenu_List"><a href="DataList.php?MstCode=" target="_blank"></a></td>
+				<td width="90" class="hyoMenu_List"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="37" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="45" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="37" class="MstHyo"></td>
+				<td width="32" class="MstHyo"></td>
+				<td width="70" class="hyoMenu_List"></td>
+				<td width="50" class="hyoMenu_List"></td>
+			</tr>
+							
+	</table>
+	</td>
+  </tr></table>
+</form>
+</body>
+</html>

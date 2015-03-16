@@ -1,0 +1,11 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<title>大気汚染物質広域監視システム（そらまめ君）ホームページ</title>
+</head>
+<frameset rows="180,*" cols="*" frameBorder="0">
+		<frame name="Titke" src="DataListTitle.php?MstCode=44201010&Time=2015031517" scrolling="no">
+		<frame name="Hyou" src="DataListHyou.php?MstCode=44201010&Time=2015031517" scrolling="yes">
+</frameset>
+<noframes></noframes>
+</html>

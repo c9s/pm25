@@ -164,6 +164,11 @@ class JapanSoramameDataSource extends BaseDataSource
             sleep(30);
         }
     }
+
+    public function updateMeasurements() {
+
+
+    }
 }
 
 

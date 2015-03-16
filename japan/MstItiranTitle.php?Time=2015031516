@@ -1,0 +1,56 @@
+<html>
+<head>
+<link rel="stylesheet" media="all" href="Styles.css" type="text/css">
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<title>大気汚染物質広域監視システム（そらまめ君）ホームページ</title>
+<style type="text/css">
+<!--
+.style1 {font-size: 12px;}
+-->
+</style>
+</head>
+
+<body bgcolor="white">
+<form name="Form1" action="">
+<table border="0" style="POSITION: absolute;top: 0px;left:0;">
+	<tr>
+		<td>
+			<span class="style1"><b>測定局一覧表</b>（※測定局名称をクリックすると、過去７日間の時系列表をご覧になれます。測定有無（○）状況は2015年03月15日時点の情報です。）</span>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table class="hyoMenu" height="70">
+				<tr class="hyoMenu_Komoku">
+					<td width="60" rowspan="2" align="center"><span class="style1">測定局<br>コード</span></td >
+					<td width="67" rowspan="2" align="center"><span class="style1">測定局<br>名称</span></td >
+					<td width="90" rowspan="2" align="center"><span class="style1">住所</span></td >
+					<td colspan="16" align="center"><span class="style1">項目（○：測定）</span></td >
+					<td width="70" rowspan="2" align="center"><span class="style1">問い合<br>わせ先</span></td >
+					<td width="50" rowspan="2" align="center"><span class="style1">局種別</span></td >
+				</tr>
+				<tr class="hyoMenu_Komoku">
+					<td width="32" align="center"><span class="style1">SO2</span></td >
+					<td width="32" align="center"><span class="style1">NO</span></td >
+					<td width="32" align="center"><span class="style1">NO2</span></td >
+					<td width="32" align="center"><span class="style1">NOX</span></td >
+					<td width="32" align="center"><span class="style1">CO</span></td >
+					<td width="32" align="center"><span class="style1">OX</span></td >
+					<td width="37" align="center"><span class="style1">NMHC</span></td >
+					<td width="32" align="center"><span class="style1">CH4</span></td >
+					<td width="32" align="center"><span class="style1">THC</span></td >
+					<td width="32" align="center"><span class="style1">SPM</span></td >
+					<td width="45" align="center"><span class="style1">PM2.5</span></td >
+					<td width="32" align="center"><span class="style1">SP</span></td >
+					<td width="32" align="center"><span class="style1">WD</span></td >
+					<td width="32" align="center"><span class="style1">WS</span></td >
+					<td width="37" align="center"><span class="style1">TEMP</span></td >
+					<td width="32" align="center"><span class="style1">HUM</span></td >
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

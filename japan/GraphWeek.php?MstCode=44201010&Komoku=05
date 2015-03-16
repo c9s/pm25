@@ -1,0 +1,74 @@
+<LINK media="all" href="../Styles.css" type="text/css" rel="stylesheet">
+<HTML>
+<HEAD>
+<title>大気汚染物質広域監視システム（そらまめ君）ホームページ</title>
+<script language="javascript">
+<!-- 
+function OpenDayGraph(){
+	MstCode=document.form1.MstCode.value;
+	Komoku=document.form1.OS.value;
+	window.location.href ="GraphDay.php?MstCode="+MstCode+"&Komoku="+Komoku;
+}
+function OpenWeekGraph(){
+	MstCode=document.form1.MstCode.value;
+	Komoku=document.form1.OS.value;
+	window.location.href ="GraphWeek.php?MstCode="+MstCode+"&Komoku="+Komoku;
+	
+}
+
+//-->
+</script>		
+	</HEAD>
+	<body class="bodyInfo">
+	<form name="form1" action="GraphWeek.php" target="_self" method="post">
+	<input type="hidden" name="MstCode" value="44201010">
+	<input type="hidden" name="Komoku" value="05">
+		<table>
+			<tr>
+				<TD>
+				<img src="image/GraphWeekTitle.gif" alt="過去７日間の時系列グラフ" width="700">
+				</TD>
+			</tr>
+			<tr>
+				<td>
+					<table width="700">
+						<tr>
+							<td><img src="image/sokuname.gif" alt="測定局名称"></td>
+							<td style="BACKGROUND-COLOR: #CCff99;"><b>敷戸小学校測定局</b>（測定局コード：44201010）</td>
+					  </tr>
+						<tr class="hyoMenu_List">
+							<td><img src="image/komoku.gif" alt="種別"></td>
+							<td style="BACKGROUND-COLOR: #CCff99;"><select name="OS" onChange="OpenWeekGraph()" ><option value="01">二酸化硫黄</option><option value="02">一酸化窒素</option><option value="03">二酸化窒素</option><option value="04">窒素酸化物</option><option value="05" selected>一酸化炭素</option><option value="06">光化学オキシダント</option><option value="07">非メタン炭化水素</option><option value="08">メタン</option><option value="09">全炭化水素</option><option value="10">浮遊粒子状物質</option><option value="25">微小粒子状物質</option><option value="11">浮遊粉塵</option><option value="21">風速</option><option value="23">気温</option><option value="24">湿度</option></select></td>
+						</tr>
+						<tr>
+							<td><img src="image/nitiji_graph.gif" alt="表示期間"></td>
+							<td style="BACKGROUND-COLOR: #CCff99;">
+							<input type="radio" value="1" name="kirikae" onClick="OpenDayGraph()">当日(2015年03月15日)
+							<b><input type="radio" value="2" name="kirikae" checked>過去7日間(2015年03月08日〜2015年03月15日)</b>
+							</td>
+						</tr>
+					</table>
+					
+				</td>
+			</tr>
+			<tr>
+				<td>
+				  <map name="__mapname81992__" id="__mapname81992__" >
+</map><img src="graph1.php?_jpg_csimd=1&amp;MstCode=44201010&amp;Komoku=05" ismap="ismap" usemap="#__mapname81992__" border="0" width="700" height="300" alt="" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center">
+					<a href="http://soramame.taiki.go.jp/index/setsumei/koumoku.html#kijun" target="_blank">・大気汚染に係る環境基準</a>
+				</td>
+			</tr>
+			<tr>
+				<td align="right">
+					 <input type="button" value="閉じる" name="close" onClick="window.close()">
+				</td>
+			</tr>
+	  </table>
+    
+    </form>
+	</body>
+</HTML>
