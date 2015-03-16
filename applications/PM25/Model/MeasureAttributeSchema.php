@@ -1,0 +1,18 @@
+<?php
+namespace PM25\Model;
+use LazyRecord\Schema\SchemaDeclare;
+
+class MeasureAttributeSchema extends SchemaDeclare
+{
+    public function schema() {
+        $this->column('label')
+            ->varchar(30)
+            ;
+
+        $this->column('identifier')
+            ->varchar(30)
+            ;
+        $this->many('station_measure_attributes', 'PM25\Model\StationMeasureAttributeSchema', 'attribute_id', 'id');
+        $this->manyToMany('stations', 'station_measure_attributes', 'station');
+    }
+}
