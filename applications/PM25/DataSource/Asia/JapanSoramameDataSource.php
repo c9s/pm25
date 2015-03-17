@@ -165,6 +165,7 @@ class JapanSoramameDataSource extends BaseDataSource
                         $station->updateLocation();
                     }
                     $station->importAttributes($stationInfo['attributes']);
+                    $importedAttrs = $station->getAttributeArray();
                 }
 
             

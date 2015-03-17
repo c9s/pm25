@@ -136,6 +136,36 @@ class Station  extends StationBase {
         return $data;
     }
 
+    public function removeAttribute($identifier) {
+        $attribute = new MeasureAttribute;
+        $attribute->load([ 'identifier' => $identifier ]);
+
+        $junction = new StationMeasureAttribute;
+        $junction->load([ 'station_id' => $this->id, 'attribute_id' => $attribute->id ]);
+        if ($junction->id) {
+            return $junction->delete();
+        }
+        return false;
+    }
+
+    public function addAttribute($identifier, $label = NULL) {
+        $attribute = new MeasureAttribute;
+        $attribute->load([ 'identifier' => $identifier ]);
+
+        $junction = new StationMeasureAttribute;
+        return $junction->loadOrCreate([ 'station_id' => $this->id, 'attribute_id' => $attribute->id ]);
+    }
+
+    public function getAttributeArray()
+    {
+        $attributes = $this->measure_attributes;
+        $array = array();
+        foreach($attributes as $attribute) {
+            $array[ $attribute->identifier ] = TRUE;
+        }
+        return $array;
+    }
+
     public function importAttributes(array $attributes)
     {
         if (empty($attributes)) {
