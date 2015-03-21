@@ -17,6 +17,9 @@ class StationSchema extends SchemaDeclare
         $this->column('county')->varchar(30);
         $this->column('county_en')->varchar(60);
 
+        $this->column('province')->varchar(60);
+        $this->column('province_en')->varchar(60);
+
         $this->column('name')->varchar(30);
 
         $this->column('name_en')->varchar(60);
@@ -43,8 +46,9 @@ class StationSchema extends SchemaDeclare
 
         $this->column('remark')->text();
 
-        $this->column('data_source')->varchar(64);
+        $this->column('code')->varchar(32);
 
+        $this->column('data_source')->varchar(64);
 
         $this->many('station_measure_attributes', 'PM25\Model\StationMeasureAttributeSchema', 'station_id', 'id');
         $this->manyToMany('measure_attributes', 'station_measure_attributes', 'attribute');
