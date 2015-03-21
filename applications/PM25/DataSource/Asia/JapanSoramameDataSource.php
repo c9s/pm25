@@ -7,6 +7,8 @@ use CLIFramework\Logger;
 use CurlKit\CurlAgent;
 use DOMElement;
 use DOMText;
+use DateTime;
+use DateTimeZone;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
 
@@ -177,8 +179,94 @@ class JapanSoramameDataSource extends BaseDataSource
     }
 
     public function updateMeasurements() {
+        // parse measurement header
+        $html = file_get_contents('japan/DataListTitle.php?MstCode=44201010&Time=2015031517');
+        $crawler = new Crawler($html);
+        $titleTable = $crawler->filter('table.hyoMenu')->eq(1); // get the second table
+        $titleRows = $titleTable->children();
+        $elementRow = $titleRows->eq(0);
+        $elementCells = $elementRow->children();
+
+        $unitRow = $titleRows->eq(1);
+        $unitCells = $unitRow->children();
 
 
+        $functionalRow = $titleRows->eq(2);
+        $functionalCells = $functionalRow->children();
+
+
+        $labels = [];
+        foreach($elementCells as $index => $cell) {
+            // Skip text nodes
+            if ($cell instanceof DOMText) {
+                continue;
+            }
+            $labels[] = $cell->textContent;
+        } 
+        array_splice($labels, 0, 4); // year, month, day, hour
+
+
+
+        $units = [];
+        foreach($unitCells as $cell) {
+            if ($cell instanceof DOMText) {
+                continue;
+            }
+            $units[] = $cell->textContent;
+        }
+
+        // Align the rowspan for units
+        foreach($elementCells as $index => $cell) {
+            if ($cell instanceof DOMText) {
+                continue;
+            }
+            $rowspan = intval($cell->getAttribute("rowspan"));
+            if ($rowspan > 1) {
+                $this->logger->debug("Make a room from index $index => $rowspan");
+                array_splice($units, $index, 0, ['_']);
+            }
+        }
+        array_splice($units, 0 , 4);
+
+        $labelUnits = array_combine($labels, $units);
+        print_r( $labels ); 
+        print_r( $units);
+        print_r( $labelUnits ); 
+        return;
+
+        // parse measurement body
+        $html = file_get_contents('japan/DataListHyou.php?MstCode=44201010&Time=2015031517');
+        // $html = mb_convert_encoding($html, 'utf-8', 'EUC-JP');
+        $crawler = new Crawler($html);
+        $crawler = $crawler->filter('table.hyoMenu tr');
+        foreach ($crawler as $row) {
+            $cells = $row->childNodes;
+            $rowContents = [];
+            foreach ($cells as $cell) {
+                // Skip text nodes
+                if ($cell instanceof DOMText) {
+                    continue;
+                }
+                $rowContents[] = $cell->textContent;
+            }
+            $year = array_shift($rowContents);
+            $month = array_shift($rowContents);
+            $day = array_shift($rowContents);
+            $hour = array_shift($rowContents);
+
+            $minute = 0;
+            $datetime = new DateTime();
+            $datetime->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+            $datetime->setDate( intval($year), intval($month), intval($day) );
+            $datetime->setTime( intval($hour), $minute);
+
+            print_r("$year-$month-{$day}T{$hour}\n");
+            print_r($datetime->format(DateTime::ATOM));
+
+            $measureData = array_combine($labels, $rowContents);
+            $measureData = array_filter($measureData, 'is_numeric');
+            print_r($measureData);
+        }
     }
 }
 
