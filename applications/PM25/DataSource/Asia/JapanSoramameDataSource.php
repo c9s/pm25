@@ -7,7 +7,7 @@ use PM25\DataSource\BaseDataSource;
 use PM25\Exception\IncorrectDataException;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
-use PM25\Model\Measurement;
+use PM25\Model\Measure;
 use DOMElement;
 use DOMText;
 use DateTime;
@@ -22,6 +22,10 @@ class JapanSoramameDataSource extends BaseDataSource
     const STATION_LIST_PAGE = '/MstItiranHyou.php?Pref={city}&Time={time}';
 
     const STATION_TITLE_PAGE = '/MstItiranTitle.php?Time={time}';
+
+    const MEASUREMENT_TITLE_PAGE = '/DataListTitle.php?MstCode={code}&Time={time}';
+
+    const MEASUREMENT_DATA_PAGE = '/DataListHyou.php?MstCode={code}&Time={time}';
 
     public function getCountyListPageUrl() {
         return self::BASE_URL . self::PROVINCE_LIST_PAGE;
@@ -39,6 +43,17 @@ class JapanSoramameDataSource extends BaseDataSource
                 self::STATION_LIST_PAGE);
     }
 
+    public function getMeasurementTitlePageUrl($code) {
+        return self::BASE_URL . 
+            str_replace([ '{code}', '{time}' ], [ $code, date('YmdH') ], 
+                self::MEASUREMENT_TITLE_PAGE);
+    }
+
+    public function getMeasurementDataPageUrl($code) {
+        return self::BASE_URL . 
+            str_replace([ '{code}', '{time}' ], [ $code, date('YmdH') ], 
+                self::MEASUREMENT_DATA_PAGE);
+    }
 
     public function parseCountyStations($attributeNames, $pageUrl) {
         $response = $this->agent->get($pageUrl);
@@ -179,10 +194,16 @@ class JapanSoramameDataSource extends BaseDataSource
         }
     }
 
-    public function updateMeasurements()
+    public function updateMeasurements(Station $station)
     {
+        $timestamp = date('Ymdh');
+
         // parse measurement header
-        $html = file_get_contents('japan/DataListTitle.php?MstCode=44201010&Time=2015031517');
+        $response = $this->agent->get($this->getMeasurementTitlePageUrl($station->code));
+        $html = $response->decodeBody();
+
+        // $html = file_get_contents('japan/DataListTitle.php?MstCode=44201010&Time=2015031517');
+
         $crawler = new Crawler($html);
         $titleTable = $crawler->filter('table.hyoMenu')->eq(1); // get the second table
         $titleRows = $titleTable->children();
@@ -239,7 +260,8 @@ class JapanSoramameDataSource extends BaseDataSource
         */
 
         // parse measurement body
-        $html = file_get_contents('japan/DataListHyou.php?MstCode=44201010&Time=2015031517');
+        $response = $this->agent->get($this->getMeasurementDataPageUrl($station->code));
+        $html = $response->decodeBody();
         // $html = mb_convert_encoding($html, 'utf-8', 'EUC-JP');
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('table.hyoMenu tr');
@@ -270,12 +292,11 @@ class JapanSoramameDataSource extends BaseDataSource
             $measureData = array_combine($labels, $rowContents);
             $measureData = array_filter($measureData, 'is_numeric');
 
-            /*
-            $measurement = new Measurement;
+            $measurement = new Measure;
             $measurement->create($measureData + [
                 'published_at' => $datetime->format(DateTime::ATOM),
+                'station_id' => $station->id,
             ]);
-            */
             print_r($measureData);
         }
     }

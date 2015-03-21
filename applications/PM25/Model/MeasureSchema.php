@@ -19,6 +19,8 @@ class MeasureSchema extends SchemaDeclare
 
         $this->column('co')->double()->default(0);
 
+        $this->column('o3')->double()->default(0);
+
         $this->column('psi')->double()->default(0);
 
         $this->column('aqi')->integer();
