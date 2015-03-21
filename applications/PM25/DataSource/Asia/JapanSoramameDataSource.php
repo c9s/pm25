@@ -1,16 +1,17 @@
 <?php
 namespace PM25\DataSource\Asia;
-use PM25\DataSource\BaseDataSource;
-use PM25\Exception\IncorrectDataException;
 use Symfony\Component\DomCrawler\Crawler;
 use CLIFramework\Logger;
 use CurlKit\CurlAgent;
+use PM25\DataSource\BaseDataSource;
+use PM25\Exception\IncorrectDataException;
+use PM25\Model\Station;
+use PM25\Model\StationCollection;
+use PM25\Model\Measurement;
 use DOMElement;
 use DOMText;
 use DateTime;
 use DateTimeZone;
-use PM25\Model\Station;
-use PM25\Model\StationCollection;
 
 class JapanSoramameDataSource extends BaseDataSource
 {
@@ -153,9 +154,9 @@ class JapanSoramameDataSource extends BaseDataSource
                     'country' => '日本國',
                     'country_en' => 'Japan',
                     'rawdata' => yaml_emit($stationInfo, YAML_UTF8_ENCODING),
-                ], ['name', 'county', 'country']);
+                ], ['code']);
 
-                if (!$ret->success) {
+                if (!$ret->success || $ret->error) {
                     $this->logger->error('Station record create or update failed: ' .$ret->message);
                 }
 
@@ -178,7 +179,8 @@ class JapanSoramameDataSource extends BaseDataSource
         }
     }
 
-    public function updateMeasurements() {
+    public function updateMeasurements()
+    {
         // parse measurement header
         $html = file_get_contents('japan/DataListTitle.php?MstCode=44201010&Time=2015031517');
         $crawler = new Crawler($html);
@@ -229,10 +231,12 @@ class JapanSoramameDataSource extends BaseDataSource
         array_splice($units, 0 , 4);
 
         $labelUnits = array_combine($labels, $units);
+
+        /*
         print_r( $labels ); 
         print_r( $units);
         print_r( $labelUnits ); 
-        return;
+        */
 
         // parse measurement body
         $html = file_get_contents('japan/DataListHyou.php?MstCode=44201010&Time=2015031517');
@@ -265,6 +269,13 @@ class JapanSoramameDataSource extends BaseDataSource
 
             $measureData = array_combine($labels, $rowContents);
             $measureData = array_filter($measureData, 'is_numeric');
+
+            /*
+            $measurement = new Measurement;
+            $measurement->create($measureData + [
+                'published_at' => $datetime->format(DateTime::ATOM),
+            ]);
+            */
             print_r($measureData);
         }
     }
