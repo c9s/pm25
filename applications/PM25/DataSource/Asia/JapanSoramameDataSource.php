@@ -197,8 +197,6 @@ class JapanSoramameDataSource extends BaseDataSource
                     $station->importAttributes($stationInfo['attributes']);
                     $importedAttrs = $station->getAttributeArray();
                 }
-
-            
             }
 
             $this->logger->info('Sleeping ' . self::REQUEST_DELAY . ' microseconds...');

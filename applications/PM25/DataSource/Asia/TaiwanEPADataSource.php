@@ -78,31 +78,33 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
         $record = new Measure;
         foreach($measures as $measure) {
             $time = new DateTime($measure['PublishTime']);
-
             $site = new Station;
             $site->load(['name' => $measure['SiteName']]);
-            $ret = $record->loadOrCreate([
-                // status: "普通",
-                'station_id'        => $site->id,
-                'psi'            => floatval($measure['PSI']),
-                'so2'            => floatval($measure['SO2']),
-                'co'             => floatval($measure['CO']),
-                'o3'             => floatval($measure['O3']),
-                'pm10'           => floatval($measure['PM10']),
-                'pm25'           => floatval($measure['PM2.5']),
-                'no2'             => floatval($measure['NO2']),
-                'fpmi'            => floatval($measure['FPMI']),
-                'wind_speed'      => floatval($measure['WindSpeed']),
-                'wind_direction'  => floatval($measure['WindDirec']),
+
+            $measureData = [
+                'psi'            => doubleval($measure['PSI']),
+                'so2'            => doubleval($measure['SO2']),
+                'co'             => doubleval($measure['CO']),
+                'o3'             => doubleval($measure['O3']),
+                'pm10'           => doubleval($measure['PM10']),
+                'pm25'           => doubleval($measure['PM2.5']),
+                'no2'             => doubleval($measure['NO2']),
+                'fpmi'            => doubleval($measure['FPMI']),
+                'wind_speed'      => doubleval($measure['WindSpeed']),
+                'wind_direction'  => doubleval($measure['WindDirec']),
+            ];
+            $measureData = array_merge($measureData, [
+                'station_id'      => $site->id,
                 'published_at'    => $time->format(DateTime::ATOM),
                 'major_pollutant' => $measure['MajorPollutant'],
-            ], ['station_id', 'published_at']);
-
-            if (!$ret->success) {
-                die("import error\n");
+            ]);
+            $ret = $record->loadOrCreate($measureData, ['station_id', 'published_at']);
+            if (!$ret->success || $ret->error) {
+                $this->logger->error($ret->message);
+                continue;
             }
-            print_r($record->toArray());
-            echo $measure['PublishTime'] , " => ", $time->format(DateTime::ATOM), " => " , $time->getTimestamp(), "\n";
+            // print_r($record->toArray());
+            // $this->logger->info($measure['PublishTime'] . " => " . $time->format(DateTime::ATOM));
             // echo $site->StationName, "\n";
         }
     }
