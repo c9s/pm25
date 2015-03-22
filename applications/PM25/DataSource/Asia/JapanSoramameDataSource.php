@@ -25,6 +25,8 @@ function measurement_description(array $data) {
 
 class JapanSoramameDataSource extends BaseDataSource
 {
+    const REQUEST_DELAY = 1000000; // 1 second
+
     const BASE_URL = 'http://soramame.taiki.go.jp';
 
     const PROVINCE_LIST_PAGE = '/MstItiran.php';
@@ -198,9 +200,10 @@ class JapanSoramameDataSource extends BaseDataSource
 
             
             }
-            $this->logger->info('Sleeping 30 seconds...');
+
+            $this->logger->info('Sleeping ' . self::REQUEST_DELAY . ' microseconds...');
             // sleep a while for later parsing
-            sleep(30);
+            usleep(self::REQUEST_DELAY);
         }
     }
 
