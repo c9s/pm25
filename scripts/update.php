@@ -15,7 +15,7 @@ $dataSources = [
     new ChinaAqiStudyDataSource($agent, $logger),
 ];
 foreach($dataSources as $dataSource) {
-    $dataSource->updateStationDetails();
+    // $dataSource->updateStationDetails();
 }
 foreach($dataSources as $dataSource) {
     $dataSource->updateMeasurements();
