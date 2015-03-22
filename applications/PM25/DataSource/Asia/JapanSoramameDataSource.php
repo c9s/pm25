@@ -13,6 +13,16 @@ use DOMText;
 use DateTime;
 use DateTimeZone;
 
+function measurement_description(array $data) {
+    $out = [];
+    foreach ($data as $key => $val) {
+        if (!in_array($key, [ 'published_at', 'station_id' ])) {
+            $out[] = sprintf("%s:%.3f", $key, $val);
+        }
+    }
+    return join(', ', $out);
+}
+
 class JapanSoramameDataSource extends BaseDataSource
 {
     const BASE_URL = 'http://soramame.taiki.go.jp';
@@ -194,7 +204,17 @@ class JapanSoramameDataSource extends BaseDataSource
         }
     }
 
-    public function updateMeasurements(Station $station)
+    public function updateMeasurements()
+    {
+        $stations = new StationCollection;
+        $stations->where([  'country_en' => 'Japan' ]);
+        foreach ($stations as $station) {
+            $this->logger->info("Parsing measurements from station: {$station->name}");
+            $this->updateMeasurementsFor($station);
+        }
+    }
+
+    public function updateMeasurementsFor(Station $station)
     {
         $timestamp = date('Ymdh');
 
@@ -227,7 +247,7 @@ class JapanSoramameDataSource extends BaseDataSource
             $labels[] = $cell->textContent;
         } 
         array_splice($labels, 0, 4); // year, month, day, hour
-
+        $labels = array_map('strtolower', $labels); // transform text to lower
 
 
         $units = [];
@@ -265,6 +285,8 @@ class JapanSoramameDataSource extends BaseDataSource
         // $html = mb_convert_encoding($html, 'utf-8', 'EUC-JP');
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('table.hyoMenu tr');
+
+        $this->logger->info("Found " . $crawler->count() .  " records.");
         foreach ($crawler as $row) {
             $cells = $row->childNodes;
             $rowContents = [];
@@ -286,18 +308,23 @@ class JapanSoramameDataSource extends BaseDataSource
             $datetime->setDate( intval($year), intval($month), intval($day) );
             $datetime->setTime( intval($hour), $minute);
 
-            print_r("$year-$month-{$day}T{$hour}\n");
-            print_r($datetime->format(DateTime::ATOM));
+            $this->logger->info("Measurement time: " . $datetime->format(DateTime::ATOM));
 
+            
             $measureData = array_combine($labels, $rowContents);
             $measureData = array_filter($measureData, 'is_numeric');
-
-            $measurement = new Measure;
-            $measurement->create($measureData + [
+            $measureData = array_map('doubleval',$measureData);
+            $measureData = array_merge($measureData, [
                 'published_at' => $datetime->format(DateTime::ATOM),
                 'station_id' => $station->id,
             ]);
-            print_r($measureData);
+
+            $this->logger->info("Data: " . measurement_description($measureData));
+            $measurement = new Measure;
+            $ret = $measurement->createOrUpdate($measureData, ['published_at' , 'station_id']);
+            if ($ret->error) {
+                $this->logger->error($ret->message);
+            }
         }
     }
 }
