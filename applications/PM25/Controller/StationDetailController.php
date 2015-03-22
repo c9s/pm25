@@ -12,6 +12,8 @@ use LogicException;
 use DateTime;
 use DateInterval;
 use PM25\StatsUtils;
+use PM25\Predicate;
+
 
 class StationDetailController extends Controller
 {
@@ -80,29 +82,26 @@ class StationDetailController extends Controller
                         'yesterday' => (new DateTime)->sub(new DateInterval('P1D'))->format('Y-m-d'),
                     ];
 
-                    $predicateStation = ['station_id = :station' , [ ':station' => $station->id ]];
-                    $predicateDateRange = ['date(m.published_at) = :published_at', [ ':published_at' => $dateString ]];
 
                     foreach($summaryDates as $dateLabel => $dateString) {
+                        $predicateStation = new Predicate('station_id = :station' , [ ':station' => $station->id ]);
+                        $predicateDateRange = new Predicate('date(m.published_at) = :published_at', [ ':published_at' => $dateString ]);
+
                         foreach($summaryLabels as $label) {
                             $field = StatsUtils::canonicalizeFieldName($label);
 
-                            $stm = $conn->prepareAndExecute("SELECT MAX($field) FROM measures m WHERE m.station_id = :station AND date(m.published_at) = :published_at", [
-                                ':station' => $station->id,
-                                ':published_at' => $dateString,
-                            ]);
+                            $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
+
+                            $stm = $conn->prepareAndExecute("SELECT MAX($field) FROM measures m WHERE $conditionSql",
+                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $max = doubleval($stm->fetchColumn(0));
 
-                            $stm = $conn->prepareAndExecute("SELECT MIN($field) FROM measures m WHERE m.station_id = :station AND date(m.published_at) = :published_at", [
-                                ':station' => $station->id,
-                                ':published_at' => $dateString,
-                            ]);
+                            $stm = $conn->prepareAndExecute("SELECT MIN($field) FROM measures m WHERE $conditionSql",
+                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $min = doubleval($stm->fetchColumn(0));
 
-                            $stm = $conn->prepareAndExecute("SELECT $field FROM measures m WHERE station_id = :station AND date(m.published_at) = :published_at ORDER BY m.published_at DESC LIMIT 1", [
-                                ':station' => $station->id,
-                                ':published_at' => $dateString,
-                            ]);
+                            $stm = $conn->prepareAndExecute("SELECT $field FROM measures m WHERE $conditionSql ORDER BY m.published_at DESC LIMIT 1",
+                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $now = doubleval($stm->fetchColumn(0));
 
 
@@ -111,7 +110,7 @@ class StationDetailController extends Controller
                             $datePaddingSql = StatsUtils::generateDatePaddingTableSql($dateString, $unit, $period);
 
                             $seriesSql = "SELECT IF(m.$field, m.$field, 0) FROM measures AS m";
-                            $seriesSql .= " RIGHT JOIN $datePaddingSql ON (date_rows.published_at = m.published_at AND m.station_id = :station AND date(m.published_at) = :published_at)";
+                            $seriesSql .= " RIGHT JOIN $datePaddingSql ON (date_rows.published_at = m.published_at AND $conditionSql)";
                             $seriesSql .= " ORDER BY date_rows.published_at";
                             $stm = $conn->prepareAndExecute($seriesSql, [
                                 ':station' => $station->id,
