@@ -110,7 +110,7 @@ class StationDetailController extends Controller
                             $datePaddingSql = StatsUtils::generateDatePaddingTableSql($dateString, $unit, $period);
 
                             $seriesSql = "SELECT IF(m.$field, m.$field, 0) FROM measures AS m";
-                            $seriesSql .= " RIGHT JOIN $datePaddingSql ON (date_rows.published_at = m.published_at AND $conditionSql)";
+                            $seriesSql .= " RIGHT JOIN $datePaddingSql ON (" . StatsUtils::generateDatePaddingTableJoinCondition($unit) . " AND $conditionSql)";
                             $seriesSql .= " ORDER BY date_rows.published_at";
                             $stm = $conn->prepareAndExecute($seriesSql, [
                                 ':station' => $station->id,
@@ -122,7 +122,8 @@ class StationDetailController extends Controller
                             $summary = [
                                 'label' => $label,
                                 'field' => $field,
-                                'period' => 'day', // period
+                                'period' => $period, // period
+                                'unit'   => $unit,
                                 'date1' => $dateString,
                                 'chart' => 'area',
                                 'max' => $max,

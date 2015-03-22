@@ -25,6 +25,17 @@ class StatsUtils {
         return '(' . join(' UNION ', $fragments) . ') AS ' . $as;
     }
 
+    static public function generateDatePaddingTableJoinCondition($unit = 'HOUR', $dateRowTableRef = 'date_rows', $measureTableRef = 'm')
+    {
+        if ($unit == 'HOUR') {
+            return "DATE_FORMAT($dateRowTableRef.published_at,'%Y-%m-%d %H:00:00') = DATE_FORMAT($measureTableRef.published_at, '%Y-%m-%d %H:00:00')";
+        } elseif ($unit == 'DAY') {
+            return "DATE($dateRowTableRef.published_at) = DATE($measureTableRef.published_at)";
+        } else {
+            throw new LogicException("Unsupported unit: $unit");
+        }
+    }
+
     static public function canonicalizeFieldName($label)
     {
         $field = strtolower(preg_replace('/\W/', '', $label));
