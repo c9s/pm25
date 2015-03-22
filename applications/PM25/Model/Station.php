@@ -24,7 +24,11 @@ class RequestFailException extends Exception {
 }
 
 class Station  extends StationBase {
-    const GOOGLE_GEOCODING_KEY = 'AIzaSyBq56dBXLlJOOfQP5UE2LVim1pXIYBEH5o';
+    // Kayo Google Map
+    // const GOOGLE_GEOCODING_KEY = 'AIzaSyBq56dBXLlJOOfQP5UE2LVim1pXIYBEH5o';
+
+    // FindCafe
+    const GOOGLE_GEOCODING_KEY = 'AIzaSyDUzJ4PkxJkLvcDc_UxZBDEzFEdZHQ8cWI';
 
     /*
         The returning structure:
@@ -102,6 +106,10 @@ class Station  extends StationBase {
                 'longitude' => $obj->results[0]->geometry->location->lng,
                 'latitude' => $obj->results[0]->geometry->location->lat,
             ]);
+        } elseif ($obj->status === "ZERO_RESULTS") {
+            return null;
+        } else {
+            throw new Exception("Google geocode API failed: " . var_export($obj, true));
         }
     }
 
