@@ -8,6 +8,7 @@ use PM25\Model\StationBase;
 use PM25\Model\MeasureAttribute;
 use PM25\Model\StationMeasureAttribute;
 use PM25\GeoCoding;
+use LazyRecord\ConnectionManager;
 use Exception;
 
 class RequestFailException extends Exception { 
