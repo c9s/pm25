@@ -19,6 +19,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
 
     public function getProvinceArray() 
     {
+        $this->logger->info("Loading city data...");
         $provinces = [];
         $provinceObjects = json_decode(file_get_contents('data/china-city.json'));
         foreach($provinceObjects as $provinceString) {
@@ -42,7 +43,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
             $body = json_decode($response->decodeBody());
             foreach($body->rows as $row) {
                 $site = new Station;
-                $site->loadOrCreate([
+                $ret = $site->createOrUpdate([
                     'country' => '中國',
                     'country_en' => 'China',
                     'province' => $provinceInfo['name'],
@@ -51,7 +52,10 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                     'city_en' => $provinceInfo['name_en'],
                     'name' => $row->position_name,
                 ], ['country_en', 'city', 'name']);
-                $logger->info("Updating site " . $site->name . "(" . $site->id . ")");
+                if ($ret->error) {
+                    $this->logger->error($ret->message);
+                }
+                $this->logger->info(sprintf('%s (% 2s) - %s', $site->name , $site->id , $ret->message));
             }
         }
     }
@@ -60,6 +64,8 @@ class ChinaAqiStudyDataSource extends BaseDataSource
     {
         $provinces = $this->getProvinceArray();
         foreach($provinces as $provinceInfo) {
+            $this->logger->info("Fetching measurements from {$provinceInfo['name']}");
+
             $response = $this->agent->post('http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php', [ 'city' => $provinceInfo['name'] ]);
             $body = json_decode($response->decodeBody());
             foreach($body->rows as $row) {
@@ -87,7 +93,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 */
                 $time = new DateTime($row->time_point);
                 $measure = new Measure;
-                $ret = $measure->updateOrCreate([
+                $ret = $measure->createOrUpdate([
                     'station_id'   => $station->id,
                     'pm25'         => $row->pm2_5,
                     'aqi'          => $row->aqi,
