@@ -13,6 +13,6 @@ $dataSources = [
     new JapanSoramameDataSource($agent, $logger),
 ];
 foreach($dataSources as $dataSource) {
-    $dataSource->updateStationDetails();
+    // $dataSource->updateStationDetails();
     $dataSource->updateMeasurements();
 }

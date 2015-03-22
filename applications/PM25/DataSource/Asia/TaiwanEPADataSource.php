@@ -1,7 +1,8 @@
 <?php
 namespace PM25\DataSource\Asia;
 use PM25\Model\Station;
-use PM25\DataSource\TaiwanEPADataSource;
+use PM25\Model\Measure;
+use DateTime;
 use PM25\Exception\IncorrectDataException;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
@@ -37,9 +38,9 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
                 'area'    => $siteDetail->Township,
                 'rawdata' => yaml_emit($siteDetail, YAML_UTF8_ENCODING),
                 // 'remark'  => [ 'type' => $siteDetail->SiteType ],
-            ], [ 'name' => $siteDetail->SiteName ]);
+            ], [ 'country_en' => 'Taiwan', 'code' => $siteDetail->SiteEngName ]);
             if ($ret->error) {
-                die($ret->message);
+                $this->logger->error($ret->message);
             }
 
             // If we don't have address_en, we should translate the address to english
@@ -47,7 +48,7 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
                 $result = $station->requestGeocode($siteDetail->SiteAddress);
                 // $result[0]->address_components;
                 $englishAddress = $result->results[0]->formatted_address;
-                echo "Updating english address => ", $englishAddress , "\n";
+                $this->logger->info("Updating english address => $englishAddress");
                 $site->update(['address_en' => $englishAddress]);
             }
 
@@ -55,7 +56,7 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
                 $result = $station->requestGeocode($station->city . ', ' . $station->country);
                 // $result[0]->address_components;
                 $str = $result->results[0]->address_components[0]->long_name;
-                echo "Updating english city name => ", $str , "\n";
+                $this->logger->info("Updating english city name => $str");
                 $station->update(['city_en' => $str]);
             }
         }
@@ -64,7 +65,7 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
     public function updateMeasurements()
     {
         $response = $this->agent->get('http://opendata.epa.gov.tw/ws/Data/AQX/?top=1000&format=json');
-        $measures = json_decode($response->decodeBody(), true);
+        $measures = json_decode($response->body, true);
         $record = new Measure;
         foreach($measures as $measure) {
             $time = new DateTime($measure['PublishTime']);
