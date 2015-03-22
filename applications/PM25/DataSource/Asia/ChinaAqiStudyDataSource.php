@@ -50,6 +50,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                     'province_en' => $provinceInfo['name_en'],
                     'city' => $provinceInfo['name'],
                     'city_en' => $provinceInfo['name_en'],
+                    'data_source' => 'ChinaAqiStudyDataSource',
                     'name' => $row->position_name,
                 ], ['country_en', 'city', 'name']);
                 if ($ret->error) {
