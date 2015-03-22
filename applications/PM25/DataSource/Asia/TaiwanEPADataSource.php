@@ -2,8 +2,9 @@
 namespace PM25\DataSource\Asia;
 use PM25\Model\Station;
 use PM25\Model\Measure;
-use DateTime;
 use PM25\Exception\IncorrectDataException;
+use DateTime;
+use Exception;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
 use PM25\DataSource\BaseDataSource;
@@ -46,18 +47,26 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
             // If we don't have address_en, we should translate the address to english
             if (! $station->address_en) {
                 $result = $station->requestGeocode($siteDetail->SiteAddress);
-                // $result[0]->address_components;
-                $englishAddress = $result->results[0]->formatted_address;
-                $this->logger->info("Updating english address => $englishAddress");
-                $site->update(['address_en' => $englishAddress]);
+                if ($result->status === "OK") {
+                    // $result[0]->address_components;
+                    $englishAddress = $result->results[0]->formatted_address;
+                    $this->logger->info("Updating english address => $englishAddress");
+                    $station->update(['address_en' => $englishAddress]);
+                } else {
+                    $this->logger->error('Geocoding API response: ' . $result->status);
+                }
             }
 
             if (! $station->city_en && $station->city) {
                 $result = $station->requestGeocode($station->city . ', ' . $station->country);
-                // $result[0]->address_components;
-                $str = $result->results[0]->address_components[0]->long_name;
-                $this->logger->info("Updating english city name => $str");
-                $station->update(['city_en' => $str]);
+                if ($result->status === "OK") {
+                    // $result[0]->address_components;
+                    $str = $result->results[0]->address_components[0]->long_name;
+                    $this->logger->info("Updating english city name => $str");
+                    $station->update(['city_en' => $str]);
+                } else {
+                    $this->logger->error('Geocoding API response: ' . $result->status);
+                }
             }
         }
     }
