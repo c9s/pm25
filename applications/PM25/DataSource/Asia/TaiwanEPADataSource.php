@@ -3,6 +3,7 @@ namespace PM25\DataSource\Asia;
 use PM25\Model\Station;
 use PM25\Model\Measure;
 use PM25\Exception\IncorrectDataException;
+use PM25\Utils;
 use DateTime;
 use Exception;
 use CLIFramework\Logger;
@@ -77,6 +78,9 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
         $measures = json_decode($response->body, true);
         $record = new Measure;
         foreach($measures as $measure) {
+
+            // $this->logger->info( );
+
             $time = new DateTime($measure['PublishTime']);
             $site = new Station;
             $site->load(['name' => $measure['SiteName']]);
@@ -93,12 +97,15 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
                 'wind_speed'      => doubleval($measure['WindSpeed']),
                 'wind_direction'  => doubleval($measure['WindDirec']),
             ];
+
+            $this->logger->info("Data: " . Utils::measurement_description($measureData));
+
             $measureData = array_merge($measureData, [
                 'station_id'      => $site->id,
                 'published_at'    => $time->format(DateTime::ATOM),
                 'major_pollutant' => $measure['MajorPollutant'],
             ]);
-            $ret = $record->loadOrCreate($measureData, ['station_id', 'published_at']);
+            $ret = $record->createOrUpdate($measureData, ['station_id', 'published_at']);
             if (!$ret->success || $ret->error) {
                 $this->logger->error($ret->message);
                 continue;
