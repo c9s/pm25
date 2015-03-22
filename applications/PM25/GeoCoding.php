@@ -44,7 +44,7 @@ class RequestFailException extends Exception {
 
 class GeoCoding
 {
-    public static function requestGeocode($address) {
+    public static function request($address) {
         $args = array(
             'address' => $address,
             'key' => self::GOOGLE_GEOCODING_KEY,
@@ -56,6 +56,10 @@ class GeoCoding
             throw new RequestFailException('Google Map API request failed.', $url, $args, $response);
         }
         $result = json_decode($response);
+
+        if ($result->status == "ZERO_RESULTS") {
+            return NULL;
+        }
         if ($result->status != "OK") {
             throw GeocodingErrorResultException($result);
         }
