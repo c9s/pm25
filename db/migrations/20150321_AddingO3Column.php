@@ -23,7 +23,7 @@
 class AddingO3Column_1426950661  extends LazyRecord\Migration\Migration {
 
     public function upgrade() {
-        $this->executeSql('ALTER TABLE stations ADD COLUMN `o3` double default 0');
+        $this->executeSql('ALTER TABLE measures ADD COLUMN `o3` double default 0');
     }
 
     public function downgrade() {
