@@ -90,11 +90,11 @@ class StationDetailController extends Controller
 
                     $summaryItems = [];
 
-                    foreach($enabledSummary as $summaryType) {
-                        switch($summaryType) {
+                    foreach($enabledSummary as $summaryIdentifier) {
+                        switch($summaryIdentifier) {
                             case 'today':
                                 $summaryItems[] = SummaryDefinition::createOneDaySummary(
-                                    'today',
+                                    $summaryIdentifier,
                                     new DateTime(date('Y-m-d')),
                                     $summaryAttributes,
                                     24,
@@ -102,14 +102,14 @@ class StationDetailController extends Controller
                             break;
                             case 'yesterday':
                                 $summaryItems[] = SummaryDefinition::createOneDaySummary(
-                                    'yesterday',
+                                    $summaryIdentifier,
                                     (new DateTime(date('Y-m-d')))->sub(new DateInterval('P1D')),
                                     $summaryAttributes,
                                     24,
                                     'HOUR');
                             case '7days':
                                 $summaryItems[] = SummaryDefinition::createDateRangeSummary(
-                                    '7days',
+                                    $summaryIdentifier,
                                     (new DateTime(date('Y-m-d')))->sub(new DateInterval('P7D')),
                                     (new DateTime(date('Y-m-d'))),
                                     $summaryAttributes,
