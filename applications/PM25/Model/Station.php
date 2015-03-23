@@ -7,6 +7,8 @@ namespace PM25\Model;
 use PM25\Model\StationBase;
 use PM25\Model\MeasureAttribute;
 use PM25\Model\StationMeasureAttribute;
+use PM25\GeoCoding;
+use LazyRecord\ConnectionManager;
 use Exception;
 
 class RequestFailException extends Exception { 
@@ -95,21 +97,17 @@ class Station  extends StationBase {
 
      */
     public function updateLocation() {
-        $obj = $this->requestGeocode($this->getAddress());
-        if ($obj->status === "OK" 
-            && $obj->results[0] 
-            && $obj->results[0]->geometry 
-            && $obj->results[0]->geometry->location
-            && $this->id)
-        {
-            return $this->update([
-                'longitude' => $obj->results[0]->geometry->location->lng,
-                'latitude' => $obj->results[0]->geometry->location->lat,
-            ]);
-        } elseif ($obj->status === "ZERO_RESULTS") {
-            return null;
-        } else {
-            throw new Exception("Google geocode API failed: " . var_export($obj, true));
+        if ($result = GeoCoding::request($this->getAddress())) {
+            if ($obj->results[0] 
+                && $obj->results[0]->geometry 
+                && $obj->results[0]->geometry->location
+                && $this->id)
+            {
+                return $this->update([
+                    'longitude' => $obj->results[0]->geometry->location->lng,
+                    'latitude' => $obj->results[0]->geometry->location->lat,
+                ]);
+            }
         }
     }
 

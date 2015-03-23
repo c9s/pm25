@@ -8,20 +8,11 @@ use PM25\Exception\IncorrectDataException;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
 use PM25\Model\Measure;
+use PM25\Utils;
 use DOMElement;
 use DOMText;
 use DateTime;
 use DateTimeZone;
-
-function measurement_description(array $data) {
-    $out = [];
-    foreach ($data as $key => $val) {
-        if (!in_array($key, [ 'published_at', 'station_id' ])) {
-            $out[] = sprintf("%s:%.3f", $key, $val);
-        }
-    }
-    return join(', ', $out);
-}
 
 class JapanSoramameDataSource extends BaseDataSource
 {
@@ -197,8 +188,6 @@ class JapanSoramameDataSource extends BaseDataSource
                     $station->importAttributes($stationInfo['attributes']);
                     $importedAttrs = $station->getAttributeArray();
                 }
-
-            
             }
 
             $this->logger->info('Sleeping ' . self::REQUEST_DELAY . ' microseconds...');
@@ -322,7 +311,7 @@ class JapanSoramameDataSource extends BaseDataSource
                 'station_id' => $station->id,
             ]);
 
-            $this->logger->info("Data: " . measurement_description($measureData));
+            $this->logger->info("Data: " . Utils::measurement_description($measureData));
             $measurement = new Measure;
             $ret = $measurement->createOrUpdate($measureData, ['published_at' , 'station_id']);
             if ($ret->error) {
