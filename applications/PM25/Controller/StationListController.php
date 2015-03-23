@@ -33,7 +33,7 @@ class StationListController extends Controller
             $row['latitude'] = doubleval($row['latitude']);
         }
         $json = $this->toJson($rows);
-        apc_store($cacheKey, 60 * 60 * 24);
+        apc_store($cacheKey, $json, 60 * 60 * 24);
         return $json;
     }
 }
