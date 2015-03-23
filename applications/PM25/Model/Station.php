@@ -98,14 +98,14 @@ class Station  extends StationBase {
      */
     public function updateLocation() {
         if ($result = GeoCoding::request($this->getAddress())) {
-            if ($obj->results[0] 
-                && $obj->results[0]->geometry 
-                && $obj->results[0]->geometry->location
+            if ($result->results[0] 
+                && $result->results[0]->geometry 
+                && $result->results[0]->geometry->location
                 && $this->id)
             {
                 return $this->update([
-                    'longitude' => $obj->results[0]->geometry->location->lng,
-                    'latitude' => $obj->results[0]->geometry->location->lat,
+                    'longitude' => $result->results[0]->geometry->location->lng,
+                    'latitude' => $result->results[0]->geometry->location->lat,
                 ]);
             }
         }

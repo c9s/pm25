@@ -42,8 +42,8 @@ class ChinaAqiStudyDataSource extends BaseDataSource
             $response = $this->agent->post('http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php', [ 'city' => $provinceInfo['name'] ]);
             $body = json_decode($response->decodeBody());
             foreach($body->rows as $row) {
-                $site = new Station;
-                $ret = $site->createOrUpdate([
+                $station = new Station;
+                $ret = $station->createOrUpdate([
                     'country' => '中國',
                     'country_en' => 'China',
                     'province' => $provinceInfo['name'],
@@ -56,7 +56,15 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 if ($ret->error) {
                     $this->logger->error($ret->message);
                 }
-                $this->logger->info(sprintf('%s (% 2s) - %s', $site->name , $site->id , $ret->message));
+                $this->logger->info(sprintf('%s (% 2s) - %s', $station->name , $station->id , $ret->message));
+
+                if ($station->id) {
+                    if (!$station->latitude && !$station->longitude) {
+                        $this->logger->info('Updating geolocation from address');
+                        // Translate the address to latitude and longitude
+                        $station->updateLocation();
+                    }
+                }
             }
         }
     }
