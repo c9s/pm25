@@ -13,7 +13,7 @@ use DateTime;
 use DateInterval;
 use PM25\StatsUtils;
 use PM25\Predicate;
-
+use PM25\SummaryDefinition;
 
 class StationDetailController extends Controller
 {
@@ -34,7 +34,11 @@ class StationDetailController extends Controller
         if ($enableMeasurementsArray === NULL) {
             $enableMeasurementsArray = 1;
         }
-        $enableSummary = $this->request->param('summary');
+        $enabledSummary = $this->request->param('summary');
+        if ($enabledSummary == "1") {
+            $enabledSummary = 'today,yesterday';
+        }
+        $enabledSummary = explode(',', $enabledSummary);
 
         $station = new Station;
         if (is_numeric($id)) {
@@ -69,69 +73,94 @@ class StationDetailController extends Controller
                 // register measurements data to the json object
                 $data['measurements']  = $measurements;
             }
-            if ($enableSummary) {
+            if ($enabledSummary && !empty($enabledSummary)) {
                 if ($conn = $this->getDefaultConnection()) {
 
                     // Use attributes to generate the summary fields
                     // $attributes = $station->measure_attributes;
                     // print_r($attributes->toArray());
-
-                    $summaryLabels = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'];
-                    $summaryDates = [ 
-                        'today' => date('Y-m-d'),
-                        'yesterday' => (new DateTime)->sub(new DateInterval('P1D'))->format('Y-m-d'),
+                    $summaryAttributes = [
+                        'PM2.5' => 'pm25',
+                        'PM10' => 'pm10',
+                        'O3' => 'o3', 
+                        'NO2' => 'no2',
+                        'CO' => 'co', 
+                        'SO2' => 'so2',
                     ];
 
+                    $summaryItems = [];
 
-                    foreach($summaryDates as $dateLabel => $dateString) {
-                        $predicateStation = new Predicate('station_id = :station' , [ ':station' => $station->id ]);
-                        $predicateDateRange = new Predicate('date(m.published_at) = :published_at', [ ':published_at' => $dateString ]);
+                    foreach($enabledSummary as $summaryType) {
+                        switch($summaryType) {
+                            case 'today':
+                                $summaryItems[] = SummaryDefinition::createOneDaySummary(
+                                    'today',
+                                    new DateTime(date('Y-m-d')),
+                                    $summaryAttributes,
+                                    24,
+                                    'HOUR');
+                            break;
+                            case 'yesterday':
+                                $summaryItems[] = SummaryDefinition::createOneDaySummary(
+                                    'yesterday',
+                                    (new DateTime(date('Y-m-d')))->sub(new DateInterval('P1D')),
+                                    $summaryAttributes,
+                                    24,
+                                    'HOUR');
+                            break;
+                        }
+                    }
 
-                        foreach($summaryLabels as $label) {
+                    foreach ($summaryItems as $summaryItem) {
+                        $predicateStation = new Predicate('m.station_id = :station' , [ ':station' => $station->id ]);
+
+                        $predicateDateRange = $summaryItem->createDateRangePredicate();
+                        // $predicateDateRange = new Predicate('date(m.published_at) = :published_at', [ ':published_at' => $summaryItem->dateRange->format('Y-m-d') ]);
+
+                        foreach($summaryItem->attributes as $label) {
                             $field = StatsUtils::canonicalizeFieldName($label);
 
                             $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
 
-                            $stm = $conn->prepareAndExecute("SELECT MAX($field) FROM measures m WHERE $conditionSql",
+                            $stm = $conn->prepareAndExecute("SELECT MAX(m.$field) FROM measures m WHERE $conditionSql",
                                 StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $max = doubleval($stm->fetchColumn(0));
 
-                            $stm = $conn->prepareAndExecute("SELECT MIN($field) FROM measures m WHERE $conditionSql",
+                            $stm = $conn->prepareAndExecute("SELECT MIN(m.$field) FROM measures m WHERE $conditionSql",
                                 StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $min = doubleval($stm->fetchColumn(0));
 
-                            $stm = $conn->prepareAndExecute("SELECT $field FROM measures m WHERE $conditionSql ORDER BY m.published_at DESC LIMIT 1",
+                            $stm = $conn->prepareAndExecute("SELECT AVG(m.$field) FROM measures m WHERE $conditionSql",
+                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
+                            $avg = doubleval($stm->fetchColumn(0));
+
+                            $stm = $conn->prepareAndExecute("SELECT m.$field FROM measures m WHERE $conditionSql ORDER BY m.published_at DESC LIMIT 1",
                                 StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $now = doubleval($stm->fetchColumn(0));
 
-
-                            $unit = 'HOUR';
-                            $period = 24;
-                            $datePaddingSql = StatsUtils::generateDatePaddingTableSql($dateString, $unit, $period);
+                            $datePaddingSql = $summaryItem->generateDatePaddingTableSql();
 
                             $seriesSql = "SELECT IF(m.$field, m.$field, 0) FROM measures AS m";
-                            $seriesSql .= " RIGHT JOIN $datePaddingSql ON (" . StatsUtils::generateDatePaddingTableJoinCondition($unit) . " AND $conditionSql)";
+                            $seriesSql .= " RIGHT JOIN $datePaddingSql ON (" . StatsUtils::generateDatePaddingTableJoinCondition($summaryItem->unit) . " AND $conditionSql)";
                             $seriesSql .= " ORDER BY date_rows.published_at";
-                            $stm = $conn->prepareAndExecute($seriesSql, [
-                                ':station' => $station->id,
-                                ':published_at' => $dateString,
-                            ]);
-
+                            $stm = $conn->prepareAndExecute($seriesSql, StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $all = StatsUtils::fetchSeries($stm);
 
                             $summary = [
                                 'label' => $label,
                                 'field' => $field,
-                                'period' => $period, // period
-                                'unit'   => $unit,
-                                'date1' => $dateString,
+                                'range' => $summaryItem->getRangeInfo(),
+                                'unit' => 'ug/m3',
                                 'chart' => 'area',
-                                'max' => $max,
-                                'min' => $min,
-                                'now' => $now,
-                                'series' => $all,
+                                'data' => [
+                                    'max' => $max,
+                                    'min' => $min,
+                                    'now' => $now,
+                                    'avg' => $avg,
+                                    'series' => $all,
+                                ],
                             ];
-                            $data['summary'][$dateLabel][] = $summary;
+                            $data['summary'][$summaryItem->identifier][] = $summary;
                         }
                     }
                 }

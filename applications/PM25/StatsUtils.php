@@ -15,7 +15,7 @@ use DateTime;
 use DateInterval;
 
 class StatsUtils {
-    static public function generateDatePaddingTableSql($baseDate, $unit = 'HOUR', $period = 24, $as = 'date_rows') {
+    static public function generateDatePaddingTableSql($baseDate, $period = 24, $unit = 'HOUR', $as = 'date_rows') {
         // $unit = 'HOUR';
         // $period = 24;
         $fragments = [];
