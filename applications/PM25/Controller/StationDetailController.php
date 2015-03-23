@@ -38,7 +38,7 @@ class StationDetailController extends Controller
         if ($enabledSummary == "1") {
             $enabledSummary = 'today,yesterday,7days';
         }
-        $enabledSummary = explode(',', $enabledSummary);
+        $enabledSummary = array_map('trim',explode(',', $enabledSummary));
 
         $station = new Station;
         if (is_numeric($id)) {
