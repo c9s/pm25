@@ -34,11 +34,11 @@ class StationDetailController extends Controller
         if ($enableMeasurementsArray === NULL) {
             $enableMeasurementsArray = 1;
         }
-        $enabledSummary = $this->request->param('summary');
-        if ($enabledSummary == "1") {
-            $enabledSummary = 'today,yesterday,7days';
+        $enabledSummaryStr = $this->request->param('summary');
+        if ($enabledSummaryStr == "1") {
+            $enabledSummaryStr = 'today,yesterday,7days';
         }
-        $enabledSummary = array_map('trim',explode(',', $enabledSummary));
+        $enabledSummary = array_map('trim',explode(',', $enabledSummaryStr));
 
         $station = new Station;
         if (is_numeric($id)) {
@@ -76,6 +76,13 @@ class StationDetailController extends Controller
                 $data['measurements']  = $measurements;
             }
             if ($enabledSummary && !empty($enabledSummary)) {
+                $json = apc_fetch("station-detail-$stationId-$enabledSummaryStr");
+                if ($json) {
+                    header('Content-Type: application/json;');
+                    return $json;
+                }
+
+
                 if ($conn = $this->getDefaultConnection()) {
 
                     // Use attributes to generate the summary fields
@@ -171,9 +178,10 @@ class StationDetailController extends Controller
                     }
                 }
             }
+            $json = $this->toJson($data);
+            apc_store("station-detail-$stationId-$enabledSummaryStr", $json, 60 * 10);
+            return $json;
 
-
-            return $this->toJson($data);
         } else {
             return $this->toJson([ 'error' => 'Station not found' ]);
         }
