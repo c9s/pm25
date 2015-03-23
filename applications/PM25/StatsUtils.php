@@ -25,6 +25,28 @@ class StatsUtils {
         return '(' . join(' UNION ', $fragments) . ') AS ' . $as;
     }
 
+    static public function sqlDebug(PDO $conn, $sql, array $arguments) {
+        foreach ($arguments as $k => $v) {
+            if (is_string($v)) {
+                $sql = str_replace($k, $conn->quote($v), $sql);
+            } else {
+                $sql = str_replace($k, $v, $sql);
+            }
+        }
+        print_r($sql);
+    }
+
+    static public function generateDateRowGroupBy($unit = 'HOUR', $dateRowTableRef = 'date_rows')
+    {
+        if ($unit == 'HOUR') {
+            return "DATE_FORMAT($dateRowTableRef.published_at,'%Y-%m-%d %H:00:00')";
+        } elseif ($unit == 'DAY') {
+            return "DATE($dateRowTableRef.published_at)";
+        } else {
+            throw new LogicException("Unsupported unit: $unit");
+        }
+    }
+
     static public function generateDatePaddingTableJoinCondition($unit = 'HOUR', $dateRowTableRef = 'date_rows', $measureTableRef = 'm')
     {
         if ($unit == 'HOUR') {

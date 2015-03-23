@@ -1,5 +1,5 @@
 <?php
-namespace PM25\Controller;
+namespace PM25;
 use Phifty\Controller;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
@@ -24,7 +24,7 @@ class SummaryDefinition {
 
     public $identifier;
 
-    public $groupByMethod = 'SUM'; // SUM() or MIN() or AVG()
+    public $groupByMethod = 'AVG'; // SUM() or MIN() or AVG()
 
     public $unit = 'HOUR'; // group by HOUR
 
@@ -53,18 +53,9 @@ class SummaryDefinition {
         ];
     }
 
-    static public function createDateRangeSummary(DateTime $from, DateTime $to, $unit = 'DAY') {
-        $summary = new self;
-        $summary->dateRange = [$from, $to];
-        $summary->unit = $unit;
-
-        list($fromDate, $toDate) = $this->dateRange;
-        $interval = $fromDate->diff($toDate);
-        if ($unit == 'DAY') {
-            $this->interval = $interval->days;
-        } else {
-            throw new LogicException("unsupport unit: $unit");
-        }
+    static public function createDateRangeSummary($identifier, DateTime $from, DateTime $to, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $unit = 'DAY') {
+        $summary = new self($identifier);
+        $summary->setDateRange([$from, $to], $unit);
         return $summary;
     }
 
@@ -77,9 +68,21 @@ class SummaryDefinition {
         return $summary;
     }
 
-    public function setDateRange($dateRange)
+    public function setDateRange($dateRange, $unit)
     {
         $this->dateRange = $dateRange;
+        $this->unit = $unit;
+        if (count($this->dateRange) == 1) {
+
+        } else if (count($this->dateRange) == 2) {
+            list($fromDate, $toDate) = $this->dateRange;
+            $interval = $fromDate->diff($toDate);
+            if ($unit == 'DAY') {
+                $this->interval = $interval->days;
+            } else {
+                throw new LogicException("unsupport unit");
+            }
+        }
     }
 
     public function createDateRangePredicate() {

@@ -36,7 +36,7 @@ class StationDetailController extends Controller
         }
         $enabledSummary = $this->request->param('summary');
         if ($enabledSummary == "1") {
-            $enabledSummary = 'today,yesterday';
+            $enabledSummary = 'today,yesterday,7days';
         }
         $enabledSummary = explode(',', $enabledSummary);
 
@@ -107,6 +107,13 @@ class StationDetailController extends Controller
                                     $summaryAttributes,
                                     24,
                                     'HOUR');
+                            case '7days':
+                                $summaryItems[] = SummaryDefinition::createDateRangeSummary(
+                                    '7days',
+                                    (new DateTime(date('Y-m-d')))->sub(new DateInterval('P7D')),
+                                    (new DateTime(date('Y-m-d'))),
+                                    $summaryAttributes,
+                                    'DAY');
                             break;
                         }
                     }
@@ -140,9 +147,14 @@ class StationDetailController extends Controller
 
                             $datePaddingSql = $summaryItem->generateDatePaddingTableSql();
 
-                            $seriesSql = "SELECT IF(m.$field, m.$field, 0) FROM measures AS m";
+                            $seriesSql = "SELECT {$summaryItem->groupByMethod}(m.$field), " . StatsUtils::generateDateRowGroupBy($summaryItem->unit) . " AS group_date FROM measures AS m";
                             $seriesSql .= " RIGHT JOIN $datePaddingSql ON (" . StatsUtils::generateDatePaddingTableJoinCondition($summaryItem->unit) . " AND $conditionSql)";
-                            $seriesSql .= " ORDER BY date_rows.published_at";
+                            $seriesSql .= " GROUP BY " . StatsUtils::generateDateRowGroupBy($summaryItem->unit);
+                            $seriesSql .= " ORDER BY date_rows.published_at ";
+
+                            // StatsUtils::sqlDebug($conn, $seriesSql, StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
+
+                            
                             $stm = $conn->prepareAndExecute($seriesSql, StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
                             $all = StatsUtils::fetchSeries($stm);
 
