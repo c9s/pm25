@@ -17,7 +17,7 @@ use PM25\SummaryDefinition;
 
 class StationDetailController extends Controller
 {
-    public $useCache = false;
+    public $useCache = true;
 
     public function getDefaultConnection() {
         static $conn;
@@ -27,8 +27,6 @@ class StationDetailController extends Controller
         $conns = ConnectionManager::getInstance();
         return $conn = $conns->get('default');
     }
-
-
 
     public function indexAction($id) {
         $enableMeasurementsArray = $this->request->param('measurements');
