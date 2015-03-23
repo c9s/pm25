@@ -17,6 +17,7 @@ use PM25\SummaryDefinition;
 
 class StationDetailController extends Controller
 {
+    public $useCache = false;
 
     public function getDefaultConnection() {
         static $conn;
@@ -76,10 +77,12 @@ class StationDetailController extends Controller
                 $data['measurements']  = $measurements;
             }
             if ($enabledSummary && !empty($enabledSummary)) {
-                $json = apc_fetch("station-detail-$stationId-$enabledSummaryStr");
-                if ($json) {
-                    header('Content-Type: application/json;');
-                    return $json;
+                if ($this->useCache) {
+                    $json = apc_fetch("station-detail-$stationId-$enabledSummaryStr");
+                    if ($json) {
+                        header('Content-Type: application/json;');
+                        return $json;
+                    }
                 }
 
 
