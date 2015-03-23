@@ -17,7 +17,7 @@ use PM25\SummaryDefinition;
 
 class StationDetailController extends Controller
 {
-    public $useCache = true;
+    public $useCache = false;
 
     public function getDefaultConnection() {
         static $conn;
