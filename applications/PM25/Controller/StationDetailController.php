@@ -57,11 +57,13 @@ class StationDetailController extends Controller
             // clean up un-serializable fields
             unset($data['location']);
 
+            $stationId = $station->id;
+
             if ($enableMeasurementsArray) {
                 $measurements = array();
                 $measures = new MeasureCollection;
                 $measures->where()
-                    ->equal('station_id', $station->id);
+                    ->equal('station_id', $stationId);
                 $measures->order('published_at', 'DESC');
                 $measures->limit(36);
                 foreach($measures as $measure) {
@@ -118,17 +120,16 @@ class StationDetailController extends Controller
                         }
                     }
 
-                    foreach ($summaryItems as $summaryItem) {
-                        $predicateStation = new Predicate('m.station_id = :station' , [ ':station' => $station->id ]);
+                    $predicateStation = new Predicate('m.station_id = :station' , [ ':station' => $stationId ]);
 
+                    foreach ($summaryItems as $summaryItem) {
                         $predicateDateRange = $summaryItem->createDateRangePredicate();
-                        // $predicateDateRange = new Predicate('date(m.published_at) = :published_at', [ ':published_at' => $summaryItem->dateRange->format('Y-m-d') ]);
+                        $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
+                        $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
 
                         foreach($summaryItem->attributes as $label) {
                             $field = StatsUtils::canonicalizeFieldName($label);
 
-                            $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
-                            $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
 
                             $stm = $conn->prepareAndExecute("SELECT MAX(m.$field), MIN(m.$field), AVG(m.$field) FROM measures m WHERE $conditionSql",$commonQueryArguments);
                             $max = doubleval($stm->fetchColumn(0));
