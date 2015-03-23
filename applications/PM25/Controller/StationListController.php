@@ -8,6 +8,13 @@ class StationListController extends Controller
 {
     public function indexAction() {
         $limit = $this->request->param('limit');
+
+        $cacheKey = "pm25-station-list-$limit";
+        if ($json = apc_fetch($cacheKey)) {
+            header('Content-Type: application/json');
+            return $json;
+        }
+
         $conns = ConnectionManager::getInstance();
         $conn = $conns->get('default');
         $sql = "SELECT id, country, country_en, city, city_en, name, name_en, address, address_en, latitude, longitude 
@@ -25,6 +32,8 @@ class StationListController extends Controller
             $row['longitude'] = doubleval($row['longitude']);
             $row['latitude'] = doubleval($row['latitude']);
         }
-        return $this->toJson($rows);
+        $json = $this->toJson($rows);
+        apc_store($cacheKey, 60 * 60 * 24);
+        return $json;
     }
 }
