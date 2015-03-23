@@ -15,6 +15,11 @@ use DateTime;
 use DateInterval;
 
 class StatsUtils {
+
+    static public function round3f($val) {
+        return round($val,3);
+    }
+    
     static public function generateDatePaddingTableSql($baseDate, $period = 24, $unit = 'HOUR', $as = 'date_rows') {
         // $unit = 'HOUR';
         // $period = 24;
@@ -85,8 +90,13 @@ class StatsUtils {
         return $args;
     }
 
-    static public function fetchSeries(PDOStatement $stm, $column = 0, $typeCastFunc = 'doubleval')
+    static public function fetchSeries(PDOStatement $stm, $column = 0, callable $typeCastFunc = NULL)
     {
+        if (!$typeCastFunc) {
+            $typeCastFunc = function($val) {
+                return round(doubleval($val), 3);
+            };
+        }
         return array_map($typeCastFunc, $stm->fetchAll(PDO::FETCH_COLUMN, $column));
     }
 }

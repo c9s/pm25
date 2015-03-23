@@ -128,21 +128,14 @@ class StationDetailController extends Controller
                             $field = StatsUtils::canonicalizeFieldName($label);
 
                             $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
+                            $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
 
-                            $stm = $conn->prepareAndExecute("SELECT MAX(m.$field) FROM measures m WHERE $conditionSql",
-                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
+                            $stm = $conn->prepareAndExecute("SELECT MAX(m.$field), MIN(m.$field), AVG(m.$field) FROM measures m WHERE $conditionSql",$commonQueryArguments);
                             $max = doubleval($stm->fetchColumn(0));
+                            $min = doubleval($stm->fetchColumn(1));
+                            $avg = doubleval($stm->fetchColumn(2));
 
-                            $stm = $conn->prepareAndExecute("SELECT MIN(m.$field) FROM measures m WHERE $conditionSql",
-                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
-                            $min = doubleval($stm->fetchColumn(0));
-
-                            $stm = $conn->prepareAndExecute("SELECT AVG(m.$field) FROM measures m WHERE $conditionSql",
-                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
-                            $avg = doubleval($stm->fetchColumn(0));
-
-                            $stm = $conn->prepareAndExecute("SELECT m.$field FROM measures m WHERE $conditionSql ORDER BY m.published_at DESC LIMIT 1",
-                                StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
+                            $stm = $conn->prepareAndExecute("SELECT m.$field FROM measures m WHERE $conditionSql ORDER BY m.published_at DESC LIMIT 1",$commonQueryArguments);
                             $now = doubleval($stm->fetchColumn(0));
 
                             $datePaddingSql = $summaryItem->generateDatePaddingTableSql();
@@ -155,7 +148,7 @@ class StationDetailController extends Controller
                             // StatsUtils::sqlDebug($conn, $seriesSql, StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
 
                             
-                            $stm = $conn->prepareAndExecute($seriesSql, StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
+                            $stm = $conn->prepareAndExecute($seriesSql, $commonQueryArguments);
                             $all = StatsUtils::fetchSeries($stm);
 
                             $summary = [
