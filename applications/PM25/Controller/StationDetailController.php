@@ -104,7 +104,7 @@ class StationDetailController extends Controller
                         switch($summaryIdentifier) {
                             case 'today':
                                 $summaryItems[] = SummaryDefinition::createOneDaySummary(
-                                    $summaryIdentifier,
+                                    $summaryIdentifier, 'Today',
                                     new DateTime(date('Y-m-d')),
                                     $summaryAttributes,
                                     24,
@@ -112,7 +112,7 @@ class StationDetailController extends Controller
                             break;
                             case 'yesterday':
                                 $summaryItems[] = SummaryDefinition::createOneDaySummary(
-                                    $summaryIdentifier,
+                                    $summaryIdentifier, 'Yesterday',
                                     (new DateTime(date('Y-m-d')))->sub(new DateInterval('P1D')),
                                     $summaryAttributes,
                                     24,
@@ -120,12 +120,19 @@ class StationDetailController extends Controller
                             break;
                             case '7days':
                                 $summaryItems[] = SummaryDefinition::createDateRangeSummary(
-                                    $summaryIdentifier,
+                                    $summaryIdentifier, '7 Days',
                                     (new DateTime(date('Y-m-d')))->sub(new DateInterval('P7D')),
                                     (new DateTime(date('Y-m-d'))),
                                     $summaryAttributes,
                                     'DAY');
                             break;
+                            case '30days':
+                                $summaryItems[] = SummaryDefinition::createDateRangeSummary(
+                                    $summaryIdentifier, '30 Days',
+                                    (new DateTime(date('Y-m-d')))->sub(new DateInterval('P30D')),
+                                    (new DateTime(date('Y-m-d'))),
+                                    $summaryAttributes,
+                                    'DAY');
                             break;
                         }
                     }
@@ -146,14 +153,16 @@ class StationDetailController extends Controller
                         foreach($summaryItem->attributes as $label) {
                             $field = StatsUtils::canonicalizeFieldName($label);
 
-
                             $stm = $conn->prepareAndExecute("SELECT MAX(m.$field), MIN(m.$field), AVG(m.$field) FROM measures m WHERE $conditionSql",$commonQueryArguments);
-                            $max = doubleval($stm->fetchColumn(0));
-                            $min = doubleval($stm->fetchColumn(1));
-                            $avg = doubleval($stm->fetchColumn(2));
+                            $result = $stm->fetch(PDO::FETCH_NUM);
+                            $max = doubleval($result[0]);
+                            $min = doubleval($result[1]);
+                            $avg = doubleval($result[2]);
 
+                            // print_r($conditionSql);
+                            // print_r($commonQueryArguments);
                             $stm = $conn->prepareAndExecute("SELECT m.$field FROM measures m WHERE $conditionSql ORDER BY m.published_at DESC LIMIT 1",$commonQueryArguments);
-                            $now = doubleval($stm->fetchColumn(0));
+                            $last = doubleval($stm->fetchColumn(0));
 
                             $datePaddingSql = $summaryItem->generateDatePaddingTableSql();
 
@@ -176,8 +185,8 @@ class StationDetailController extends Controller
                                 'data' => [
                                     'max' => $max,
                                     'min' => $min,
-                                    'now' => $now,
-                                    'avg' => $avg,
+                                    'last' => $last,
+                                    'avg'  => $avg,
                                     'series' => $all,
                                 ],
                             ];

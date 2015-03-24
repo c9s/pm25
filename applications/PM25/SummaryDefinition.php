@@ -22,6 +22,8 @@ class SummaryDefinition {
 
     const DATE_RANGE_DATE_RANGE = 2;
 
+    public $label;
+
     public $identifier;
 
     public $groupByMethod = 'AVG'; // SUM() or MIN() or AVG()
@@ -41,8 +43,9 @@ class SummaryDefinition {
 
     public $dateRange = self::DATE_RANGE_ONE_DAY; // single date range or double date range
 
-    public function __construct($identifier) {
+    public function __construct($identifier, $label = NULL) {
         $this->identifier = $identifier;
+        $this->label = $label;
     }
 
     public function getRangeInfo() {
@@ -53,14 +56,14 @@ class SummaryDefinition {
         ];
     }
 
-    static public function createDateRangeSummary($identifier, DateTime $from, DateTime $to, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $unit = 'DAY') {
-        $summary = new self($identifier);
+    static public function createDateRangeSummary($identifier, $label, DateTime $from, DateTime $to, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $unit = 'DAY') {
+        $summary = new self($identifier, $label);
         $summary->setDateRange([$from, $to], $unit);
         return $summary;
     }
 
-    static public function createOneDaySummary($identifier, DateTime $date, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $interval = 24, $unit = 'HOUR') {
-        $summary = new self($identifier);
+    static public function createOneDaySummary($identifier, $label, DateTime $date, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $interval = 24, $unit = 'HOUR') {
+        $summary = new self($identifier, $label);
         $summary->dateRange = [$date];
         $summary->interval = $interval;
         $summary->unit = $unit;
@@ -93,7 +96,7 @@ class SummaryDefinition {
                 ]);
         } else if ($this->getDateRangeType() == self::DATE_RANGE_DATE_RANGE) {
             return new Predicate(
-                'date(m.published_at) BETWEEN :from_date AND :to_date ', [
+                'm.published_at BETWEEN :from_date AND :to_date', [
                     ':from_date' => $this->dateRange[0]->format('Y-m-d'),
                     ':to_date' => $this->dateRange[1]->format('Y-m-d'),
                 ]);
