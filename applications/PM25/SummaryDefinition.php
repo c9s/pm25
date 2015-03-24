@@ -22,7 +22,7 @@ class SummaryDefinition {
 
     const DATE_RANGE_DATE_RANGE = 2;
 
-    public $label;
+    public $title;
 
     public $identifier;
 
@@ -33,19 +33,29 @@ class SummaryDefinition {
     public $interval = 24;
 
     public $attributes = [
-        'PM2.5' => 'pm25',
-        'PM10' => 'pm10',
-        'O3' => 'o3', 
-        'NO2' => 'no2',
-        'CO' => 'co', 
-        'SO2' => 'so2',
+        'pm25'  =>   'PM2.5',
+        'pm10'  =>   'PM10',
+        'o3'    =>   'O3',
+        'no2'   =>   'NO2',
+        'co'    =>   'CO',
+        'so2'   =>   'SO2',
     ];
+
+    public $units = [
+        'pm25'  =>   'μg/m3',
+        'pm10'  =>   'μg/m3',
+        'o3'    =>   'ppb',
+        'no2'   =>   'ppb',
+        'co'    =>   'ppm',
+        'so2'   =>   'ppb',
+    ];
+
 
     public $dateRange = self::DATE_RANGE_ONE_DAY; // single date range or double date range
 
-    public function __construct($identifier, $label = NULL) {
+    public function __construct($identifier, $title = NULL) {
         $this->identifier = $identifier;
-        $this->label = $label;
+        $this->title = $title;
     }
 
     public function getRangeInfo() {
@@ -56,14 +66,14 @@ class SummaryDefinition {
         ];
     }
 
-    static public function createDateRangeSummary($identifier, $label, DateTime $from, DateTime $to, array $attributes, $unit = 'DAY') {
-        $summary = new self($identifier, $label);
+    static public function createDateRangeSummary($identifier, $title, DateTime $from, DateTime $to, array $attributes, $unit = 'DAY') {
+        $summary = new self($identifier, $title);
         $summary->setDateRange([$from, $to], $unit);
         return $summary;
     }
 
-    static public function createOneDaySummary($identifier, $label, DateTime $date, array $attributes, $interval = 24, $unit = 'HOUR') {
-        $summary = new self($identifier, $label);
+    static public function createOneDaySummary($identifier, $title, DateTime $date, array $attributes, $interval = 24, $unit = 'HOUR') {
+        $summary = new self($identifier, $title);
         $summary->dateRange = [$date];
         $summary->interval = $interval;
         $summary->unit = $unit;

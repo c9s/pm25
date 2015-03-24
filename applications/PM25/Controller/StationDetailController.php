@@ -90,12 +90,12 @@ class StationDetailController extends Controller
                     // $attributes = $station->measure_attributes;
                     // print_r($attributes->toArray());
                     $summaryAttributes = [
-                        'PM2.5' => 'pm25',
-                        'PM10' => 'pm10',
-                        'O3' => 'o3', 
-                        'NO2' => 'no2',
-                        'CO' => 'co', 
-                        'SO2' => 'so2',
+                        'pm25'  =>   'PM2.5',
+                        'pm10'  =>   'PM10',
+                        'o3'    =>   'O3',
+                        'no2'   =>   'NO2',
+                        'co'    =>   'CO',
+                        'so2'   =>   'SO2',
                     ];
 
                     $summaryItems = [];
@@ -142,6 +142,7 @@ class StationDetailController extends Controller
                     foreach ($summaryItems as $summaryItem) {
 
                         $summarySection = [
+                            'title' => $summaryItem->title,
                             'identifier' => $summaryItem->identifier,
                             'range' => $summaryItem->getRangeInfo(),
                         ];
@@ -150,7 +151,7 @@ class StationDetailController extends Controller
                         $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
                         $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
 
-                        foreach($summaryItem->attributes as $label => $field) {
+                        foreach($summaryItem->attributes as $field => $label) {
                             // $field = StatsUtils::canonicalizeFieldName($label);
 
                             $stm = $conn->prepareAndExecute("SELECT MAX(m.$field), MIN(m.$field), AVG(m.$field) FROM measures m WHERE $conditionSql",$commonQueryArguments);
@@ -180,7 +181,6 @@ class StationDetailController extends Controller
                             $summary = [
                                 'label' => $label,
                                 'field' => $field,
-                                'unit' => 'ug/m3',
                                 'chart' => 'area',
                                 'data' => [
                                     'max' => $max,
@@ -190,6 +190,9 @@ class StationDetailController extends Controller
                                     'series' => $all,
                                 ],
                             ];
+                            if (isset($summaryItem->units[$field])) {
+                                $summary['unit'] = $summaryItem->units[$field];
+                            }
                             $summarySection['rows'][] = $summary;
                         }
                         $data['summary'][] = $summarySection;
