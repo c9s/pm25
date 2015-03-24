@@ -117,6 +117,7 @@ class StationDetailController extends Controller
                                     $summaryAttributes,
                                     24,
                                     'HOUR');
+                            break;
                             case '7days':
                                 $summaryItems[] = SummaryDefinition::createDateRangeSummary(
                                     $summaryIdentifier,
@@ -124,6 +125,7 @@ class StationDetailController extends Controller
                                     (new DateTime(date('Y-m-d'))),
                                     $summaryAttributes,
                                     'DAY');
+                            break;
                             break;
                         }
                     }
