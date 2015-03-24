@@ -131,6 +131,12 @@ class StationDetailController extends Controller
                     $predicateStation = new Predicate('m.station_id = :station' , [ ':station' => $stationId ]);
 
                     foreach ($summaryItems as $summaryItem) {
+
+                        $summarySection = [
+                            'identifier' => $summaryItem->identifier,
+                            'range' => $summaryItem->getRangeInfo(),
+                        ];
+
                         $predicateDateRange = $summaryItem->createDateRangePredicate();
                         $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
                         $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
@@ -163,7 +169,6 @@ class StationDetailController extends Controller
                             $summary = [
                                 'label' => $label,
                                 'field' => $field,
-                                'range' => $summaryItem->getRangeInfo(),
                                 'unit' => 'ug/m3',
                                 'chart' => 'area',
                                 'data' => [
@@ -174,8 +179,9 @@ class StationDetailController extends Controller
                                     'series' => $all,
                                 ],
                             ];
-                            $data['summary'][$summaryItem->identifier][] = $summary;
+                            $summarySection['rows'][] = $summary;
                         }
+                        $data['summary'][] = $summarySection;
                     }
                 }
             }

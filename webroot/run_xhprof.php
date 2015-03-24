@@ -22,6 +22,8 @@ $xhprof_runs = new XHProfRuns_Default();
 $profiler_namespace = preg_replace( '#\W+#' , '' , $pathinfo ?: 'default_run' );
 $run_id = $xhprof_runs->save_run($xhprof_data, $profiler_namespace);
 $profiler_url = sprintf('/xhprof?run=%s&source=%s',$run_id, $profiler_namespace);
+
+/*
 ?>
 <style> 
 .xhprof-bar { 
@@ -53,3 +55,4 @@ $profiler_url = sprintf('/xhprof?run=%s&source=%s',$run_id, $profiler_namespace)
     <a class="btn" target="_blank" href="<?=$profiler_url?>">XHProf [<?=$profiler_namespace?>]</a>
     <a class="btn" onclick="$(this).parent('.xhprof-bar').fadeOut();">x</a>
 </div>
+ */
