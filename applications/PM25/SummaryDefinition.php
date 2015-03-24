@@ -56,13 +56,13 @@ class SummaryDefinition {
         ];
     }
 
-    static public function createDateRangeSummary($identifier, $label, DateTime $from, DateTime $to, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $unit = 'DAY') {
+    static public function createDateRangeSummary($identifier, $label, DateTime $from, DateTime $to, array $attributes, $unit = 'DAY') {
         $summary = new self($identifier, $label);
         $summary->setDateRange([$from, $to], $unit);
         return $summary;
     }
 
-    static public function createOneDaySummary($identifier, $label, DateTime $date, array $attributes = ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2'], $interval = 24, $unit = 'HOUR') {
+    static public function createOneDaySummary($identifier, $label, DateTime $date, array $attributes, $interval = 24, $unit = 'HOUR') {
         $summary = new self($identifier, $label);
         $summary->dateRange = [$date];
         $summary->interval = $interval;

@@ -150,8 +150,8 @@ class StationDetailController extends Controller
                         $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
                         $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
 
-                        foreach($summaryItem->attributes as $label) {
-                            $field = StatsUtils::canonicalizeFieldName($label);
+                        foreach($summaryItem->attributes as $label => $field) {
+                            // $field = StatsUtils::canonicalizeFieldName($label);
 
                             $stm = $conn->prepareAndExecute("SELECT MAX(m.$field), MIN(m.$field), AVG(m.$field) FROM measures m WHERE $conditionSql",$commonQueryArguments);
                             $result = $stm->fetch(PDO::FETCH_NUM);
