@@ -116,6 +116,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 if ($ret->error) {
                     $this->logger->error($ret->message);
                 }
+                $this->logger->info("Measure: " . $ret->message);
             }
         }
     }
