@@ -148,8 +148,8 @@ class StationDetailController extends Controller
                         ];
 
                         $predicateDateRange = $summaryItem->createDateRangePredicate();
-                        $conditionSql = Predicate::mergePredicateConditions([$predicateStation, $predicateDateRange]);
-                        $commonQueryArguments = Predicate::mergePredicateArguments([$predicateStation, $predicateDateRange]);
+                        $conditionSql = Predicate::mergeConditions([$predicateStation, $predicateDateRange]);
+                        $commonQueryArguments = Predicate::mergeArguments([$predicateStation, $predicateDateRange]);
 
                         foreach($summaryItem->attributes as $field => $label) {
                             // $field = StatsUtils::canonicalizeFieldName($label);
@@ -172,7 +172,7 @@ class StationDetailController extends Controller
                             $seriesSql .= " GROUP BY " . StatsUtils::generateDateRowGroupBy($summaryItem->unit);
                             $seriesSql .= " ORDER BY date_rows.published_at ";
 
-                            // StatsUtils::sqlDebug($conn, $seriesSql, StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]));
+                            // StatsUtils::sqlDebug($conn, $seriesSql, StatsUtils::mergeArguments([$predicateStation, $predicateDateRange]));
 
                             
                             $stm = $conn->prepareAndExecute($seriesSql, $commonQueryArguments);
