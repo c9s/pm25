@@ -77,7 +77,6 @@ class ChinaAqiStudyDataSource extends BaseDataSource
 
             $response = $this->agent->post('http://www.aqistudy.cn/api/getdata_citydetailinfo_memcache.php', [ 'city' => $provinceInfo['name'] ]);
             $body = json_decode($response->body);
-            print_r($body);
             foreach($body->rows as $row) {
                 $station = new Station;
                 $station->load([ 'country_en' => 'China', 'province' => $provinceInfo['name'], 'name' => $row->position_name ]);

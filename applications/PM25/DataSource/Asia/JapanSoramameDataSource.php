@@ -278,6 +278,10 @@ class JapanSoramameDataSource extends BaseDataSource
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('table.hyoMenu tr');
 
+
+
+
+
         $this->logger->info("Found " . $crawler->count() .  " records.");
         foreach ($crawler as $row) {
             $cells = $row->childNodes;

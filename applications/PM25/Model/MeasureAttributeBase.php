@@ -18,11 +18,13 @@ class MeasureAttributeBase  extends BaseModel {
 public static $column_names = array (
   0 => 'label',
   1 => 'identifier',
-  2 => 'id',
+  2 => 'unit',
+  3 => 'id',
 );
 public static $column_hash = array (
   'label' => 1,
   'identifier' => 1,
+  'unit' => 1,
   'id' => 1,
 );
 public static $mixin_classes = array (
