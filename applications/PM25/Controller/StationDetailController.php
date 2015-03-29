@@ -148,8 +148,8 @@ class StationDetailController extends Controller
                         ];
 
                         $predicateDateRange = $summaryItem->createDateRangePredicate();
-                        $conditionSql = StatsUtils::mergePredicateConditions([$predicateStation, $predicateDateRange]);
-                        $commonQueryArguments = StatsUtils::mergePredicateArguments([$predicateStation, $predicateDateRange]);
+                        $conditionSql = Predicate::mergePredicateConditions([$predicateStation, $predicateDateRange]);
+                        $commonQueryArguments = Predicate::mergePredicateArguments([$predicateStation, $predicateDateRange]);
 
                         foreach($summaryItem->attributes as $field => $label) {
                             // $field = StatsUtils::canonicalizeFieldName($label);
