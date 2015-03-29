@@ -29,7 +29,7 @@ class StationListController extends Controller
         $predicates = [];
 
         if ($keyword) {
-            $predicates[] = new Predicate('(name LIKE :pat OR name_en LIKE :pat OR city LIKE :pat OR city_en LIKE :pat)', [ ':pat' => '%' . $keyword . '%' ]);
+            $predicates[] = new Predicate('(name LIKE :pat OR name_en LIKE :pat OR city LIKE :pat OR city_en LIKE :pat OR county LIKE :pat OR address LIKE :pat OR address_en LIKE :pat)', [ ':pat' => '%' . $keyword . '%' ]);
         }
 
         if ($country) {
