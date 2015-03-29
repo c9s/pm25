@@ -11,5 +11,5 @@ $agent->setConnectionTimeout(10000);
 
 $logger = Logger::getInstance();
 $dataSource = new ChinaAqiStudyDataSource($agent, $logger);
-$dataSource->updateStationDetails();
-// $dataSource->updateMeasurements();
+// $dataSource->updateStationDetails();
+$dataSource->updateMeasurements();
