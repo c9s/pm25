@@ -8,6 +8,7 @@ use PM25\Exception\IncorrectDataException;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
 use PM25\Model\Measure;
+use PM25\Model\MeasureCollection;
 use DOMElement;
 use DOMText;
 use DateTime;
@@ -82,7 +83,17 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 $station->load([ 'country_en' => 'China', 'province' => $provinceInfo['name'], 'name' => $row->position_name ]);
                 if (!$station->id) {
                     $this->logger->error('Station not found: ' . $row->position_name);
+                    continue;
                 }
+
+                $measurements = new MeasureCollection;
+                $measurements->where([
+                    'station_id' => $station->id,
+                ]);
+                $measurements->order('published_at', 'DESC');
+                $measurements->limit(1);
+                $lastMeasurement = $measurements->first();
+
 
                 /*
                     (
@@ -101,6 +112,12 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                     )
                 */
                 $time = new DateTime($row->time_point);
+
+                if ($lastMeasurement->published_at && $time <= $lastMeasurement->published_at) {
+                    $this->logger->info(sprintf("Skipping older measurements: %s", $time->format(DateTime::ATOM)));
+                    continue;
+                }
+
                 $measure = new Measure;
                 $ret = $measure->createOrUpdate([
                     'station_id'   => $station->id,
