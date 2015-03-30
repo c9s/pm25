@@ -11,13 +11,15 @@ $agent->setConnectionTimeout(10000);
 
 $logger = Logger::getInstance();
 $dataSource = new JapanSoramameDataSource($agent, $logger);
+$dataSource->updateMeasurements();
 
+/*
 $station = new Station(176);
-$lastMeasurement = $station->measurements->first;
+$lastMeasurement = $station->measurements->first();
 print_r($lastMeasurement->published_at);
+*/
 
 /*
 // $stations = $dataSource->updateStationDetails([ 'start_from' => '神奈川県' ]);
 $dataSource->updateStationDetails();
-$dataSource->updateMeasurements();
  */

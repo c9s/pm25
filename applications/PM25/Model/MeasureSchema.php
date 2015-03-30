@@ -34,7 +34,7 @@ class MeasureSchema extends SchemaDeclare
         $this->column('major_pollutant')->varchar(32);
 
         // PublishTime: "2015-03-04 22:00"
-        $this->column('published_at')->timestamp();
+        $this->column('published_at')->timestamp()->isa('DateTime');
 
         $this->belongsTo('station', 'PM25\Model\StationSchema', 'id', 'station_id');
     }

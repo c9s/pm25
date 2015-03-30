@@ -278,9 +278,8 @@ class JapanSoramameDataSource extends BaseDataSource
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('table.hyoMenu tr');
 
-
-
-
+        $lastMeasurement = $station->measurements->limit(1)->first();
+        $lastPublishedAt = $lastMeasurement->published_at;
 
         $this->logger->info("Found " . $crawler->count() .  " records.");
         foreach ($crawler as $row) {
@@ -299,19 +298,24 @@ class JapanSoramameDataSource extends BaseDataSource
             $hour = array_shift($rowContents);
 
             $minute = 0;
-            $datetime = new DateTime();
-            $datetime->setTimeZone(new DateTimeZone('Asia/Tokyo'));
-            $datetime->setDate( intval($year), intval($month), intval($day) );
-            $datetime->setTime( intval($hour), $minute);
+            $dateTime = new DateTime();
+            $dateTime->setTimeZone(new DateTimeZone('Asia/Tokyo'));
+            $dateTime->setDate( intval($year), intval($month), intval($day) );
+            $dateTime->setTime( intval($hour), $minute);
 
-            $this->logger->info("Measurement time: " . $datetime->format(DateTime::ATOM));
+            if ($dateTime <= $lastPublishedAt) {
+                $this->logger->info(sprintf("Skipping older measurement %s", $dateTime->format(DateTime::ATOM) ));
+                continue;
+            }
+
+            $this->logger->info("Measurement time: " . $dateTime->format(DateTime::ATOM));
 
             
             $measureData = array_combine($labels, $rowContents);
             $measureData = array_filter($measureData, 'is_numeric');
             $measureData = array_map('doubleval',$measureData);
             $measureData = array_merge($measureData, [
-                'published_at' => $datetime->format(DateTime::ATOM),
+                'published_at' => $dateTime->format(DateTime::ATOM),
                 'station_id' => $station->id,
             ]);
 
