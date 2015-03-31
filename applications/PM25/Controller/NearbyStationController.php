@@ -14,14 +14,19 @@ class NearbyStationController extends Controller
         $conn = $conns->get('default');
         $stmt = $conn->prepareAndExecute("
             SELECT s.id, s.country, s.city, s.name, s.country_en, s.city_en, s.name_en, s.latitude, s.longitude, m.pm25, m.pm10, m.aqi, m.psi,
-            111.045 * DEGREES(
+                111.045 * DEGREES(
                    ACOS(COS(RADIANS(:lat))
                  * COS(RADIANS(latitude))
                  * COS(RADIANS(:lon) - RADIANS(longitude))
                  + SIN(RADIANS(:lat)) * SIN(RADIANS(latitude)))) AS distance_km 
                  FROM stations s
                  LEFT JOIN (SELECT pm25, pm10, aqi, psi, station_id FROM measures s ORDER BY published_at DESC LIMIT 1) m ON (m.station_id = s.id)
-                 WHERE latitude != 0 AND longitude != 0
+                 WHERE 
+                    s.latitude BETWEEN :lat - (50.0 / 111.045)
+                        AND :lat + (50.0 / 111.045)
+                    AND s.longitude BETWEEN :lon - (50.0 / (111.045 * COS(RADIANS(:lat))))
+                        AND :lon + (50.0 / (111.045 * COS(RADIANS(:lat))))
+
                  ORDER BY distance_km ASC LIMIT $limit
                  ", 
                  [ 
