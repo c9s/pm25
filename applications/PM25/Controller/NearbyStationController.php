@@ -34,7 +34,9 @@ class NearbyStationController extends Controller
             $item['latitude'] = doubleval($item['latitude']);
             $item['longitude'] = doubleval($item['longitude']);
             $item['distance_km'] = doubleval($item['distance_km']);
-            $item = array_merge($item, $measurements->first()->toArray());
+            $lastMeasure = $measurements->first()->toArray();
+            unset($lastMeasure['id']);
+            $item = array_merge($item, $lastMeasure);
             $rows[] = $item;
         }
         return $this->toJson($rows);
