@@ -13,24 +13,34 @@ class NearbyStationController extends Controller
         $conns = ConnectionManager::getInstance();
         $conn = $conns->get('default');
 
+
+
         // select DISTANCE(s.latitude, s.longitude, 35.702069, 121.775327) from stations s
-        $stmt = $conn->prepareAndExecute("
+        $sql = "
             SELECT s.id, s.country, s.country_en, s.city, s.city_en, s.name, s.name_en, s.address, s.address_en, s.country, s.country_en, s.latitude, s.longitude,
                  DISTANCE(s.latitude, s.longitude, :lat, :lon) as distance_km
                  FROM stations s
                  WHERE latitude != 0 AND longitude != 0
                  ORDER BY distance_km ASC LIMIT $limit
-                 ", 
-                 [ 
+                 ";
+        $args = [ 
                      ':lat' => doubleval($latitude),
                      ':lon' => doubleval($longitude),
-                 ]);
-        $rows = $stmt->fetchAll();
-        foreach($rows as &$row) {
-            $row['id'] = intval($row['id']);
-            $row['latitude'] = doubleval($row['latitude']);
-            $row['longitude'] = doubleval($row['longitude']);
-            $row['distance_km'] = doubleval($row['distance_km']);
+                 ];
+
+        $stations = new StationCollection;
+        $stations->loadQuery($sql, $args);
+
+        $rows = [];
+        foreach($stations as $station) {
+            $station->measurements->order('published_at', 'desc')->limit(1);
+            $measurements = $station->measurements;
+            $item = $station->toArray();
+            $item['latitude'] = doubleval($item['latitude']);
+            $item['longitude'] = doubleval($item['longitude']);
+            $item['distance_km'] = doubleval($item['distance_km']);
+            $item = array_merge($item, $measurements->first()->toArray());
+            $rows[] = $item;
         }
         return $this->toJson($rows);
     }
