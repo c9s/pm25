@@ -279,7 +279,7 @@ class JapanSoramameDataSource extends BaseDataSource
         $crawler = $crawler->filter('table.hyoMenu tr');
 
         $lastMeasurement = $station->measurements->limit(1)->first();
-        $lastPublishedAt = $lastMeasurement->published_at;
+        $lastPublishedAt = $lastMeasurement ? $lastMeasurement->published_at : 0;
 
         $this->logger->info("Found " . $crawler->count() .  " records.");
         foreach ($crawler as $row) {
