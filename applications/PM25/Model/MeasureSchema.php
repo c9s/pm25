@@ -5,7 +5,7 @@ use LazyRecord\Schema\SchemaDeclare;
 class MeasureSchema extends SchemaDeclare
 {
     public function schema() {
-        $this->column('station_id')->integer();
+        $this->column('station_id')->mediumint()->notNull();
 
         $this->column('pm10')->double()->default(0);
 
@@ -34,7 +34,7 @@ class MeasureSchema extends SchemaDeclare
         $this->column('major_pollutant')->varchar(32);
 
         // PublishTime: "2015-03-04 22:00"
-        $this->column('published_at')->timestamp()->isa('DateTime');
+        $this->column('published_at')->timestamp()->isa('DateTime')->notNull();
 
         $this->belongsTo('station', 'PM25\Model\StationSchema', 'id', 'station_id');
     }
