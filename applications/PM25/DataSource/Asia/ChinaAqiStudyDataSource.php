@@ -113,7 +113,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 */
                 $time = new DateTime($row->time_point);
 
-                if ($lastMeasurement->published_at && $time <= $lastMeasurement->published_at) {
+                if ($lastMeasurement && $lastMeasurement->published_at && $time <= $lastMeasurement->published_at) {
                     $this->logger->info(sprintf("Skipping older measurements: %s", $time->format(DateTime::ATOM)));
                     continue;
                 }
