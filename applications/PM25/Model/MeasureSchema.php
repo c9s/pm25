@@ -21,17 +21,11 @@ class MeasureSchema extends SchemaDeclare
 
         $this->column('o3')->double()->default(0);
 
-        $this->column('psi')->double()->default(0);
-
         $this->column('aqi')->integer();
-
-        $this->column('status_text')->double()->default(0);
 
         $this->column('wind_speed')->double();
 
         $this->column('wind_direction')->double();
-
-        $this->column('major_pollutant')->varchar(32);
 
         // PublishTime: "2015-03-04 22:00"
         $this->column('published_at')->timestamp()->isa('DateTime')->notNull();

@@ -86,7 +86,7 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
             $site->load(['name' => $measure['SiteName']]);
 
             $measureData = [
-                'psi'            => doubleval($measure['PSI']),
+                // 'psi'            => doubleval($measure['PSI']),
                 'so2'            => doubleval($measure['SO2']),
                 'co'             => doubleval($measure['CO']),
                 'o3'             => doubleval($measure['O3']),
@@ -103,7 +103,7 @@ class TaiwanEPADataSource extends BaseDataSource implements DataSourceInterface
             $measureData = array_merge($measureData, [
                 'station_id'      => $site->id,
                 'published_at'    => $time->format(DateTime::ATOM),
-                'major_pollutant' => $measure['MajorPollutant'],
+                // 'major_pollutant' => $measure['MajorPollutant'],
             ]);
             $ret = $record->createOrUpdate($measureData, ['station_id', 'published_at']);
             if (!$ret->success || $ret->error) {
