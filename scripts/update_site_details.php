@@ -16,5 +16,4 @@ $dataSources = [
 ];
 foreach($dataSources as $dataSource) {
     $dataSource->updateStationDetails();
-    $dataSource->updateMeasurements();
 }
