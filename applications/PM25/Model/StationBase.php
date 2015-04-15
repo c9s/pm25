@@ -10,7 +10,7 @@ class StationBase
     const table = 'stations';
     const read_source_id = 'default';
     const write_source_id = 'default';
-    const primary_key = NULL;
+    const primary_key = 'id';
     public static $column_names = array (
       0 => 'id',
       1 => 'country',

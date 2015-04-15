@@ -12,16 +12,16 @@ class MetricUnitBase
     const write_source_id = 'default';
     const primary_key = 'id';
     public static $column_names = array (
-      0 => 'identifier',
-      1 => 'label',
-      2 => 'form',
-      3 => 'id',
+      0 => 'id',
+      1 => 'identifier',
+      2 => 'label',
+      3 => 'form',
     );
     public static $column_hash = array (
+      'id' => 1,
       'identifier' => 1,
       'label' => 1,
       'form' => 1,
-      'id' => 1,
     );
     public static $mixin_classes = array (
     );
@@ -31,6 +31,12 @@ class MetricUnitBase
            return $this->_schema;
         }
         return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\MetricUnitSchemaProxy');
+    }
+    public function getId()
+    {
+        if (isset($this->_data['id'])) {
+            return $this->_data['id'];
+        }
     }
     public function getIdentifier()
     {
@@ -48,12 +54,6 @@ class MetricUnitBase
     {
         if (isset($this->_data['form'])) {
             return $this->_data['form'];
-        }
-    }
-    public function getId()
-    {
-        if (isset($this->_data['id'])) {
-            return $this->_data['id'];
         }
     }
 }

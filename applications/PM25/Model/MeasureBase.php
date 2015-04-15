@@ -12,21 +12,22 @@ class MeasureBase
     const write_source_id = 'default';
     const primary_key = 'id';
     public static $column_names = array (
-      0 => 'station_id',
-      1 => 'pm10',
-      2 => 'pm25',
-      3 => 'no2',
-      4 => 'fpmi',
-      5 => 'so2',
-      6 => 'co',
-      7 => 'o3',
-      8 => 'aqi',
-      9 => 'wind_speed',
-      10 => 'wind_direction',
-      11 => 'published_at',
-      12 => 'id',
+      0 => 'id',
+      1 => 'station_id',
+      2 => 'pm10',
+      3 => 'pm25',
+      4 => 'no2',
+      5 => 'fpmi',
+      6 => 'so2',
+      7 => 'co',
+      8 => 'o3',
+      9 => 'aqi',
+      10 => 'wind_speed',
+      11 => 'wind_direction',
+      12 => 'published_at',
     );
     public static $column_hash = array (
+      'id' => 1,
       'station_id' => 1,
       'pm10' => 1,
       'pm25' => 1,
@@ -39,7 +40,6 @@ class MeasureBase
       'wind_speed' => 1,
       'wind_direction' => 1,
       'published_at' => 1,
-      'id' => 1,
     );
     public static $mixin_classes = array (
     );
@@ -49,6 +49,12 @@ class MeasureBase
            return $this->_schema;
         }
         return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\MeasureSchemaProxy');
+    }
+    public function getId()
+    {
+        if (isset($this->_data['id'])) {
+            return $this->_data['id'];
+        }
     }
     public function getStationId()
     {
@@ -120,12 +126,6 @@ class MeasureBase
     {
         if (isset($this->_data['published_at'])) {
             return $this->_data['published_at'];
-        }
-    }
-    public function getId()
-    {
-        if (isset($this->_data['id'])) {
-            return $this->_data['id'];
         }
     }
 }

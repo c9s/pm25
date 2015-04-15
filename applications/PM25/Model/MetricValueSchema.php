@@ -3,7 +3,7 @@ namespace PM25\Model;
 use LazyRecord\Schema\SchemaDeclare;
 use LazyRecord\Schema\TemplateSchema;
 
-abstract class MetricValueSchema extends TemplateSchema
+class MetricValueSchema extends TemplateSchema
 {
     public function schema() 
     {
@@ -18,16 +18,16 @@ abstract class MetricValueSchema extends TemplateSchema
 
         $this->belongsTo('station', 'PM25\Model\StationSchema', 'id', 'station_id');
 
-        $this->hasOne('unit', 'PM25\Model\MetricUnitSchema', 'id', 'unit_id');
+        $this->one('unit', 'PM25\Model\MetricUnitSchema', 'id', 'unit_id');
     }
 
     public function provideSchemas() {
-        $schemas = array();
-
-        $schema = new self;
-        $schema->table('co2');
-        $schemas[] = $schema;
-
+        $schemas = [];
+        foreach(['pm10', 'pm25', 'no2', 'co', 'o3', 'so2'] as $table) {
+            $schema = new self;
+            $schema->table($table);
+            $schemas[] = $schema;
+        }
         return $schemas;
     }
 }
