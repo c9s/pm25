@@ -6,12 +6,12 @@ class StationMeasureAttributeSchema extends SchemaDeclare
 {
     public function schema() {
         $this->column('station_id')
-            ->integer()
+            ->int()
             ->notNull()
             ;
 
         $this->column('attribute_id')
-            ->integer()
+            ->int()
             ->notNull()
             ;
 

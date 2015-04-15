@@ -10,9 +10,9 @@ use PM25\Model\MeasureBase;
 class Measure  extends MeasureBase {
 
 
-    public function toArray()
+    public function toArray(array $fields = NULL)
     {
-        $data = parent::toArray();
+        $data = parent::toArray($fields);
         $data['id'] = intval($data['id']);
 
         $data['pm25'] = doubleval($data['pm25']);

@@ -21,7 +21,7 @@ class MeasureSchema extends SchemaDeclare
 
         $this->column('o3')->double()->default(0);
 
-        $this->column('aqi')->integer();
+        $this->column('aqi')->int();
 
         $this->column('wind_speed')->double();
 

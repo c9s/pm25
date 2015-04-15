@@ -133,9 +133,9 @@ class Station  extends StationBase {
     }
 
 
-    public function toArray()
+    public function toArray(array $fields = NULL)
     {
-        $data = parent::toArray();
+        $data = parent::toArray($fields);
         $data['longitude'] = doubleval($data['longitude']);
         $data['latitude'] = doubleval($data['latitude']);
         $data['id'] = doubleval($data['id']);
