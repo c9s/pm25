@@ -7,12 +7,12 @@ class MetricValueSchema extends TemplateSchema
 {
     public function schema() 
     {
-        $this->column('station_id')->mediumint()->notNull();
+        $this->column('station_id')->mediumint()->notNull()->unsigned();
 
         // The default metric value column
         $this->column('val')->double(5,3)->default(0)->notNull();
 
-        $this->column('unit_id')->int()->notNull();
+        $this->column('unit_id')->smallint()->notNull()->unsigned();
 
         $this->column('published_at')->timestamp()->isa('DateTime')->notNull();
 
