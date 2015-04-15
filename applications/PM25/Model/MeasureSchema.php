@@ -5,11 +5,14 @@ use LazyRecord\Schema\SchemaDeclare;
 class MeasureSchema extends SchemaDeclare
 {
     public function schema() {
+
+        $this->column('id')->bigint()->unsigned()->primary();
+
         $this->column('station_id')->mediumint()->notNull();
 
-        $this->column('pm10')->double()->default(0);
+        $this->column('pm10')->double(5,2)->default(0);
 
-        $this->column('pm25')->double()->default(0);
+        $this->column('pm25')->double(5,2)->default(0);
 
         $this->column('no2')->double()->default(0);
 
@@ -21,7 +24,7 @@ class MeasureSchema extends SchemaDeclare
 
         $this->column('o3')->double()->default(0);
 
-        $this->column('aqi')->int();
+        $this->column('aqi')->smallint();
 
         $this->column('wind_speed')->double();
 
