@@ -3,9 +3,10 @@ namespace PM25\Model;
 use LazyRecord\Schema\SchemaDeclare;
 use LazyRecord\Schema\TemplateSchema;
 
+
 class MetricValueSchema extends TemplateSchema
 {
-    static $valueTables = [ 'pm10', 'pm25', 'no2', 'co', 'o3', 'so2' ];
+    static $valueTables = ['pm10', 'pm25', 'no2', 'co', 'o3', 'so2' ];
 
     public function schema() 
     {
@@ -14,13 +15,13 @@ class MetricValueSchema extends TemplateSchema
         // The default metric value column
         $this->column('val')->double(5,3)->default(0)->notNull();
 
-        $this->column('unit_id')->smallint()->notNull()->unsigned();
+        $this->column('unit')->smallint()->notNull()->unsigned();
 
         $this->column('published_at')->timestamp()->isa('DateTime')->notNull();
 
         $this->belongsTo('station', 'PM25\Model\StationSchema', 'id', 'station_id');
 
-        $this->one('unit', 'PM25\Model\MetricUnitSchema', 'id', 'unit_id');
+        // $this->one('unit', 'PM25\Model\MetricUnitSchema', 'id', 'unit_id');
     }
 
     public function provideSchemas() {

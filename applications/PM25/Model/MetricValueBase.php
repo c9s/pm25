@@ -14,14 +14,14 @@ class MetricValueBase
     public static $column_names = array (
       0 => 'station_id',
       1 => 'val',
-      2 => 'unit_id',
+      2 => 'unit',
       3 => 'published_at',
       4 => 'id',
     );
     public static $column_hash = array (
       'station_id' => 1,
       'val' => 1,
-      'unit_id' => 1,
+      'unit' => 1,
       'published_at' => 1,
       'id' => 1,
     );
@@ -46,10 +46,10 @@ class MetricValueBase
             return $this->_data['val'];
         }
     }
-    public function getUnitId()
+    public function getUnit()
     {
-        if (isset($this->_data['unit_id'])) {
-            return $this->_data['unit_id'];
+        if (isset($this->_data['unit'])) {
+            return $this->_data['unit'];
         }
     }
     public function getPublishedAt()

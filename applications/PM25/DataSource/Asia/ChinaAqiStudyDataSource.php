@@ -6,6 +6,7 @@ use CurlKit\CurlAgent;
 use PM25\DataSource\BaseDataSource;
 use PM25\Exception\IncorrectDataException;
 use PM25\Model\Station;
+use PM25\Model\MetricUnitEnum;
 use PM25\Model\StationCollection;
 use PM25\Model\Measure;
 use PM25\Model\MeasureCollection;
@@ -107,9 +108,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 }
 
                 $measurements = new MeasureCollection;
-                $measurements->where([
-                    'station_id' => $station->id,
-                ]);
+                $measurements->where([ 'station_id' => $station->id ]);
                 $measurements->orderBy('published_at', 'DESC');
                 $measurements->limit(1);
                 $lastMeasurement = $measurements->first();
@@ -137,6 +136,55 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                     $this->logger->info(sprintf("Skipping older measurements: %s", $time->format(DateTime::ATOM)));
                     continue;
                 }
+
+                $ret = $pm25->createOrUpdate([ 
+                    'station_id' => $station->id,
+                    'val' => doubleval($row->pm2_5),
+                    'unit' => MetricUnitEnum::UGM3,
+                    'published_at' => $time->format(DateTime::ATOM),
+                ], ['station_id', 'published_at'] );
+                $this->logger->info("pm25: " . $ret->message);
+
+                $ret = $pm10->createOrUpdate([ 
+                    'station_id' => $station->id,
+                    'val' => doubleval($row->pm10),
+                    'unit' => MetricUnitEnum::UGM3,
+                    'published_at' => $time->format(DateTime::ATOM),
+                ], ['station_id', 'published_at'] );
+                $this->logger->info("pm10: " . $ret->message);
+
+                $ret = $no2->createOrUpdate([ 
+                    'station_id' => $station->id,
+                    'val' => doubleval($row->no2),
+                    'unit' => MetricUnitEnum::PPB,
+                    'published_at' => $time->format(DateTime::ATOM),
+                ], ['station_id', 'published_at'] );
+                $this->logger->info("no2: " . $ret->message);
+
+                $ret = $co->createOrUpdate([ 
+                    'station_id' => $station->id,
+                    'val' => doubleval($row->co),
+                    'unit' => MetricUnitEnum::PPM,
+                    'published_at' => $time->format(DateTime::ATOM),
+                ], ['station_id', 'published_at'] );
+                $this->logger->info("no2: " . $ret->message);
+
+                $ret = $so2->createOrUpdate([ 
+                    'station_id' => $station->id,
+                    'val' => doubleval($row->so2),
+                    'unit' => MetricUnitEnum::PPM,
+                    'published_at' => $time->format(DateTime::ATOM),
+                ], ['station_id', 'published_at'] );
+                $this->logger->info("so2: " . $ret->message);
+
+                $ret = $o3->createOrUpdate([ 
+                    'station_id' => $station->id,
+                    'val' => doubleval($row->o3),
+                    'unit' => MetricUnitEnum::PPB,
+                    'published_at' => $time->format(DateTime::ATOM),
+                ], ['station_id', 'published_at'] );
+                $this->logger->info("o3: " . $ret->message);
+
 
                 $measure = new Measure;
                 $ret = $measure->createOrUpdate([
