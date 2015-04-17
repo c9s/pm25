@@ -14,9 +14,13 @@ class MetricUnitEnum extends SplEnum {
     const μGM3 = 7;
     const MGM3 = 8;
     const CMSEC = 9; // cm/sec
+
     const MSEC = 10; // m/sec
+    const MS = 10; // m/sec
+
     const KMSEC = 11; // km/sec
 
+    const C = 12; // ℃
 
     static public function valueByLabel($label)
     {
@@ -39,6 +43,9 @@ class MetricUnitEnum extends SplEnum {
         case self::PPM:
             return 'ppm';
             break;
+        case self::C:
+            return '℃';
+            break;
         case self::PPMV:
             return 'ppmV';
             break;
@@ -57,7 +64,8 @@ class MetricUnitEnum extends SplEnum {
         case self::UGM3:
             return 'μg/m3';
             break;
-        case self::MSEC:
+        case self::MSEC: 
+        case self::MS:
             return 'm/sec';
             break;
         case self::KMSEC:
