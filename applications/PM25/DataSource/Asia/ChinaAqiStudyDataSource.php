@@ -74,16 +74,6 @@ class ChinaAqiStudyDataSource extends BaseDataSource
 
     public function updateMeasurements() 
     {
-
-        /*
-                    'pm25'         => $row->pm2_5,
-                    'aqi'          => $row->aqi,
-                    'pm10'         => $row->pm10,
-                    'no2'          => $row->no2,
-                    'co'           => $row->co,
-                    'so2'          => $row->so2,
-                    'o3'           => $row->o3,
-         */
         $pm25 = MetricValue::createWithTable('pm25');
         $pm10 = MetricValue::createWithTable('pm10');
         $co   = MetricValue::createWithTable('co');

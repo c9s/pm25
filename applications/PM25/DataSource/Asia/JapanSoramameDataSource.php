@@ -7,7 +7,10 @@ use PM25\DataSource\BaseDataSource;
 use PM25\Exception\IncorrectDataException;
 use PM25\Model\Station;
 use PM25\Model\StationCollection;
+use PM25\Model\MetricValue;
+use PM25\Model\MetricValueSchema;
 use PM25\Model\Measure;
+use PM25\Model\MetricUnitEnum;
 use PM25\Utils;
 use DOMElement;
 use DOMText;
@@ -208,6 +211,15 @@ class JapanSoramameDataSource extends BaseDataSource
 
     public function updateMeasurementsFor(Station $station)
     {
+        $pm25 = MetricValue::createWithTable('pm25');
+        $pm10 = MetricValue::createWithTable('pm10');
+        $co   = MetricValue::createWithTable('co');
+        $no2  = MetricValue::createWithTable('no2');
+        $so2  = MetricValue::createWithTable('so2');
+        $o3   = MetricValue::createWithTable('o3');
+
+
+
         $timestamp = date('Ymdh');
 
         // parse measurement header
@@ -268,8 +280,10 @@ class JapanSoramameDataSource extends BaseDataSource
         /*
         print_r( $labels ); 
         print_r( $units);
-        print_r( $labelUnits ); 
         */
+        // print_r( $labelUnits ); 
+
+        $this->logger->info('Fetching ' . $this->getMeasurementDataPageUrl($station->code));
 
         // parse measurement body
         $response = $this->agent->get($this->getMeasurementDataPageUrl($station->code));
@@ -279,7 +293,7 @@ class JapanSoramameDataSource extends BaseDataSource
         $crawler = $crawler->filter('table.hyoMenu tr');
 
         $lastMeasurement = $station->measurements->limit(1)->first();
-        $lastPublishedAt = $lastMeasurement ? $lastMeasurement->published_at : 0;
+        $lastPublishedAt = $lastMeasurement ? $lastMeasurement->published_at : new DateTime("1980-01-01");
 
         $this->logger->info("Found " . $crawler->count() .  " records.");
         foreach ($crawler as $row) {
@@ -313,7 +327,31 @@ class JapanSoramameDataSource extends BaseDataSource
             
             $measureData = array_combine($labels, $rowContents);
             $measureData = array_filter($measureData, 'is_numeric');
+
+
             $measureData = array_map('doubleval',$measureData);
+            foreach($measureData as $label => $val) {
+                $table = MetricValueSchema::canonicalizeTableName($label);
+
+                if (!in_array($table, MetricValueSchema::$valueTables)) {
+                    $this->logger->warn("Table `$table` does not exist.");
+                    continue;
+                }
+
+                $metricValue = MetricValue::createWithTable($table);
+                $unitEnum = MetricUnitEnum::valueByLabel($labelUnits[$label]);
+
+                if ($unitEnum == Null) {
+                    $this->logger->warn("Unit for {$labelUnits[$label]} is undefined.");
+                }
+                $ret = $metricValue->createOrUpdate([
+                    'val' => $val, 
+                    'published_at' => $dateTime->format(DateTime::ATOM),
+                    'unit' => $unitEnum,
+                    'station_id' => $station->id,
+                ]);
+            }
+
             $measureData = array_merge($measureData, [
                 'published_at' => $dateTime->format(DateTime::ATOM),
                 'station_id' => $station->id,

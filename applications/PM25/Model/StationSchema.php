@@ -55,8 +55,8 @@ class StationSchema extends SchemaDeclare
         $this->many('station_measure_attributes', 'PM25\Model\StationMeasureAttributeSchema', 'station_id', 'id');
         $this->manyToMany('measure_attributes', 'station_measure_attributes', 'attribute');
 
-        $this->many('measurements', 'PM25\Model\MeasureSchema', 'station_id', 'id')
-            ->order('published_at', 'DESC')
+        $this->many('measurements', 'PM25\\Model\\MeasureSchema', 'station_id', 'id')
+            ->orderBy('published_at', 'DESC')
             ;
     }
 }
