@@ -6,7 +6,7 @@ class MetricValueCollectionBase
 {
     const schema_proxy_class = 'PM25\\Model\\MetricValueSchemaProxy';
     const model_class = 'PM25\\Model\\MetricValue';
-    const table = 'co2';
+    const table = 'so2';
     const read_source_id = 'default';
     const write_source_id = 'default';
 }

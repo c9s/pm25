@@ -4,9 +4,9 @@ use LazyRecord\Schema\SchemaDeclare;
 
 class MeasureSchema extends SchemaDeclare
 {
-    public function schema() {
-
-        $this->column('id')->bigint()->unsigned()->primary();
+    public function schema() 
+    {
+        $this->column('id')->bigint()->unsigned()->primary()->notNull()->autoIncrement();
 
         $this->column('station_id')->mediumint()->notNull();
 

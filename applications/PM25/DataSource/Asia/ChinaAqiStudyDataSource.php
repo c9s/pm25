@@ -9,6 +9,7 @@ use PM25\Model\Station;
 use PM25\Model\StationCollection;
 use PM25\Model\Measure;
 use PM25\Model\MeasureCollection;
+use PM25\Model\MetricValue;
 use DOMElement;
 use DOMText;
 use DateTime;
@@ -72,6 +73,25 @@ class ChinaAqiStudyDataSource extends BaseDataSource
 
     public function updateMeasurements() 
     {
+
+        /*
+                    'pm25'         => $row->pm2_5,
+                    'aqi'          => $row->aqi,
+                    'pm10'         => $row->pm10,
+                    'no2'          => $row->no2,
+                    'co'           => $row->co,
+                    'so2'          => $row->so2,
+                    'o3'           => $row->o3,
+         */
+        $pm25 = MetricValue::createWithTable('pm25');
+        $pm10 = MetricValue::createWithTable('pm10');
+        $co   = MetricValue::createWithTable('co');
+        $no2  = MetricValue::createWithTable('no2');
+        $so2  = MetricValue::createWithTable('so2');
+        $o3   = MetricValue::createWithTable('o3');
+
+
+
         $provinces = $this->getProvinceArray();
         foreach($provinces as $provinceInfo) {
             $this->logger->info("Fetching measurements from {$provinceInfo['name']}");
@@ -90,7 +110,7 @@ class ChinaAqiStudyDataSource extends BaseDataSource
                 $measurements->where([
                     'station_id' => $station->id,
                 ]);
-                $measurements->order('published_at', 'DESC');
+                $measurements->orderBy('published_at', 'DESC');
                 $measurements->limit(1);
                 $lastMeasurement = $measurements->first();
 

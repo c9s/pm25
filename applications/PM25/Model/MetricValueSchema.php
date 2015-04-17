@@ -5,6 +5,8 @@ use LazyRecord\Schema\TemplateSchema;
 
 class MetricValueSchema extends TemplateSchema
 {
+    static $valueTables = [ 'pm10', 'pm25', 'no2', 'co', 'o3', 'so2' ];
+
     public function schema() 
     {
         $this->column('station_id')->mediumint()->notNull()->unsigned();
@@ -23,7 +25,7 @@ class MetricValueSchema extends TemplateSchema
 
     public function provideSchemas() {
         $schemas = [];
-        foreach(['pm10', 'pm25', 'no2', 'co', 'o3', 'so2'] as $table) {
+        foreach(self::$valueTables as $table) {
             $schema = new self;
             $schema->table($table);
             $schemas[] = $schema;

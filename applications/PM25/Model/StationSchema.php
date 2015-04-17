@@ -7,7 +7,7 @@ class StationSchema extends SchemaDeclare
     public function schema() {
         $this->table('stations');
 
-        $this->column('id')->mediumint()->primary()->unsigned();
+        $this->column('id')->mediumInt()->primary()->unsigned()->notNull()->autoIncrement();
 
         $this->column('country')->varchar(30);
 
