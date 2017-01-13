@@ -40,9 +40,9 @@ class MetricValueSchema extends TemplateSchema
 
         $this->column('published_at')->timestamp()->isa('DateTime')->notNull();
 
-        $this->belongsTo('station', 'PM25\Model\StationSchema', 'id', 'station_id');
+        $this->belongsTo('station', 'App\Model\StationSchema', 'id', 'station_id');
 
-        // $this->one('unit', 'PM25\Model\MetricUnitSchema', 'id', 'unit_id');
+        // $this->one('unit', 'App\Model\MetricUnitSchema', 'id', 'unit_id');
     }
 
     static public function getTableUnit($table) {

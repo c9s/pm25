@@ -15,7 +15,7 @@ class StationMeasureAttributeSchema extends SchemaDeclare
             ->notNull()
             ;
 
-        $this->belongsTo('attribute', 'PM25\Model\MeasureAttributeSchema', 'id', 'attribute_id');
-        $this->belongsTo('station', 'PM25\Model\StationSchema', 'id', 'station_id');
+        $this->belongsTo('attribute', 'App\Model\MeasureAttributeSchema', 'id', 'attribute_id');
+        $this->belongsTo('station', 'App\Model\StationSchema', 'id', 'station_id');
     }
 }

@@ -28,7 +28,7 @@ class MetricUnitEnum extends SplEnum {
         if (!$n) {
             var_dump( $label ); 
         }
-        return constant('PM25\Model\MetricUnitEnum::' . $n);
+        return constant('App\Model\MetricUnitEnum::' . $n);
     }
 
     static public function label($const) 

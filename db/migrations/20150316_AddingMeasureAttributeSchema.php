@@ -22,8 +22,8 @@
 
 class AddingMeasureAttributeSchema_1426517709  extends LazyRecord\Migration\Migration {
     public function upgrade() {
-        $this->importSchema(new PM25\Model\StationMeasureAttributeSchema);
-        $this->importSchema(new PM25\Model\MeasureAttributeSchema);
+        $this->importSchema(new App\Model\StationMeasureAttributeSchema);
+        $this->importSchema(new App\Model\MeasureAttributeSchema);
     }
 
     public function downgrade() {

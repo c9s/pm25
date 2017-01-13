@@ -52,7 +52,7 @@ class StationSchema extends SchemaDeclare
 
         $this->column('data_source')->varchar(64);
 
-        $this->many('station_measure_attributes', 'PM25\Model\StationMeasureAttributeSchema', 'station_id', 'id');
+        $this->many('station_measure_attributes', 'App\Model\StationMeasureAttributeSchema', 'station_id', 'id');
         $this->manyToMany('measure_attributes', 'station_measure_attributes', 'attribute');
 
         $this->many('measurements', 'App\\Model\\MeasureSchema', 'station_id', 'id')
