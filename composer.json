@@ -1,0 +1,22 @@
+{
+    "name": "c9s/pm25",
+    "version": "1.0",
+    "require": {
+        "php": ">=5.4.0",
+        "phifty/phifty": "3.1.x-dev",
+        "corneltek/sqlbuilder": "3.2.x-dev",
+        "corneltek/actionkit": "3.1.x-dev",
+        "corneltek/lazyrecord": "3.4.x-dev",
+        "phifty/corebundle": "3.2.x-dev",
+        "phifty/commonbundle": "3.2.x-dev",
+        "phifty/crud": "3.2.x-dev",
+        "composer/installers": "@dev",
+        "corneltek/pux": "@dev",
+        "corneltek/kendo": "@dev",
+        "phpsgi/funk": "@dev",
+        "phpsgi/phpsgi": "@dev",
+        "monolog/monolog": "^1.17",
+        "corneltek/curlkit": "*",
+        "symfony/dom-crawler": "*"
+    }
+}
