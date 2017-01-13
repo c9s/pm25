@@ -39,11 +39,11 @@ class MetricValueSchemaProxy extends RuntimeSchema
   4 => 'published_at',
 );
 
-    const schema_class = 'PM25\\Model\\MetricValueSchema';
-    const collection_class = 'PM25\\Model\\MetricValueCollection';
-    const model_class = 'PM25\\Model\\MetricValue';
+    const schema_class = 'App\\Model\\MetricValueSchema';
+    const collection_class = 'App\\Model\\MetricValueCollection';
+    const model_class = 'App\\Model\\MetricValue';
     const model_name = 'MetricValue';
-    const model_namespace = 'PM25\\Model';
+    const model_namespace = 'App\\Model';
     const primary_key = 'id';
     const table = 'ws';
     const label = 'MetricValue';
@@ -107,16 +107,16 @@ class MetricValueSchemaProxy extends RuntimeSchema
 );
         $this->primaryKey      = 'id';
         $this->table           = 'ws';
-        $this->modelClass      = 'PM25\\Model\\MetricValue';
-        $this->collectionClass = 'PM25\\Model\\MetricValueCollection';
+        $this->modelClass      = 'App\\Model\\MetricValue';
+        $this->collectionClass = 'App\\Model\\MetricValueCollection';
         $this->label           = 'MetricValue';
         $this->relations       = array( 
   'station' => \LazyRecord\Schema\Relationship::__set_state(array( 
   'data' => array( 
       'type' => 3,
-      'self_schema' => 'PM25\\Model\\MetricValueSchema',
+      'self_schema' => 'App\\Model\\MetricValueSchema',
       'self_column' => 'station_id',
-      'foreign_schema' => 'PM25\\Model\\StationSchema',
+      'foreign_schema' => 'App\\Model\\StationSchema',
       'foreign_column' => 'id',
     ),
   'accessor' => 'station',

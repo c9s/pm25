@@ -36,11 +36,11 @@ class MeasureAttributeSchemaProxy extends RuntimeSchema
   3 => 'id',
 );
 
-    const schema_class = 'PM25\\Model\\MeasureAttributeSchema';
-    const collection_class = 'PM25\\Model\\MeasureAttributeCollection';
-    const model_class = 'PM25\\Model\\MeasureAttribute';
+    const schema_class = 'App\\Model\\MeasureAttributeSchema';
+    const collection_class = 'App\\Model\\MeasureAttributeCollection';
+    const model_class = 'App\\Model\\MeasureAttribute';
     const model_name = 'MeasureAttribute';
-    const model_namespace = 'PM25\\Model';
+    const model_namespace = 'App\\Model';
     const primary_key = 'id';
     const table = 'measure_attributes';
     const label = 'MeasureAttribute';
@@ -94,17 +94,17 @@ class MeasureAttributeSchemaProxy extends RuntimeSchema
 );
         $this->primaryKey      = 'id';
         $this->table           = 'measure_attributes';
-        $this->modelClass      = 'PM25\\Model\\MeasureAttribute';
-        $this->collectionClass = 'PM25\\Model\\MeasureAttributeCollection';
+        $this->modelClass      = 'App\\Model\\MeasureAttribute';
+        $this->collectionClass = 'App\\Model\\MeasureAttributeCollection';
         $this->label           = 'MeasureAttribute';
         $this->relations       = array( 
   'station_measure_attributes' => \LazyRecord\Schema\Relationship::__set_state(array( 
   'data' => array( 
       'type' => 1,
       'self_column' => 'id',
-      'self_schema' => 'PM25\\Model\\MeasureAttributeSchema',
+      'self_schema' => 'App\\Model\\MeasureAttributeSchema',
       'foreign_column' => 'attribute_id',
-      'foreign_schema' => 'PM25\\Model\\StationMeasureAttributeSchema',
+      'foreign_schema' => 'App\\Model\\StationMeasureAttributeSchema',
     ),
   'accessor' => 'station_measure_attributes',
   'where' => NULL,

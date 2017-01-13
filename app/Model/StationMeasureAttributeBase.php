@@ -4,9 +4,9 @@ use LazyRecord\BaseModel;
 class StationMeasureAttributeBase
     extends BaseModel
 {
-    const schema_proxy_class = 'PM25\\Model\\StationMeasureAttributeSchemaProxy';
-    const collection_class = 'PM25\\Model\\StationMeasureAttributeCollection';
-    const model_class = 'PM25\\Model\\StationMeasureAttribute';
+    const schema_proxy_class = 'App\\Model\\StationMeasureAttributeSchemaProxy';
+    const collection_class = 'App\\Model\\StationMeasureAttributeCollection';
+    const model_class = 'App\\Model\\StationMeasureAttribute';
     const table = 'station_measure_attributes';
     const read_source_id = 'default';
     const write_source_id = 'default';
@@ -28,7 +28,7 @@ class StationMeasureAttributeBase
         if ($this->_schema) {
            return $this->_schema;
         }
-        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\StationMeasureAttributeSchemaProxy');
+        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('App\\Model\\StationMeasureAttributeSchemaProxy');
     }
     public function getStationId()
     {

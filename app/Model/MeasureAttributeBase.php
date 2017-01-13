@@ -4,9 +4,9 @@ use LazyRecord\BaseModel;
 class MeasureAttributeBase
     extends BaseModel
 {
-    const schema_proxy_class = 'PM25\\Model\\MeasureAttributeSchemaProxy';
-    const collection_class = 'PM25\\Model\\MeasureAttributeCollection';
-    const model_class = 'PM25\\Model\\MeasureAttribute';
+    const schema_proxy_class = 'App\\Model\\MeasureAttributeSchemaProxy';
+    const collection_class = 'App\\Model\\MeasureAttributeCollection';
+    const model_class = 'App\\Model\\MeasureAttribute';
     const table = 'measure_attributes';
     const read_source_id = 'default';
     const write_source_id = 'default';
@@ -30,7 +30,7 @@ class MeasureAttributeBase
         if ($this->_schema) {
            return $this->_schema;
         }
-        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\MeasureAttributeSchemaProxy');
+        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('App\\Model\\MeasureAttributeSchemaProxy');
     }
     public function getLabel()
     {

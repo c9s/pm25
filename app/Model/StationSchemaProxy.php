@@ -96,11 +96,11 @@ class StationSchemaProxy extends RuntimeSchema
   23 => 'data_source',
 );
 
-    const schema_class = 'PM25\\Model\\StationSchema';
-    const collection_class = 'PM25\\Model\\StationCollection';
-    const model_class = 'PM25\\Model\\Station';
+    const schema_class = 'App\\Model\\StationSchema';
+    const collection_class = 'App\\Model\\StationCollection';
+    const model_class = 'App\\Model\\Station';
     const model_name = 'Station';
-    const model_namespace = 'PM25\\Model';
+    const model_namespace = 'App\\Model';
     const primary_key = 'id';
     const table = 'stations';
     const label = 'Station';
@@ -347,17 +347,17 @@ class StationSchemaProxy extends RuntimeSchema
 );
         $this->primaryKey      = 'id';
         $this->table           = 'stations';
-        $this->modelClass      = 'PM25\\Model\\Station';
-        $this->collectionClass = 'PM25\\Model\\StationCollection';
+        $this->modelClass      = 'App\\Model\\Station';
+        $this->collectionClass = 'App\\Model\\StationCollection';
         $this->label           = 'Station';
         $this->relations       = array( 
   'station_measure_attributes' => \LazyRecord\Schema\Relationship::__set_state(array( 
   'data' => array( 
       'type' => 1,
       'self_column' => 'id',
-      'self_schema' => 'PM25\\Model\\StationSchema',
+      'self_schema' => 'App\\Model\\StationSchema',
       'foreign_column' => 'station_id',
-      'foreign_schema' => 'PM25\\Model\\StationMeasureAttributeSchema',
+      'foreign_schema' => 'App\\Model\\StationMeasureAttributeSchema',
     ),
   'accessor' => 'station_measure_attributes',
   'where' => NULL,
@@ -379,9 +379,9 @@ class StationSchemaProxy extends RuntimeSchema
   'data' => array( 
       'type' => 1,
       'self_column' => 'id',
-      'self_schema' => 'PM25\\Model\\StationSchema',
+      'self_schema' => 'App\\Model\\StationSchema',
       'foreign_column' => 'station_id',
-      'foreign_schema' => 'PM25\\Model\\MeasureSchema',
+      'foreign_schema' => 'App\\Model\\MeasureSchema',
     ),
   'accessor' => 'measurements',
   'where' => NULL,

@@ -4,9 +4,9 @@ use LazyRecord\BaseModel;
 class StationBase
     extends BaseModel
 {
-    const schema_proxy_class = 'PM25\\Model\\StationSchemaProxy';
-    const collection_class = 'PM25\\Model\\StationCollection';
-    const model_class = 'PM25\\Model\\Station';
+    const schema_proxy_class = 'App\\Model\\StationSchemaProxy';
+    const collection_class = 'App\\Model\\StationCollection';
+    const model_class = 'App\\Model\\Station';
     const table = 'stations';
     const read_source_id = 'default';
     const write_source_id = 'default';
@@ -70,7 +70,7 @@ class StationBase
         if ($this->_schema) {
            return $this->_schema;
         }
-        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\StationSchemaProxy');
+        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('App\\Model\\StationSchemaProxy');
     }
     public function getId()
     {

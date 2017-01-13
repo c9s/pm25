@@ -33,11 +33,11 @@ class StationMeasureAttributeSchemaProxy extends RuntimeSchema
   2 => 'id',
 );
 
-    const schema_class = 'PM25\\Model\\StationMeasureAttributeSchema';
-    const collection_class = 'PM25\\Model\\StationMeasureAttributeCollection';
-    const model_class = 'PM25\\Model\\StationMeasureAttribute';
+    const schema_class = 'App\\Model\\StationMeasureAttributeSchema';
+    const collection_class = 'App\\Model\\StationMeasureAttributeCollection';
+    const model_class = 'App\\Model\\StationMeasureAttribute';
     const model_name = 'StationMeasureAttribute';
-    const model_namespace = 'PM25\\Model';
+    const model_namespace = 'App\\Model';
     const primary_key = 'id';
     const table = 'station_measure_attributes';
     const label = 'StationMeasureAttribute';
@@ -79,16 +79,16 @@ class StationMeasureAttributeSchemaProxy extends RuntimeSchema
 );
         $this->primaryKey      = 'id';
         $this->table           = 'station_measure_attributes';
-        $this->modelClass      = 'PM25\\Model\\StationMeasureAttribute';
-        $this->collectionClass = 'PM25\\Model\\StationMeasureAttributeCollection';
+        $this->modelClass      = 'App\\Model\\StationMeasureAttribute';
+        $this->collectionClass = 'App\\Model\\StationMeasureAttributeCollection';
         $this->label           = 'StationMeasureAttribute';
         $this->relations       = array( 
   'attribute' => \LazyRecord\Schema\Relationship::__set_state(array( 
   'data' => array( 
       'type' => 3,
-      'self_schema' => 'PM25\\Model\\StationMeasureAttributeSchema',
+      'self_schema' => 'App\\Model\\StationMeasureAttributeSchema',
       'self_column' => 'attribute_id',
-      'foreign_schema' => 'PM25\\Model\\MeasureAttributeSchema',
+      'foreign_schema' => 'App\\Model\\MeasureAttributeSchema',
       'foreign_column' => 'id',
     ),
   'accessor' => 'attribute',
@@ -99,9 +99,9 @@ class StationMeasureAttributeSchemaProxy extends RuntimeSchema
   'station' => \LazyRecord\Schema\Relationship::__set_state(array( 
   'data' => array( 
       'type' => 3,
-      'self_schema' => 'PM25\\Model\\StationMeasureAttributeSchema',
+      'self_schema' => 'App\\Model\\StationMeasureAttributeSchema',
       'self_column' => 'station_id',
-      'foreign_schema' => 'PM25\\Model\\StationSchema',
+      'foreign_schema' => 'App\\Model\\StationSchema',
       'foreign_column' => 'id',
     ),
   'accessor' => 'station',

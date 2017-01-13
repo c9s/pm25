@@ -4,9 +4,9 @@ use LazyRecord\BaseModel;
 class MeasureBase
     extends BaseModel
 {
-    const schema_proxy_class = 'PM25\\Model\\MeasureSchemaProxy';
-    const collection_class = 'PM25\\Model\\MeasureCollection';
-    const model_class = 'PM25\\Model\\Measure';
+    const schema_proxy_class = 'App\\Model\\MeasureSchemaProxy';
+    const collection_class = 'App\\Model\\MeasureCollection';
+    const model_class = 'App\\Model\\Measure';
     const table = 'measures';
     const read_source_id = 'default';
     const write_source_id = 'default';
@@ -48,7 +48,7 @@ class MeasureBase
         if ($this->_schema) {
            return $this->_schema;
         }
-        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\MeasureSchemaProxy');
+        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('App\\Model\\MeasureSchemaProxy');
     }
     public function getId()
     {

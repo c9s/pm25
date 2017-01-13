@@ -4,9 +4,9 @@ use LazyRecord\BaseModel;
 class MetricValueBase
     extends BaseModel
 {
-    const schema_proxy_class = 'PM25\\Model\\MetricValueSchemaProxy';
-    const collection_class = 'PM25\\Model\\MetricValueCollection';
-    const model_class = 'PM25\\Model\\MetricValue';
+    const schema_proxy_class = 'App\\Model\\MetricValueSchemaProxy';
+    const collection_class = 'App\\Model\\MetricValueCollection';
+    const model_class = 'App\\Model\\MetricValue';
     const table = 'ws';
     const read_source_id = 'default';
     const write_source_id = 'default';
@@ -32,7 +32,7 @@ class MetricValueBase
         if ($this->_schema) {
            return $this->_schema;
         }
-        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('PM25\\Model\\MetricValueSchemaProxy');
+        return $this->_schema = \LazyRecord\Schema\SchemaLoader::load('App\\Model\\MetricValueSchemaProxy');
     }
     public function getId()
     {

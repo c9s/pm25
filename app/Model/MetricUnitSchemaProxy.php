@@ -36,11 +36,11 @@ class MetricUnitSchemaProxy extends RuntimeSchema
   3 => 'form',
 );
 
-    const schema_class = 'PM25\\Model\\MetricUnitSchema';
-    const collection_class = 'PM25\\Model\\MetricUnitCollection';
-    const model_class = 'PM25\\Model\\MetricUnit';
+    const schema_class = 'App\\Model\\MetricUnitSchema';
+    const collection_class = 'App\\Model\\MetricUnitCollection';
+    const model_class = 'App\\Model\\MetricUnit';
     const model_name = 'MetricUnit';
-    const model_namespace = 'PM25\\Model';
+    const model_namespace = 'App\\Model';
     const primary_key = 'id';
     const table = 'metric_units';
     const label = 'MetricUnit';
@@ -94,8 +94,8 @@ class MetricUnitSchemaProxy extends RuntimeSchema
 );
         $this->primaryKey      = 'id';
         $this->table           = 'metric_units';
-        $this->modelClass      = 'PM25\\Model\\MetricUnit';
-        $this->collectionClass = 'PM25\\Model\\MetricUnitCollection';
+        $this->modelClass      = 'App\\Model\\MetricUnit';
+        $this->collectionClass = 'App\\Model\\MetricUnitCollection';
         $this->label           = 'MetricUnit';
         $this->relations       = array( 
 );
