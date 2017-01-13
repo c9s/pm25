@@ -1,7 +1,7 @@
 <?php
-namespace PM25\Controller;
+namespace App\Controller;
 use Phifty\Controller;
-use PM25\Model\StationCollection;
+use App\Model\StationCollection;
 use LazyRecord\ConnectionManager;
 
 class NearbyStationController extends Controller

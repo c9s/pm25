@@ -1,5 +1,5 @@
 <?php
-namespace PM25\Model;
+namespace App\Model;
 use LazyRecord\BaseCollection;
 class MeasureCollectionBase
     extends BaseCollection

@@ -1,5 +1,5 @@
 <?php
-namespace PM25;
+namespace App;
 
 class UnitUtils
 {

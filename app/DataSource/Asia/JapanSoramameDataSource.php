@@ -1,17 +1,17 @@
 <?php
-namespace PM25\DataSource\Asia;
+namespace App\DataSource\Asia;
 use Symfony\Component\DomCrawler\Crawler;
 use CLIFramework\Logger;
 use CurlKit\CurlAgent;
-use PM25\DataSource\BaseDataSource;
-use PM25\Exception\IncorrectDataException;
-use PM25\Model\Station;
-use PM25\Model\StationCollection;
-use PM25\Model\MetricValue;
-use PM25\Model\MetricValueSchema;
-use PM25\Model\Measure;
-use PM25\Model\MetricUnitEnum;
-use PM25\Utils;
+use App\DataSource\BaseDataSource;
+use App\Exception\IncorrectDataException;
+use App\Model\Station;
+use App\Model\StationCollection;
+use App\Model\MetricValue;
+use App\Model\MetricValueSchema;
+use App\Model\Measure;
+use App\Model\MetricUnitEnum;
+use App\Utils;
 use DOMElement;
 use DOMText;
 use DateTime;

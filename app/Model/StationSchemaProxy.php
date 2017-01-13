@@ -5,7 +5,7 @@
  * 
  * Last Modified: April 17th at 10:03pm
  */
-namespace PM25\Model;
+namespace App\Model;
 
 
 use LazyRecord;

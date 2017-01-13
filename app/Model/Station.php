@@ -3,11 +3,11 @@
 This is an auto-generated file,
 Please DO NOT modify this file directly.
 */
-namespace PM25\Model;
-use PM25\Model\StationBase;
-use PM25\Model\MeasureAttribute;
-use PM25\Model\StationMeasureAttribute;
-use PM25\GeoCoding;
+namespace App\Model;
+use App\Model\StationBase;
+use App\Model\MeasureAttribute;
+use App\Model\StationMeasureAttribute;
+use App\GeoCoding;
 use LazyRecord\ConnectionManager;
 use Exception;
 

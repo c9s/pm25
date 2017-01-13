@@ -1,5 +1,5 @@
 <?php
-namespace PM25\Exception;
+namespace App\Exception;
 use RuntimeException;
 
 class IncorrectDataException extends RuntimeException

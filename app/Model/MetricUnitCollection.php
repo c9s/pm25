@@ -3,9 +3,9 @@
 This is an auto-generated file,
 Please DO NOT modify this file directly.
 */
-namespace PM25\Model;
+namespace App\Model;
 
-use PM25\Model\MetricUnitCollectionBase;
+use App\Model\MetricUnitCollectionBase;
 
 class MetricUnitCollection  extends MetricUnitCollectionBase {
 

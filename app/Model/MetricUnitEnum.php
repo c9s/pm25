@@ -1,5 +1,5 @@
 <?php
-namespace PM25\Model;
+namespace App\Model;
 use SplEnum;
 
 class MetricUnitEnum extends SplEnum {

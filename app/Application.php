@@ -1,5 +1,5 @@
 <?php
-namespace PM25;
+namespace App;
 use Phifty\Bundle;
 
 class Application extends Bundle

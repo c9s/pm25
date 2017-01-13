@@ -1,6 +1,6 @@
 <?php
-namespace PM25\Model;
-use PM25\Model\MetricValueCollectionBase;
+namespace App\Model;
+use App\Model\MetricValueCollectionBase;
 class MetricValueCollection
     extends MetricValueCollectionBase
 {

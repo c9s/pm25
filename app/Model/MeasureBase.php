@@ -1,5 +1,5 @@
 <?php
-namespace PM25\Model;
+namespace App\Model;
 use LazyRecord\BaseModel;
 class MeasureBase
     extends BaseModel

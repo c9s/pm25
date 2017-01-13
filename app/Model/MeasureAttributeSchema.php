@@ -1,5 +1,5 @@
 <?php
-namespace PM25\Model;
+namespace App\Model;
 use LazyRecord\Schema\SchemaDeclare;
 
 class MeasureAttributeSchema extends SchemaDeclare

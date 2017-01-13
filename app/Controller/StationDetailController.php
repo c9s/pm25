@@ -1,9 +1,9 @@
 <?php
-namespace PM25\Controller;
+namespace App\Controller;
 use Phifty\Controller;
-use PM25\Model\Station;
-use PM25\Model\StationCollection;
-use PM25\Model\MeasureCollection;
+use App\Model\Station;
+use App\Model\StationCollection;
+use App\Model\MeasureCollection;
 use LazyRecord\ConnectionManager;
 use LazyRecord\Connection;
 use PDO;
@@ -11,9 +11,9 @@ use PDOStatement;
 use LogicException;
 use DateTime;
 use DateInterval;
-use PM25\StatsUtils;
-use PM25\Predicate;
-use PM25\SummaryDefinition;
+use App\StatsUtils;
+use App\Predicate;
+use App\SummaryDefinition;
 
 class StationDetailController extends Controller
 {

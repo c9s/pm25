@@ -1,10 +1,10 @@
 <?php
-namespace PM25;
+namespace App;
 use Phifty\Controller;
-use PM25\Model\Station;
-use PM25\Model\StationCollection;
-use PM25\Model\MeasureCollection;
-use PM25\Predicate;
+use App\Model\Station;
+use App\Model\StationCollection;
+use App\Model\MeasureCollection;
+use App\Predicate;
 use LazyRecord\ConnectionManager;
 use LazyRecord\Connection;
 use PDO;

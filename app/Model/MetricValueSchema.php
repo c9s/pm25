@@ -1,8 +1,8 @@
 <?php
-namespace PM25\Model;
+namespace App\Model;
 use LazyRecord\Schema\SchemaDeclare;
 use LazyRecord\Schema\TemplateSchema;
-use PM25\Model\MetricUnitEnum;
+use App\Model\MetricUnitEnum;
 use LogicException;
 
 class MetricValueSchema extends TemplateSchema

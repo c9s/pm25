@@ -1,7 +1,7 @@
 <?php
-namespace PM25\Model;
-use PM25\Model\MetricValueBase;
-use PM25\Model\MetricValueSchema;
+namespace App\Model;
+use App\Model\MetricValueBase;
+use App\Model\MetricValueSchema;
 use Exception;
 use RuntimeException;
 

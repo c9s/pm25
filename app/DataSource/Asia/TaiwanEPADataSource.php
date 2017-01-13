@@ -1,14 +1,14 @@
 <?php
-namespace PM25\DataSource\Asia;
-use PM25\Model\Station;
-use PM25\Model\Measure;
-use PM25\Exception\IncorrectDataException;
-use PM25\Utils;
+namespace App\DataSource\Asia;
+use App\Model\Station;
+use App\Model\Measure;
+use App\Exception\IncorrectDataException;
+use App\Utils;
 use DateTime;
 use Exception;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
-use PM25\DataSource\BaseDataSource;
+use App\DataSource\BaseDataSource;
 use CurlKit\CurlAgent;
 
 interface DataSourceInterface {

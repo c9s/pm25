@@ -1,8 +1,8 @@
 <?php
-namespace PM25\Controller;
+namespace App\Controller;
 use Phifty\Controller;
-use PM25\Model\StationCollection;
-use PM25\Predicate;
+use App\Model\StationCollection;
+use App\Predicate;
 use LazyRecord\ConnectionManager;
 
 class StationListController extends Controller

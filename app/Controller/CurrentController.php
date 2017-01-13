@@ -1,7 +1,7 @@
 <?php
-namespace PM25\Controller;
+namespace App\Controller;
 use Phifty\Controller;
-use PM25\Model\MeasureCollection;
+use App\Model\MeasureCollection;
 use LazyRecord\ConnectionManager;
 
 

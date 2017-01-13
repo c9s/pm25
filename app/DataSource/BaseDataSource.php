@@ -1,7 +1,7 @@
 <?php
-namespace PM25\DataSource;
+namespace App\DataSource;
 use CLIFramework\Logger;
-use PM25\DataSource\BaseDataSource;
+use App\DataSource\BaseDataSource;
 use CurlKit\CurlAgent;
 
 class BaseDataSource
