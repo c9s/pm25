@@ -1,7 +1,7 @@
 <?php
 require 'main.php';
-use PM25\Model\Station;
-use PM25\Model\Measure;
+use App\Model\Station;
+use App\Model\Measure;
 
 $json = file_get_contents('http://opendata.epa.gov.tw/ws/Data/UVSite/?$orderby=PublishAgency&$skip=0&$top=1000&format=json');
 $data = json_decode($json);

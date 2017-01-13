@@ -1,9 +1,9 @@
 <?php
 require 'main.php';
-use PM25\Model\Station;
-use PM25\DataSource\Asia\TaiwanEPADataSource;
-use PM25\DataSource\Asia\JapanSoramameDataSource;
-use PM25\DataSource\Asia\ChinaAqiStudyDataSource;
+use App\Model\Station;
+use App\DataSource\Asia\TaiwanEPADataSource;
+use App\DataSource\Asia\JapanSoramameDataSource;
+use App\DataSource\Asia\ChinaAqiStudyDataSource;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
 use CurlKit\CurlAgent;

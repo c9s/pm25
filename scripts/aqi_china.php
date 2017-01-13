@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php
 require 'main.php';
-use PM25\Model\Station;
-use PM25\Model\Measure;
+use App\Model\Station;
+use App\Model\Measure;
 use CLIFramework\Logger;
 
 $logger = Logger::getInstance();

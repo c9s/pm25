@@ -1,7 +1,7 @@
 <?php
 require 'main.php';
-use PM25\Model\Station;
-use PM25\Model\Measure;
+use App\Model\Station;
+use App\Model\Measure;
 
 $measures = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQX/?top=1000&format=json'), true);
 $record = new Measure;

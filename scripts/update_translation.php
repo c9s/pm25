@@ -1,8 +1,8 @@
 <?php
 require 'main.php';
 
-use PM25\Model\Station;
-use PM25\Model\StationCollection;
+use App\Model\Station;
+use App\Model\StationCollection;
 use CLIFramework\Logger;
 use LazyRecord\ConnectionManager;
 

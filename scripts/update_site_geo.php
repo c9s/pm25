@@ -1,6 +1,6 @@
 <?php
 require 'main.php';
-use PM25\Model\StationCollection;
+use App\Model\StationCollection;
 
 $sites = new StationCollection;
 $sites->where()

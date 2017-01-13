@@ -1,6 +1,6 @@
 <?php
 require 'main.php';
-use PM25\Model\Station;
+use App\Model\Station;
 $sites = json_decode(file_get_contents('http://opendata.epa.gov.tw/ws/Data/AQX/?top=1000&format=json'));
 
 $record = new Station;

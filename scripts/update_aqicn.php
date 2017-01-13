@@ -1,7 +1,7 @@
 <?php
 require 'main.php';
-use PM25\Model\Site;
-use PM25\Model\Measure;
+use App\Model\Site;
+use App\Model\Measure;
 
 /*
  * 全国城市空气质量实时发布网
