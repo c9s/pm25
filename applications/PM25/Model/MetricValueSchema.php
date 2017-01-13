@@ -29,6 +29,8 @@ class MetricValueSchema extends TemplateSchema
 
     public function schema() 
     {
+        $this->column('id')->bigInt()->notNull()->unsigned()->autoIncrement()->primary();
+
         $this->column('station_id')->mediumint()->notNull()->unsigned();
 
         // The default metric value column
