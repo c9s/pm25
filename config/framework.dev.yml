@@ -1,0 +1,47 @@
+---
+ApplicationName: PM25
+ApplicationID:   pm25
+ApplicationUUID: e133b9fe-c27a-11e4-ab74-3c15c2cb5a5a
+Domain: pm25.corneltek.com
+Mail:
+  System: "\"System\" <no-reply@xxx.com>"
+  Admin: "\"Admin\" <yoanlin93@xxx.com>"
+ServiceProviders:
+  CurrentUserServiceProvider:
+    Class: App\CurrentUser
+    Model: UserBundle\Model\User
+  LocaleServiceProvider:
+    Directory: locale
+    Default: zh_TW
+    Domain: bossnet
+    Langs:
+      - en
+      - zh_TW
+  PuxRouterServiceProvider:
+  LibraryServiceProvider:
+  ViewServiceProvider:
+    Backend: twig
+    Class: App\View\PageView
+    # TemplateDirs:
+    # - design/production
+  MailerServiceProvider:
+    Transport: MailTransport
+  CacheServiceProvider: ~
+  ActionServiceProvider:
+    DefaultFieldView: ActionKit\FieldView\BootstrapFieldView
+  CacheServiceProvider:
+  SessionServiceProvider:
+  TwigServiceProvider:
+    Namespaces:
+      AppCRUD: app/Templates/crud
+  AssetServiceProvider:
+    BaseUrl: /assets
+    BaseDir: webroot/assets
+  BundleServiceProvider:
+    Paths:
+      - bundles
+Bundles:
+  CoreBundle:
+  CommonBundle:
+  I18N:
+  CRUD:
