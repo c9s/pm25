@@ -1,0 +1,15 @@
+---
+bootstrap:
+  - bootstrap.php
+schema:
+  auto_id: true
+  loader: frameworks/phifty/Phifty/SchemaLoader.php
+seeds: null
+data_source:
+  default: master
+  nodes:
+    master:
+      database: pm25
+      driver: mysql
+      host: localhost
+      user: root
