@@ -12,15 +12,6 @@ class StationListController extends Controller
         $country = $this->request->param('country');
         $limit = $this->request->param('limit');
 
-        $cacheKey = "pm25-station-list-$limit";
-
-        /*
-        if ($json = apc_fetch($cacheKey)) {
-            header('Content-Type: application/json');
-            return $json;
-        }
-        */
-
         $args = [];
         $conns = ConnectionManager::getInstance();
         $conn = $conns->get('default');
@@ -56,8 +47,6 @@ class StationListController extends Controller
             $row['latitude'] = doubleval($row['latitude']);
             $row = array_filter($row);
         }
-        $json = $this->toJson($rows);
-        apc_store($cacheKey, $json, 60 * 60 * 24);
-        return $json;
+        return $this->toJson($rows);
     }
 }
