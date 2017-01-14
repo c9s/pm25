@@ -2,7 +2,7 @@
 namespace App;
 use Phifty\Bundle;
 
-class Application extends Bundle
+class App extends Bundle
 {
     public function init() {
         $this->route('/current', 'CurrentController');
